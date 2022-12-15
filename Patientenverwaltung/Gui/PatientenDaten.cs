@@ -8,34 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PatientenverwaltungOberfläche
+namespace Patientenverwaltung.Gui
 {
-    public partial class PatientDatenForm : Form
+    public partial class PatientenDaten : Form
     {
-        public PatientDatenForm()
+        public PatientenDaten()
         {
             InitializeComponent();
-        }
-
-        private void btn_PatientBearbeiten_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            PatientBearbeiten bearbeitePatient = new PatientBearbeiten();
-            bearbeitePatient.Show();
-        }
-
-        private void btn_Berichte_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Bericht BerichtForm = new Bericht();
-            BerichtForm.Show();
-        }
-
-        private void btn_Zurueck_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Patienten patientForm = new Patienten();
-            patientForm.Show();
         }
     }
 }

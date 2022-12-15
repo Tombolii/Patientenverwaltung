@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PatientenverwaltungOberfläche
+namespace Patientenverwaltung.Gui
 {
     public partial class PatientBearbeiten : Form
     {
