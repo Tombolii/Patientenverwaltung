@@ -8,20 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PatientenverwaltungOberfläche
+namespace Patientenverwaltung.Gui
 {
     public partial class BerichtBearbeiten : Form
     {
         public BerichtBearbeiten()
         {
             InitializeComponent();
-        }
-
-        private void btn_Abbrechen_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            BerichtDaten berichtDaten = new BerichtDaten();
-            berichtDaten.Show();
         }
     }
 }
