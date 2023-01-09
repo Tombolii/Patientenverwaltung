@@ -17,6 +17,15 @@ namespace Patientenverwaltung.Model
             set { _straße = value; }
         }
 
+        private string _hausnummer;
+
+        public string hausnummer
+        {
+            get { return _hausnummer; }
+            set { _hausnummer = value; }
+        }
+
+
         private string _ort;
 
         public string ort

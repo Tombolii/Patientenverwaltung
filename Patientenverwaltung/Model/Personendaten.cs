@@ -49,9 +49,9 @@ namespace Patientenverwaltung.Model
             set { _email = value; }
         }
 
-        private int _telefonnummer;
+        private string _telefonnummer;
 
-        public int telefonnummer
+        public string telefonnummer
         {
             get { return _telefonnummer; }
             set { _telefonnummer = value; }

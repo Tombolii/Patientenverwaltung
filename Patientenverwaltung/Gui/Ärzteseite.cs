@@ -8,7 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+<<<<<<< HEAD
+namespace Patientenverwaltung
+=======
 namespace Patientenverwaltung.Gui
+>>>>>>> cdc62687ad59cd89e6d0d1e1b890a50d411f4501
 {
     public partial class Ärzteseite : Form
     {
