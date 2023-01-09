@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Patientenverwaltung;
 using System.Windows.Forms;
 
 namespace Patientenverwaltung.Gui
 {
     public partial class NeuerTermin : Form
     {
+        Controller controller = new Controller();
         public NeuerTermin()
         {
             InitializeComponent();
