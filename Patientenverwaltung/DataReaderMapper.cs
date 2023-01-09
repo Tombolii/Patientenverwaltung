@@ -24,21 +24,36 @@ namespace Patientenverwaltung
             return patient;
         }
 
-        private void extractPersonendatenFromReader(MySqlDataReader reader, Personendaten patient)
+        public Arzt extractArztFromReader(MySqlDataReader reader)
+        {
+            Arzt arzt = new Arzt();
+            while (reader.Read())
+            {
+                arzt.idArzt = reader.GetInt32("idArzt");
+                arzt.fachgebiet = reader.GetString("fachgebiet");
+                arzt.titel = reader.GetString("titel");
+                extractPersonendatenFromReader(reader, arzt);
+            }
+            return arzt;
+        }
+
+        private void extractPersonendatenFromReader(MySqlDataReader reader, Personendaten person)
         {
             while (reader.Read())
             {
-                patient.vorname = reader.GetString("vorname");
-                patient.nachname = reader.GetString("nachname");
-                patient.email = reader.GetString("email");
-                patient.telefonnummer = reader.GetInt32("telefonnummer");
-                patient.geburtstag = DateTime.Parse(reader.GetString("geburtstag"));
-                Adresse adresse = new Adresse();
-                adresse.straße = reader.GetString("straße");
-                adresse.hausnummer = reader.GetString("hausnummer");
-                adresse.ort = reader.GetString("ort");
-                adresse.plz = reader.GetInt32("plz");
-                patient.adresse = adresse;
+                person.vorname = reader.GetString("vorname");
+                person.nachname = reader.GetString("nachname");
+                person.email = reader.GetString("email");
+                person.telefonnummer = reader.GetString("telefonnummer");
+                person.geburtstag = DateTime.Parse(reader.GetString("geburtstag"));
+                Adresse adresse = new Adresse
+                {
+                    straße = reader.GetString("straße"),
+                    hausnummer = reader.GetString("hausnummer"),
+                    ort = reader.GetString("ort"),
+                    plz = reader.GetInt32("plz")
+                };
+                person.adresse = adresse;
             }
         }
     }
