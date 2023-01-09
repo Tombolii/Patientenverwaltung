@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Patientenverwaltung;
 using System.Windows.Forms;
 
 <<<<<<< HEAD
@@ -16,6 +17,7 @@ namespace Patientenverwaltung.Gui
 {
     public partial class Ärzteseite : Form
     {
+        Controller controller = new Controller();
         public Ärzteseite()
         {
             InitializeComponent();
