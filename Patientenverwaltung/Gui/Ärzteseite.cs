@@ -8,39 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+<<<<<<< HEAD
 namespace Patientenverwaltung
+=======
+namespace Patientenverwaltung.Gui
+>>>>>>> cdc62687ad59cd89e6d0d1e1b890a50d411f4501
 {
     public partial class Ärzteseite : Form
     {
         public Ärzteseite()
         {
             InitializeComponent();
-        }
-
-        private void btn_PatientenAnsehen_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Patienten patientForm = new Patienten();
-            patientForm.Show();
-        }
-
-        private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            NeuerTermin addTermin = new NeuerTermin();
-            addTermin.Show();
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // Ärzteseite
-            // 
-            this.ClientSize = new System.Drawing.Size(644, 346);
-            this.Name = "Ärzteseite";
-            this.ResumeLayout(false);
-
         }
     }
 }

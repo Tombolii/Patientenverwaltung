@@ -8,24 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PatientenverwaltungOberfläche
+namespace Patientenverwaltung.Gui
 {
     public partial class NeuerPatient : Form
     {
         public NeuerPatient()
         {
             InitializeComponent();
-        }
-
-        private void btn_Abbrechen_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Patienten patientForm = new Patienten();
-            patientForm.Show();
-        }
-
-        private void btn_PatientHinzufuegen_Click(object sender, EventArgs e)
-        {
         }
     }
 }
