@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataReaderMapper.cs" />
     <Compile Include="Datenbank\DBAdapter.cs" />
     <Compile Include="Datenbank\MySQLConnector.cs" />
     <Compile Include="Form1.cs">

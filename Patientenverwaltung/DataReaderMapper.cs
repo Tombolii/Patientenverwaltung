@@ -24,7 +24,7 @@ namespace Patientenverwaltung
             return patient;
         }
 
-        private void extractPersonendatenFromReader(MySqlDataReader reader, Patient patient)
+        private void extractPersonendatenFromReader(MySqlDataReader reader, Personendaten patient)
         {
             while (reader.Read())
             {

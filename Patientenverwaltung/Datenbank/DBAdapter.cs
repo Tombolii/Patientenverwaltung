@@ -4,23 +4,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Patientenverwaltung.Model;
 
 namespace Patientenverwaltung.Datenbank
 {
     internal class DBAdapter
     {
 
-        
-
-
-        public static string DB_NAME = "planungsbuero";
-        public static string DB_PASSWORD = "187";
-        public static string DB_USER = "WWI_User";
+        public static string DB_NAME = "patientenverwaltung";
+        public static string DB_PASSWORD = "";
+        public static string DB_USER = "Arzt";
         public static string DB_HOST = "10.1.13.119";
 
-      
+
 
         MySQLConnector connector = new MySQLConnector(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+        public List<Termin> getTermineOfArzt(int idArzt)
+        {
+            string condition = "WHERE idArzt = " + idArzt;
+
+            string sql = "SELECT termin.zeitpunkt, termin.idPatient, termin.idArzt " +
+                "FROM termin ";
+        }
+
+        private List<Termin> getTermine(string condition)
+        {
+            string sql = "SELECT termin.idTermin, termin.zeitpunkt, termin.idPatient, termin.idArzt " +
+                "FROM termin " +
+                condition + ";";
+            MySqlDataReader reader = this.connector.executeQuery(sql);
+            List<Termin> termine = new List<Termin>();
+            while (reader.Read())
+            {
+                Termin termin = new Termin();
+                termin.idTermin = reader.GetInt32("idTermin");
+                termin.zeitpunkt = DateTime.Parse(reader.GetString("zeitpunkt"));
+                
+            }
+        }
+
+        public void getPatientById(int idPatient)
+        {
+            string sql = "SELECT patient.idPatient, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.telefonnummer, " +
+                "personendaten.geburtstag, adresse.straße, adresse.hausnummer, adresse.ort, adresse.plz, versicherung.name, patient.versicherungsnummer, " +
+                "FROM patient " +
+                "INNER JOIN personendaten ON personendaten.idPersonendaten = patient.idPersonendaten " +
+                "INNER JOIN adresse ON adresse.idAdresse = personendaten.idAdresse " +
+                "INNER JOIN versicherung ON versicherung.idVersicherung = patient.idVersicherung " +
+                "WHERE idPatient = " + idPatient + ";";
+            
+            MySqlDataReader reader = connector.executeQuery(sql);
+
+        }
 
         public void insertTaetigkeitenMigration(TaetigkeitenModel model)
         {
@@ -33,7 +69,7 @@ namespace Patientenverwaltung.Datenbank
 
                 connector.executeNonQuery(sql);
             }
-            
+
         }
 
 
@@ -111,9 +147,9 @@ namespace Patientenverwaltung.Datenbank
 
             connector.executeNonQuery(sql);
         }
-        
-        
-        
+
+
+
 
 
     }
