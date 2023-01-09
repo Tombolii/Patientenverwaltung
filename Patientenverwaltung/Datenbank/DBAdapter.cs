@@ -62,11 +62,29 @@ namespace Patientenverwaltung.Datenbank
 
         public void deletePatient(int idPatient)
         {
-            string sql = "DELET FROM patient WHERE idPatient = " + idPatient + ";";
+            string sql = "DELETE FROM patient WHERE idPatient = " + idPatient + ";";
             connector.executeNonQuery(sql);
         }
 
-
+        public void modifyPatient(Patient patient)
+        {
+            string sql = "UPDATE patient " +
+                "SET patient.versicherungsnummer = " + patient.versicherungsnummer + ", "
+                + "personendaten.vorname = " + patient.vorname + ", "
+                + "personendaten.nachname = " + patient.nachname + ", "
+                + "personendaten.email = " + patient.email + ", "
+                + "personendaten.telefonnummer = " + patient.telefonnummer + ", "
+                + "personendaten.geburtstag = " + patient.geburtstag + ", "
+                + "adresse.straße = " + patient.adresse.straße + ", "
+                + "adresse.hausnummer = " + patient.adresse.hausnummer + ", "
+                + "adresse.ort = " + patient.adresse.ort + ", "
+                + "adresse.plz = " + patient.adresse.plz
+                + "FROM patient " +
+                "INNER JOIN personendaten ON personendaten.idPersonendaten = patient.idPatient " +
+                "INNER JOIN adresse ON adresse.idAdresse = personendaten.idAdresse;";
+           
+            connector.executeNonQuery(sql);
+        }
 
         private List<Termin> getTermine(string condition)
         {
