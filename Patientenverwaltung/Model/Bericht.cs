@@ -48,5 +48,13 @@ namespace Patientenverwaltung.Model
             set { _diagnose = value; }
         }
 
+        private DateTime _zeitpunkt;
+
+        public DateTime zeitpunkt
+        {
+            get { return _zeitpunkt; }
+            set { _zeitpunkt = value; }
+        }
+
     }
 }
