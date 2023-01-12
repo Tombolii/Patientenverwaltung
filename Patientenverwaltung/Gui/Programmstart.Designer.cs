@@ -45,37 +45,37 @@
             // lbl_Name
             // 
             this.lbl_Name.AutoSize = true;
-            this.lbl_Name.Location = new System.Drawing.Point(16, 11);
+            this.lbl_Name.Location = new System.Drawing.Point(18, 14);
             this.lbl_Name.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Name.Name = "lbl_Name";
-            this.lbl_Name.Size = new System.Drawing.Size(126, 16);
+            this.lbl_Name.Size = new System.Drawing.Size(148, 20);
             this.lbl_Name.TabIndex = 0;
             this.lbl_Name.Text = "Hallo Manuel Neuer";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 70);
+            this.label1.Location = new System.Drawing.Point(27, 88);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 16);
+            this.label1.Size = new System.Drawing.Size(141, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Ihr Terminkalender";
             // 
             // cal_Arzt
             // 
-            this.cal_Arzt.Location = new System.Drawing.Point(21, 97);
-            this.cal_Arzt.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
+            this.cal_Arzt.Location = new System.Drawing.Point(24, 121);
+            this.cal_Arzt.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
             this.cal_Arzt.Name = "cal_Arzt";
             this.cal_Arzt.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(328, 11);
+            this.label2.Location = new System.Drawing.Point(369, 14);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 16);
+            this.label2.Size = new System.Drawing.Size(70, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Termine:";
             // 
@@ -87,8 +87,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(332, 97);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(374, 121);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 15;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -106,65 +106,65 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(589, 271);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(663, 339);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(332, 70);
+            this.label3.Location = new System.Drawing.Point(374, 88);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 16);
+            this.label3.Size = new System.Drawing.Size(57, 20);
             this.label3.TabIndex = 7;
             this.label3.Text = "Datum";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(427, 70);
+            this.label4.Location = new System.Drawing.Point(480, 88);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 16);
+            this.label4.Size = new System.Drawing.Size(60, 20);
             this.label4.TabIndex = 8;
             this.label4.Text = "Uhrzeit";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(519, 70);
+            this.label5.Location = new System.Drawing.Point(584, 88);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 16);
+            this.label5.Size = new System.Drawing.Size(86, 20);
             this.label5.TabIndex = 9;
             this.label5.Text = "Nachname";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(657, 70);
+            this.label6.Location = new System.Drawing.Point(739, 88);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(62, 16);
+            this.label6.Size = new System.Drawing.Size(74, 20);
             this.label6.TabIndex = 10;
             this.label6.Text = "Vorname";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(808, 69);
+            this.label7.Location = new System.Drawing.Point(909, 86);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 16);
+            this.label7.Size = new System.Drawing.Size(106, 20);
             this.label7.TabIndex = 11;
             this.label7.Text = "Beschwerden";
             // 
             // btn_TerminHinzufuegen
             // 
-            this.btn_TerminHinzufuegen.Location = new System.Drawing.Point(777, 375);
-            this.btn_TerminHinzufuegen.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_TerminHinzufuegen.Location = new System.Drawing.Point(874, 469);
+            this.btn_TerminHinzufuegen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_TerminHinzufuegen.Name = "btn_TerminHinzufuegen";
-            this.btn_TerminHinzufuegen.Size = new System.Drawing.Size(144, 28);
+            this.btn_TerminHinzufuegen.Size = new System.Drawing.Size(162, 35);
             this.btn_TerminHinzufuegen.TabIndex = 12;
             this.btn_TerminHinzufuegen.Text = "Termin hinzufügen";
             this.btn_TerminHinzufuegen.UseVisualStyleBackColor = true;
@@ -172,19 +172,20 @@
             // 
             // btn_PatientenAnsehen
             // 
-            this.btn_PatientenAnsehen.Location = new System.Drawing.Point(28, 375);
-            this.btn_PatientenAnsehen.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_PatientenAnsehen.Location = new System.Drawing.Point(32, 469);
+            this.btn_PatientenAnsehen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_PatientenAnsehen.Name = "btn_PatientenAnsehen";
-            this.btn_PatientenAnsehen.Size = new System.Drawing.Size(144, 28);
+            this.btn_PatientenAnsehen.Size = new System.Drawing.Size(162, 35);
             this.btn_PatientenAnsehen.TabIndex = 13;
             this.btn_PatientenAnsehen.Text = "Patienten ansehen";
             this.btn_PatientenAnsehen.UseVisualStyleBackColor = true;
+            this.btn_PatientenAnsehen.Click += new System.EventHandler(this.btn_PatientenAnsehen_Click);
             // 
             // Programmstart
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(959, 422);
+            this.ClientSize = new System.Drawing.Size(1079, 528);
             this.Controls.Add(this.btn_PatientenAnsehen);
             this.Controls.Add(this.btn_TerminHinzufuegen);
             this.Controls.Add(this.label7);
@@ -197,7 +198,7 @@
             this.Controls.Add(this.cal_Arzt);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_Name);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Programmstart";
             this.Text = "Ärzteseite";
             this.ResumeLayout(false);

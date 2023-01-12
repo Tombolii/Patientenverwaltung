@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Controller = Patientenverwaltung.Controller;
 
 namespace Patientenverwaltung.Gui
 {
+    
     public partial class Programmstart : Form
     {
+
         public Programmstart()
         {
             InitializeComponent();
@@ -19,7 +22,12 @@ namespace Patientenverwaltung.Gui
 
         private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
         {
+            Controller.addTermin();
+        }
 
+        private void btn_PatientenAnsehen_Click(object sender, EventArgs e)
+        {
+            Controller.Patient();
         }
     }
 }

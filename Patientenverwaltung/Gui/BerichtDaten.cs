@@ -13,10 +13,19 @@ namespace Patientenverwaltung.Gui
 {
     public partial class BerichtDaten_cs : Form
     {
-        Controller controller= new Controller();
         public BerichtDaten_cs()
         {
             InitializeComponent();
+        }
+
+        private void btn_Abbrechen_Click(object sender, EventArgs e)
+        {
+            Controller.showBericht();
+        }
+
+        private void btn_BerhichtBearbeiten_Click(object sender, EventArgs e)
+        {
+            Controller.modifyBericht();
         }
     }
 }
