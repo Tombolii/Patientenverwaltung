@@ -9,6 +9,14 @@ namespace Patientenverwaltung.Model
     internal class Krankheitsbild
     {
 
+        private int _idKrankheitsbild;
+
+        public int idKrankheitsbild
+        {
+            get { return _idKrankheitsbild; }
+            set { _idKrankheitsbild = value; }
+        }
+
         private string _bezeichnung;
 
         public string bezeichnung
