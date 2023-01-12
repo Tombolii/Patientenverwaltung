@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Patientenverwaltung.Gui;
 using System.Windows.Forms;
 
 namespace Patientenverwaltung
 {
-    internal static class Program
+    internal class Program
     {
+        
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
@@ -16,7 +18,7 @@ namespace Patientenverwaltung
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(Controller.startProgram());
         }
     }
 }

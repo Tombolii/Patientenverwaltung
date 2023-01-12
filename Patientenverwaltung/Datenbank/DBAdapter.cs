@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Patientenverwaltung.Model;
+using Patientenverwaltung.Gui;
 
 namespace Patientenverwaltung.Datenbank
 {
@@ -86,6 +87,8 @@ namespace Patientenverwaltung.Datenbank
             }
             reader.Close();
             return termine;
+
+
         }
     }
 }
