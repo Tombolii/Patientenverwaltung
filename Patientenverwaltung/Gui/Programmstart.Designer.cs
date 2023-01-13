@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cal_Arzt = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tblTermine = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -65,7 +65,7 @@
             // cal_Arzt
             // 
             this.cal_Arzt.Location = new System.Drawing.Point(24, 121);
-            this.cal_Arzt.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
+            this.cal_Arzt.Margin = new System.Windows.Forms.Padding(14);
             this.cal_Arzt.Name = "cal_Arzt";
             this.cal_Arzt.TabIndex = 2;
             // 
@@ -79,35 +79,35 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Termine:";
             // 
-            // tableLayoutPanel1
+            // tblTermine
             // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(374, 121);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 15;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(663, 339);
-            this.tableLayoutPanel1.TabIndex = 6;
+            this.tblTermine.ColumnCount = 5;
+            this.tblTermine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3454F));
+            this.tblTermine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.53545F));
+            this.tblTermine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.02112F));
+            this.tblTermine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.24434F));
+            this.tblTermine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.70287F));
+            this.tblTermine.Location = new System.Drawing.Point(374, 121);
+            this.tblTermine.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tblTermine.Name = "tblTermine";
+            this.tblTermine.RowCount = 15;
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblTermine.Size = new System.Drawing.Size(663, 339);
+            this.tblTermine.TabIndex = 6;
             // 
             // label3
             // 
@@ -122,7 +122,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(480, 88);
+            this.label4.Location = new System.Drawing.Point(488, 88);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 20);
@@ -132,7 +132,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(584, 88);
+            this.label5.Location = new System.Drawing.Point(589, 88);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 20);
@@ -193,7 +193,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tblTermine);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cal_Arzt);
             this.Controls.Add(this.label1);
@@ -201,6 +201,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Programmstart";
             this.Text = "Ärzteseite";
+            this.Load += new System.EventHandler(this.Programmstart_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,7 +213,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MonthCalendar cal_Arzt;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tblTermine;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

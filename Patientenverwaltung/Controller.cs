@@ -13,111 +13,143 @@ using Bericht = Patientenverwaltung.Gui.Bericht;
 namespace Patientenverwaltung
 {
     
-    class Controller
+    public class Controller
     {
-        static Programmstart programmstart = new Programmstart();
-        static Bericht bericht = new Bericht();
-        static BerichtBearbeiten berichtBearbeiten = new BerichtBearbeiten();
-        static BerichtDaten_cs berichtDaten = new BerichtDaten_cs();
-        static NeuerBericht neuerBericht = new NeuerBericht();
-        static NeuerPatient neuerPatient = new NeuerPatient();
-        static NeuerTermin neuerTermin = new NeuerTermin();
-        static PatientBearbeiten patientBearbeiten = new PatientBearbeiten();
-        static Patienten patient = new Patienten();
-        static PatientenDaten patientenDaten = new PatientenDaten();
-        static TerminBearbeiten terminBearbeiten = new TerminBearbeiten ();
-        static TerminDaten terminDaten = new TerminDaten ();
-        static DBAdapter adapter = new DBAdapter();
+        private Programmstart programmstart = null;
+        private Bericht bericht = null;
+        private BerichtBearbeiten berichtBearbeiten = null;
+        private BerichtDaten_cs berichtDaten = null;
+        private NeuerBericht neuerBericht = null;
+        private NeuerPatient neuerPatient = null;
+        private NeuerTermin neuerTermin = null;
+        private PatientBearbeiten patientBearbeiten = null;
+        private Patienten patient = null;
+        private PatientenDaten patientenDaten = null;
+        private TerminBearbeiten terminBearbeiten = null;
+        private TerminDaten terminDaten = null;
+        private DBAdapter adapter = new DBAdapter();
 
-        public static Form startProgram()
+        public Controller()
+        {
+            programmstart = new Programmstart(this);
+          bericht = new Bericht(this);
+          berichtBearbeiten = new BerichtBearbeiten(this);
+          berichtDaten = new BerichtDaten_cs(this);
+          neuerBericht = new NeuerBericht(this);
+          neuerPatient = new NeuerPatient(this);
+          neuerTermin = new NeuerTermin(this);
+          patientBearbeiten = new PatientBearbeiten(this);
+          patient = new Patienten(this);
+          patientenDaten = new PatientenDaten(this);
+          terminBearbeiten = new TerminBearbeiten(this);
+          terminDaten = new TerminDaten(this);
+
+    }
+
+    public Form startProgram()
         { return programmstart; }
 
-        public static void saveTermin()
+        public  void saveTermin()
         {
             neuerTermin.Hide();
             programmstart.Show();
         }
-        public static void addTermin()
+        public  void addTermin()
         {
             programmstart.Hide();
             neuerTermin.ShowDialog();
         }
 
-        public static void modifyTermin()
+        public void modifyTermin()
         {
             programmstart.Hide();
             berichtDaten.Show();
         }
 
-        public static void showTermin()
+        public  void showTermin()
         {
             programmstart.Hide();
             terminDaten.Show();
         }
 
-        public static void closeTermin()
+        public  void closeTermin()
         {
             terminDaten.Hide();
             programmstart.Show();
         }
 
-        public static void getBericht()
+        public  void getBericht()
         {   
             programmstart.Hide();
             bericht.Show(); 
         }
 
-        public static void modifyBericht()
+        public  void modifyBericht()
         { 
             programmstart.Hide();
             berichtBearbeiten.Show(); 
         }
 
-        public static void showBericht()
+        public  void showBericht()
         {
             programmstart.Hide();
             berichtDaten.Show();
         }
 
-        public static void addBericht()
+        public  void addBericht()
         {
             programmstart.Hide();
             neuerBericht.Show();
         }
 
-        public static void addPatient()
+        public  void addPatient()
         {
             programmstart.Hide();
             neuerPatient.Show();
         }
 
-        public static void modifyPatient()
+        public  void modifyPatient()
         {
             programmstart.Hide();
             berichtBearbeiten.Show();
         }
 
-        public static void Patient()
+        public  void Patient()
         {
             programmstart.Hide();
             patient.Show();
         }
 
-        public static void closePatient()
+        public  void closePatient()
         {
             patient.Hide();
             programmstart.Show();
         }
 
-        public static void showPatienten()
+        public  void showPatienten()
         {
             programmstart.Hide();
             patientenDaten.Show();
         }
 
-        public List<Termin> getTerminArzt(int idArzt)
+        public List<Termin> GetTerminArzt(int idArzt)
         {
-            return adapter.getTermineOfArzt(idArzt);            
+
+            
+
+            Patient patient= new Patient();
+            patient.idPatient = 1;
+            patient.nachname = "Müller";
+            patient.vorname = "Mascarpone";
+            Termin termin = new Termin();
+            termin.idTermin = 1;
+            DateTime dt = DateTime.Now;
+            termin.zeitpunkt = dt;
+            termin.patient =patient;
+            //return adapter.getTermineOfArzt(idArzt);            
+            List<Termin> testlist = new List<Termin>();
+            testlist.Add(termin);
+            return testlist;
 
         }
         public List<Termin> getTerminPatient(int idPatient)

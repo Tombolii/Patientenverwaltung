@@ -13,19 +13,22 @@ namespace Patientenverwaltung.Gui
 {
     public partial class PatientBearbeiten : Form
     {
-        public PatientBearbeiten()
+        private Controller controller;
+
+        public PatientBearbeiten(Controller controller)
         {
             InitializeComponent();
+            this.controller = controller;
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
-            Controller.startProgram();
+            controller.startProgram();
         }
 
         private void btn_AenderungUebernehmen_Click(object sender, EventArgs e)
         {
-            Controller.Patient();
+            controller.Patient();
         }
     }
 }

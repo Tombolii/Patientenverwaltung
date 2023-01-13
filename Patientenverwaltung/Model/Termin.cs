@@ -8,7 +8,7 @@ using Patientenverwaltung.Gui;
 
 namespace Patientenverwaltung.Model
 {
-    internal class Termin
+    public class Termin
     {
 
         private int _idTermin;

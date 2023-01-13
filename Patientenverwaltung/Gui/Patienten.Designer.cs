@@ -244,6 +244,8 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Patienten";
             this.Text = "Patienten";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Patienten_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
