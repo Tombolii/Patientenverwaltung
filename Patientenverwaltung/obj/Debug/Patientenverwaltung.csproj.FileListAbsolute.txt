@@ -8,27 +8,28 @@ C:\BS\3. LJ\Bfk-S\2022-11-10 Übung UML\Patientenverwaltung\Patientenverwaltung\
 C:\BS\3. LJ\Bfk-S\2022-11-10 Übung UML\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.CoreCompileInputs.cache
 C:\BS\3. LJ\Bfk-S\2022-11-10 Übung UML\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.exe
 C:\BS\3. LJ\Bfk-S\2022-11-10 Übung UML\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.pdb
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.AssemblyReference.cache
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\bin\Debug\Patientenverwaltung.exe
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\bin\Debug\Patientenverwaltung.exe.config
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\bin\Debug\MySql.Data.dll
 C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.SuggestedBindingRedirects.cache
 C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Form1.resources
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.BerichtDaten_cs.resources
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.TerminBearbeiten.resources
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Properties.Resources.resources
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.GenerateResource.cache
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.CoreCompileInputs.cache
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.exe
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.pdb
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\bin\Debug\Patientenverwaltung.exe.config
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\bin\Debug\Patientenverwaltung.exe
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\bin\Debug\Patientenverwaltung.pdb
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\bin\Debug\MySql.Data.dll
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.CopyComplete
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.Programmstart.resources
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.Patienten.resources
 C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.Bericht.resources
-C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.PatientBearbeiten.resources
 C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.BerichtBearbeiten.resources
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.BerichtDaten_cs.resources
 C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.NeuerBericht.resources
 C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.NeuerPatient.resources
 C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.NeuerTermin.resources
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.PatientBearbeiten.resources
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.Patienten.resources
 C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.PatientenDaten.resources
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.Programmstart.resources
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.TerminBearbeiten.resources
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Gui.TerminDaten.resources
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.Properties.Resources.resources
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.GenerateResource.cache
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.CoreCompileInputs.cache
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.CopyComplete
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.exe
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.pdb
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\obj\Debug\Patientenverwaltung.csproj.AssemblyReference.cache
+C:\Users\jasch\OneDrive\Desktop\Berufsschule\3. Schuljahr\Bfk-S\12.12.2022 Projektstart\Patientenverwaltung\Patientenverwaltung\bin\Debug\Patientenverwaltung.pdb

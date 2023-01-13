@@ -18,7 +18,7 @@ namespace Patientenverwaltung
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(Controller.startProgram());
+            Application.Run(new Controller().startProgram());
         }
     }
 }

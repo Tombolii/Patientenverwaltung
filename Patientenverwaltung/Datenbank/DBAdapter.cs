@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Patientenverwaltung.Model;
 using Patientenverwaltung.Gui;
+using Bericht = Patientenverwaltung.Model.Bericht;
 
 namespace Patientenverwaltung.Datenbank
 {
-    internal class DBAdapter
+    public class DBAdapter
     {
 
         public static string DB_NAME = "patientenverwaltung";

@@ -31,7 +31,7 @@ namespace Patientenverwaltung
 
         public Controller()
         {
-            programmstart = new Programmstart(this);
+          programmstart = new Programmstart(this);
           bericht = new Bericht(this);
           berichtBearbeiten = new BerichtBearbeiten(this);
           berichtDaten = new BerichtDaten_cs(this);
@@ -49,12 +49,12 @@ namespace Patientenverwaltung
     public Form startProgram()
         { return programmstart; }
 
-        public  void saveTermin()
+        public void saveTermin()
         {
             neuerTermin.Hide();
             programmstart.Show();
         }
-        public  void addTermin()
+        public void addTermin()
         {
             programmstart.Hide();
             neuerTermin.ShowDialog();
@@ -66,49 +66,49 @@ namespace Patientenverwaltung
             berichtDaten.Show();
         }
 
-        public  void showTermin()
+        public void showTermin()
         {
             programmstart.Hide();
             terminDaten.Show();
         }
 
-        public  void closeTermin()
+        public void closeTermin()
         {
             terminDaten.Hide();
             programmstart.Show();
         }
 
-        public  void getBericht()
+        public void getBericht()
         {   
             programmstart.Hide();
             bericht.Show(); 
         }
 
-        public  void modifyBericht()
+        public void modifyBericht()
         { 
             programmstart.Hide();
             berichtBearbeiten.Show(); 
         }
 
-        public  void showBericht()
+        public void showBericht()
         {
             programmstart.Hide();
             berichtDaten.Show();
         }
 
-        public  void addBericht()
+        public void addBericht()
         {
             programmstart.Hide();
             neuerBericht.Show();
         }
 
-        public  void addPatient()
+        public void addPatient()
         {
             programmstart.Hide();
             neuerPatient.Show();
         }
 
-        public  void modifyPatient()
+        public void modifyPatient()
         {
             programmstart.Hide();
             berichtBearbeiten.Show();

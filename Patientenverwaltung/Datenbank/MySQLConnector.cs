@@ -89,8 +89,8 @@ namespace Patientenverwaltung.Datenbank
             catch (Exception ex)
             {
 
-                throw new Exception(errorMsg);
                 Console.WriteLine(errorMsg + ex.Message);
+                throw new Exception(errorMsg);
             }
 
             return mySQLComm;
