@@ -2,7 +2,6 @@
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
-
 /PatientverwaltungTest/obj/project.nuget.cache
 /.vs/Patientenverwaltung/FileContentIndex
 /.vs/Patientenverwaltung/v17/TestStore/0
@@ -31,4 +30,3 @@
 /Patientenverwaltung/bin/Debug/Patientenverwaltung.pdb
 /Patientenverwaltung/bin/Debug/Patientenverwaltung.exe
 /Patientenverwaltung/bin/Debug/MySql.Data.dll
-*.config

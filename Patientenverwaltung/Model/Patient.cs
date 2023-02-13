@@ -16,9 +16,9 @@ namespace Patientenverwaltung.Model
             set { _idPatient = value; }
         }
 
-        private string _versicherung;
+        private Versicherung _versicherung;
 
-        public string versicherung
+        public Versicherung versicherung
         {
             get { return _versicherung; }
             set { _versicherung = value; }
