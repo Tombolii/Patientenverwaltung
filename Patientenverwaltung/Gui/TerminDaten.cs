@@ -13,10 +13,22 @@ namespace Patientenverwaltung.Gui
 {
     public partial class TerminDaten : Form
     {
-        
-        public TerminDaten()
+        private Controller controller;
+
+        public TerminDaten(Controller controller)
         {
             InitializeComponent();
+            this.controller = controller;
+        }
+
+        private void btn_TerminBearbeiten_Click(object sender, EventArgs e)
+        {
+            controller.modifyTermin();
+        }
+
+        private void btn_Abbrechen_Click(object sender, EventArgs e)
+        {
+            controller.closeTermin();
         }
     }
 }

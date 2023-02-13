@@ -13,10 +13,27 @@ namespace Patientenverwaltung.Gui
 {
     public partial class PatientenDaten : Form
     {
-        
-        public PatientenDaten()
+        private Controller controller;
+
+        public PatientenDaten(Controller controller)
         {
             InitializeComponent();
+            this.controller = controller;
+        }
+
+        private void btn_PatientBearbeiten_Click(object sender, EventArgs e)
+        {
+            controller.modifyPatient();
+        }
+
+        private void btn_Berichte_Click(object sender, EventArgs e)
+        {
+            controller.showBericht();
+        }
+
+        private void btn_Zurueck_Click(object sender, EventArgs e)
+        {
+            controller.Patient();
         }
     }
 }
