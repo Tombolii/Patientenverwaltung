@@ -13,10 +13,10 @@ namespace Patientenverwaltung.Datenbank
     public class DBAdapter
     {
 
-        public static string DB_NAME = "patientenverwaltung";
-        public static string DB_PASSWORD = "";
-        public static string DB_USER = "Arzt";
-        public static string DB_HOST = "10.1.13.119";
+        public const string DB_NAME = "patientenverwaltung";
+        public const string DB_PASSWORD = "";
+        public const string DB_USER = "root";
+        public const string DB_HOST = "localhost";
 
         DataReaderMapper mapper = new DataReaderMapper();
 
@@ -33,19 +33,6 @@ namespace Patientenverwaltung.Datenbank
             string condition = "WHERE idPatient = " + idPatient;
             return getTermine(condition);
         }
-
-        public Patient getPatient(int idPatient)
-        {
-            string condition = "WHERE idPatient = " + idPatient + ";";
-            return getPatientByCondition(condition);
-        }
-        
-        public Patient getPatient(string nachname)
-        {
-            string condition = "WHERE nachname = '" + nachname + "';";
-            return getPatientByCondition(condition);
-        }
-
         public Arzt getArztById(int idArzt)
         {
             string sql = "SELECT arzt.idArzt, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.telefonnummer, " +
@@ -60,10 +47,112 @@ namespace Patientenverwaltung.Datenbank
             return mapper.extractArztFromReader(reader);
         }
 
+        /// <summary>
+        /// Liest einen Patient mit Hilfe der idPatient aus
+        /// </summary>
+        /// <param name="idPatient">
+        /// Id des gesuchten Patienten
+        /// </param>
+        /// <returns>
+        /// den gesuchten Patienten
+        /// </returns>
+        public Patient getPatient(int idPatient)
+        {
+            string condition = "WHERE idPatient = " + idPatient;
+            return getPatientByCondition(condition)[0];
+        }
+
+        /// <summary>
+        /// Liest alle Patienten mit einem bestimmten Nachnamen aus
+        /// </summary>
+        /// <param name="nachname">
+        /// Nachname des gesuchten Patienten
+        /// </param>
+        /// <returns>
+        /// Liste der Patienten mit dem gesuchten Nachnamen
+        /// </returns>
+        public List<Patient> getPatient(string nachname)
+        {
+            string condition = "WHERE nachname = '" + nachname + "'";
+            return getPatientByCondition(condition);
+        }
+
         public void deletePatient(int idPatient)
         {
-            string sql = "DELET FROM patient WHERE idPatient = " + idPatient + ";";
+            string sql = "DELETE FROM patient WHERE idPatient = " + idPatient + ";";
             connector.executeNonQuery(sql);
+        }
+
+        
+        public void modifyPatient(Patient patient)
+        {
+            // Update adresse
+            string sql = "UPDATE adresse " +
+                "SET straße = '" + patient.adresse.straße + "', " +
+                "hausnummer = '" + patient.adresse.hausnummer + "', " +
+                "ort = '" + patient.adresse.ort + "', " +
+                "plz = " + patient.adresse.plz + " " +
+                "WHERE idAdresse = " + patient.adresse.idAdresse + ";";
+            connector.executeNonQuery(sql);
+
+            sql = "UPDATE personendaten " +
+                "SET vorname = '" + patient.vorname + "', " +
+                "nachname = '" + patient.nachname + "', " +
+                "email = '" + patient.email + "', " +
+                "telefonnummer = '" + patient.telefonnummer + "', " +
+                "geburtstag = '" + patient.geburtstag + "' " +
+                "WHERE idPersonendaten = " + patient.idPersonendaten + ";";
+            connector.executeNonQuery(sql);
+
+            sql = "UPDATE patient " +
+                "SET versicherungsnummer = " + patient.versicherungsnummer + ", " +
+                "idVersicherung = " + patient.versicherung.idVersicherung + " " +
+                "WHERE idPatient = " + patient.idPatient + ";";
+
+            connector.executeNonQuery(sql);
+            List<Krankheitsbild> currentVorerkrankungen = getVorerkrankungenOfPatient(patient.idPatient);
+            if (!patient.vorerkrankungen.Equals(currentVorerkrankungen))
+            {
+                synchVorerkrankungenOfPatient(patient.idPatient, patient.vorerkrankungen, currentVorerkrankungen);
+            }
+        }
+
+        public Patient addPatient(Patient newPatient)
+        {
+            // Anlegen der Adresse
+            string sql = "INSERT INTO adresse (straße, hausnummer, ort, plz) " +
+                "VALUES('" + newPatient.adresse.straße + "', '" +
+                newPatient.adresse.hausnummer + "', '" +
+                newPatient.adresse.ort + "', " +
+                newPatient.adresse.plz + "); " +
+                "SELECT LAST_INSERT_ID() as 'idAdresse';";
+            connector.executeNonQuery(sql);
+
+            // Anlegen der Personendaten
+            sql = "INSERT into personendaten (vorname, nachname, email, telefonnummer, geburtstag, idAdresse) " +
+                "VALUES('" + newPatient.vorname + "', ' " +
+                newPatient.nachname + "', '" +
+                newPatient.email + "', '" +
+                newPatient.telefonnummer + "', '" +
+                newPatient.geburtstag + "', " +
+                "LAST_INSERT_ID());";
+            connector.executeNonQuery(sql);
+
+            // Anlegen des Patienten und Auslesen der Id des neuen Patienten
+            sql = "INSERT INTO patient (idVersicherung, idPersonendaten, versicherungsnummer) " +
+                "VALUES(" + newPatient.versicherung.idVersicherung + ", " +
+                "LAST_INSERT_ID(), " +
+                newPatient.versicherungsnummer + "); " +
+                "SELECT LAST_INSERT_ID() as 'idPatient'";
+            MySqlDataReader reader = connector.executeQuery(sql);
+            reader.Read();
+            int idPatient = reader.GetInt32("idPatient");
+            reader.Close();
+
+            // Neu angelegten Patient auslesen und Vorerkrankungen synchronisieren
+            Patient patient = getPatient(idPatient);
+            synchVorerkrankungenOfPatient(patient.idPatient, newPatient.vorerkrankungen, new List<Krankheitsbild>());
+            return patient;
         }
 
         public List<Bericht> getBerichteOfPatient(int idPatient)
@@ -123,10 +212,10 @@ namespace Patientenverwaltung.Datenbank
             connector.executeNonQuery(sql);
         }
 
-        private Patient getPatientByCondition(string condition)
+        private List<Patient> getPatientByCondition(string condition)
         {
             string sql = "SELECT patient.idPatient, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.telefonnummer, " +
-                "personendaten.geburtstag, adresse.straße, adresse.hausnummer, adresse.ort, adresse.plz, versicherung.name, patient.versicherungsnummer, " +
+                "personendaten.geburtstag, adresse.idAdresse, adresse.straße, adresse.hausnummer, adresse.ort, adresse.plz, versicherung.name, versicherung.idVersicherung, patient.versicherungsnummer " +
                 "FROM patient " +
                 "INNER JOIN personendaten ON personendaten.idPersonendaten = patient.idPersonendaten " +
                 "INNER JOIN adresse ON adresse.idAdresse = personendaten.idAdresse " +
@@ -134,7 +223,7 @@ namespace Patientenverwaltung.Datenbank
                 condition + ";";
 
             MySqlDataReader reader = connector.executeQuery(sql);
-            return mapper.extractPatientFromReader(reader);
+            return mapper.extractPatientenFromReader(reader);
         }
 
         private List<Termin> getTermine(string condition)
@@ -157,6 +246,65 @@ namespace Patientenverwaltung.Datenbank
             return termine;
 
 
+        }
+
+        private List<Krankheitsbild> getVorerkrankungenOfPatient(int idPatient)
+        {
+           List<Krankheitsbild> vorerkrankungen = new List<Krankheitsbild>();
+           string sql = "SELECT krankheitsbild.idKrankheitsbild, bezeichnung, symptome " +
+                "FROM krankheitsbild " +
+                "INNER JOIN vorerkrankung ON krankheitsbild.idKrankheitsbild = vorerkrankung.idKrankheitsbild " +
+                "WHERE idPatient = " + idPatient + ";";
+
+           MySqlDataReader reader = connector.executeQuery(sql);
+           while (reader.Read())
+           {
+                Krankheitsbild vorerkrankung = new Krankheitsbild();
+                vorerkrankung.idKrankheitsbild = reader.GetInt32("idKrankheitsbild");
+                vorerkrankung.bezeichnung = reader.GetString("bezeichnung");
+                vorerkrankung.symptome = reader.GetString("symptome");
+                vorerkrankungen.Add(vorerkrankung);
+           }
+           reader.Close();
+           return vorerkrankungen;           
+        }
+
+        private void synchVorerkrankungenOfPatient(
+            int idPatient, List<Krankheitsbild> updatedVorerkrankungen, List<Krankheitsbild> currentVorerkrankungen)
+        {
+            List<Krankheitsbild> newVorerkrankungen = updatedVorerkrankungen.Except(currentVorerkrankungen).ToList();
+            if (newVorerkrankungen != null && newVorerkrankungen.Count > 0)
+            {
+                // neue Vorerkrankungen in der DB aufnehmen
+                string sql = "INSERT INTO vorerkrankung (idPatient, idKrankheitsbild) " +
+                    extractSqlValuesForVorerkrankungen(newVorerkrankungen, idPatient) + ";";
+                connector.executeNonQuery(sql);
+            }
+            List<Krankheitsbild> deletedVorerkrankungen = currentVorerkrankungen.Except(updatedVorerkrankungen).ToList();
+            if (deletedVorerkrankungen != null && deletedVorerkrankungen.Count > 0)
+            {
+                // entfernte Vorerkrankungen in der DB entfernen
+                string sql = "DELETE FROM vorerkrankung " +
+                    "WHERE idPatient = " + idPatient + 
+                    " AND idKrankheitsbild IN (" + 
+                    String.Join(", ", deletedVorerkrankungen.Select(item => item.idKrankheitsbild).ToList()) 
+                    + ");";
+                connector.executeNonQuery(sql);
+            }
+        }
+
+        private string extractSqlValuesForVorerkrankungen(List<Krankheitsbild> vorerkrankungen, int idPatient)
+        {
+            string values = "VALUES ";
+            for (int i = 0; i < vorerkrankungen.Count; i++)
+            {
+                values += "(" + idPatient + ", " + vorerkrankungen[i].idKrankheitsbild + ")";
+                if (i < (vorerkrankungen.Count - 1))
+                {
+                    values += ", ";
+                }
+            }
+            return values;
         }
     }
 }

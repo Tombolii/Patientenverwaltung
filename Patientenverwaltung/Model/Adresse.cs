@@ -8,6 +8,13 @@ namespace Patientenverwaltung.Model
 {
     public class Adresse
     {
+        private int _idAdresse;
+
+        public int idAdresse
+        {
+            get { return _idAdresse; }
+            set { _idAdresse = value; }
+        }
 
         private string _straße;
 
