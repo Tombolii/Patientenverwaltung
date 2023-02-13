@@ -23,12 +23,12 @@ namespace Patientenverwaltung.Gui
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
-            controller.showBericht();
+            controller.berichtBearbeitenClose();
         }
 
         private void btn_AenderungUebernehmen_Click(object sender, EventArgs e)
         {
-            controller.showBericht();
+            controller.berichtBearbeitenSaveChange();
         }
     }
 }

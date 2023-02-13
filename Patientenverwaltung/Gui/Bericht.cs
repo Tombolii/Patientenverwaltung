@@ -23,17 +23,17 @@ namespace Patientenverwaltung.Gui
 
         private void btn_BerichtHinzufuegen_Click(object sender, EventArgs e)
         {
-            controller.addBericht();
+            controller.berichtAddBericht();
         }
 
         private void btn_BerichtSuchen_Click(object sender, EventArgs e)
         {
-            controller.showBericht();
+            controller.berichtSearchBericht();
         }
 
         private void btn_Startseite_Click(object sender, EventArgs e)
         {
-            controller.Patient();
+            controller.berichtBackToPat();
         }
     }
 }

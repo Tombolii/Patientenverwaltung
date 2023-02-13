@@ -24,12 +24,12 @@ namespace Patientenverwaltung.Gui
 
         private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
         {
-            controller.saveTermin();
+            controller.neuerTerminAddTermin();
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
-            controller.showTermin();
+            controller.neuerTerminClose();
         }
     }
 }

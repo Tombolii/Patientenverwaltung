@@ -25,12 +25,12 @@ namespace Patientenverwaltung.Gui
 
         private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
         {
-            controller.addTermin();
+            controller.ärzteseiteAddTermin();
         }
 
         private void btn_PatientenAnsehen_Click(object sender, EventArgs e)
         {
-            controller.Patient();
+            controller.ärzteseiteSearchPat();
         }
 
         private void Programmstart_Load(object sender, EventArgs e)
