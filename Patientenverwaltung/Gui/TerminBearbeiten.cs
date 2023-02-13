@@ -23,7 +23,17 @@ namespace Patientenverwaltung.Gui
 
         private void btn_AenderungUebernehmen_Click(object sender, EventArgs e)
         {
-            controller.saveTermin();
+            controller.terminBearbeitenSaveChange();
+        }
+
+        private void btn_Abbrechen_Click(object sender, EventArgs e)
+        {
+            controller.terminBearbeitenClose();
+        }
+
+        private void TerminBearbeiten_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

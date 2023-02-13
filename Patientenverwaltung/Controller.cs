@@ -49,87 +49,201 @@ namespace Patientenverwaltung
     public Form startProgram()
         { return programmstart; }
 
-        public void saveTermin()
+        public void ärzteseiteSearchPat()
         {
-            neuerTermin.Hide();
-            programmstart.Show();
-        }
-        public void addTermin()
-        {
-            programmstart.Hide();
-            neuerTermin.ShowDialog();
-        }
-
-        public void modifyTermin()
-        {
-            programmstart.Hide();
-            berichtDaten.Show();
-        }
-
-        public void showTermin()
-        {
-            programmstart.Hide();
-            terminDaten.Show();
-        }
-
-        public void closeTermin()
-        {
-            terminDaten.Hide();
-            programmstart.Show();
-        }
-
-        public void getBericht()
-        {   
-            programmstart.Hide();
-            bericht.Show(); 
-        }
-
-        public void modifyBericht()
-        { 
-            programmstart.Hide();
-            berichtBearbeiten.Show(); 
-        }
-
-        public void showBericht()
-        {
-            programmstart.Hide();
-            berichtDaten.Show();
-        }
-
-        public void addBericht()
-        {
-            programmstart.Hide();
-            neuerBericht.Show();
-        }
-
-        public void addPatient()
-        {
-            programmstart.Hide();
-            neuerPatient.Show();
-        }
-
-        public void modifyPatient()
-        {
-            programmstart.Hide();
-            berichtBearbeiten.Show();
-        }
-
-        public  void Patient()
-        {
+            //Fertig - Ungetestet
             programmstart.Hide();
             patient.Show();
         }
 
-        public  void closePatient()
+        public void ärzteseiteAddTermin()
         {
+            //Fertig - Ungestestet
+            programmstart.Hide();
+            neuerTermin.Show();
+        }
+
+        public void berichtBackToPat()
+        {
+            //Fertig - Ungestestet
+            bericht.Hide();
+            patient.Show();
+        }
+
+        public void berichtSearchBericht()
+        {
+            //Fertig - Ungestestet
+            bericht.Hide();
+            berichtDaten.Show();
+            
+        }
+
+        public void berichtAddBericht()
+        {
+            //Fertig - Ungestestet
+            bericht.Hide();
+            neuerBericht.Show();
+        }
+
+        public void berichtBearbeitenSaveChange()
+        {
+            //Fertig - Ungestestet
+            berichtBearbeiten.Hide();
+            bericht.Show();
+        }
+
+        public void berichtBearbeitenClose()
+        {
+            //Fertig - Ungestestet
+            berichtBearbeiten.Hide();
+            bericht.Show();
+        }
+
+        public void berichtDatenChange()
+        {
+            //Fertig - Ungestestet
+            berichtDaten.Hide();
+            berichtBearbeiten.Show();
+        }
+
+        public void berichtDatenBack()
+        {
+            //Fertig - Ungestestet
+            berichtDaten.Hide();
+            bericht.Show();
+        }
+
+        public void neuerBerichtAddBericht()
+        {
+            //Fertig - Ungestestet
+            neuerBericht.Hide();
+            bericht.Show();
+        }
+
+        public void neuerBerichtClose()
+        {
+            //Fertig - Ungestestet
+            neuerBericht.Hide();
+            bericht.Show();
+        }
+
+        public void neuerPatientAddPat()
+        {
+            //Fertig - Ungestestet
+            neuerPatient.Hide();
+            patient.Show();
+        }
+
+        public void neuerPatientClose()
+        {
+            //Fertig - Ungestestet
+            neuerPatient.Hide();
+            patient.Show();
+        }
+
+        public void neuerTerminAddTermin()
+        {
+            //Fertig - Ungestestet
+            neuerTermin.Hide();
+            programmstart.Show();
+        }
+
+        public void neuerTerminClose()
+        {
+            //Fertig - Ungestestet
+            neuerTermin.Hide();
+            programmstart.Show();
+        }
+
+        public void patientBearbeitenSaveChange()
+        {
+            //Fertig - Ungestestet
+            patientBearbeiten.Hide();
+            patient.Show();
+        }
+
+        public void patientBearbeitenClose()
+        {
+            //Fertig - Ungestestet
+            patientBearbeiten.Hide();
+            patient.Show();
+        }
+
+        public void patientenBackToStart()
+        {
+            //Fertig - Ungestestet
             patient.Hide();
             programmstart.Show();
         }
 
-        public  void showPatienten()
+        public void patientSearchPat()
         {
-            programmstart.Hide();
+            //Fertig - Ungestestet
+            patient.Hide();
             patientenDaten.Show();
+        }
+
+        public void patientAddPat()
+        {
+            //Fertig - Ungestestet
+            patient.Hide();
+            neuerPatient.Show();
+        }
+
+        public void patientDatenChangePat()
+        {
+            //Fertig - Ungestestet
+            patientenDaten.Hide();
+            patientBearbeiten.Show();
+        }
+
+        public void patientDatenOpenBerichte()
+        {
+            //Fertig - Ungestestet
+            patientenDaten.Hide();
+            berichtDaten.Show();
+        }
+
+        public void patientDatenBack()
+        {
+            //Fertig - Ungestestet
+            patientenDaten.Hide();
+            patient.Show();
+        }
+
+        public void terminBearbeitenSaveChange()
+        {
+            //Fertig - Ungestestet
+            terminBearbeiten.Hide();
+            programmstart.Show();
+        }
+
+        public void terminBearbeitenClose()
+        {
+            //Fertig - Ungestestet
+            terminBearbeiten.Hide();
+            programmstart.Show();
+        }
+
+        public void terminDatenChangeTermin()
+        {
+            //Fertig - Ungestestet
+            terminDaten.Hide();
+            terminBearbeiten.Show();
+        }
+
+        public void terminDatenDeleteTermin()
+        {
+            //Fertig - Ungestestet
+            terminDaten.Hide();
+            programmstart.Show();
+        }
+
+        public void terminDatenClose()
+        {
+            //Fertig - Ungestestet
+            terminDaten.Hide();
+            programmstart.Show();
         }
 
         public List<Termin> GetTerminArzt(int idArzt)

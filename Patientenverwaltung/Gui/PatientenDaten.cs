@@ -23,17 +23,17 @@ namespace Patientenverwaltung.Gui
 
         private void btn_PatientBearbeiten_Click(object sender, EventArgs e)
         {
-            controller.modifyPatient();
+            controller.patientDatenChangePat();
         }
 
         private void btn_Berichte_Click(object sender, EventArgs e)
         {
-            controller.showBericht();
+            controller.patientDatenOpenBerichte();
         }
 
         private void btn_Zurueck_Click(object sender, EventArgs e)
         {
-            controller.Patient();
+            controller.patientDatenBack();
         }
     }
 }

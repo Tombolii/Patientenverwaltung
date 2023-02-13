@@ -23,12 +23,12 @@ namespace Patientenverwaltung.Gui
 
         private void btn_BerhichtHinzufuegen_Click(object sender, EventArgs e)
         {
-            controller.addBericht();
+            controller.neuerBerichtAddBericht();
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
-            controller.showBericht();
+            controller.neuerBerichtClose();
         }
     }
 }

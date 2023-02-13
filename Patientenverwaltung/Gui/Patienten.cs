@@ -23,22 +23,26 @@ namespace Patientenverwaltung.Gui
 
         private void btn_Startseite_Click(object sender, EventArgs e)
         {
-            controller.closePatient();
+            controller.patientenBackToStart();
         }
 
         private void btn_PatientHinzufuegen_Click(object sender, EventArgs e)
         {
-            controller.addPatient();
+            controller.patientAddPat();
         }
 
         private void btn_PatientSuchen_Click(object sender, EventArgs e)
         {
-            controller.showPatienten();
+            controller.patientSearchPat();
         }
 
         private void Patienten_FormClosing(object sender, FormClosingEventArgs e)
         {
-            controller.closePatient();
+        }
+
+        private void Patienten_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
