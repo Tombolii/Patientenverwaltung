@@ -13,10 +13,22 @@ namespace Patientenverwaltung.Gui
 {
     public partial class NeuerBericht : Form
     {
-        Controller controller = new Controller();
-        public NeuerBericht()
+        private Controller controller;
+
+        public NeuerBericht(Controller controller)
         {
             InitializeComponent();
+            this.controller = controller;
+        }
+
+        private void btn_BerhichtHinzufuegen_Click(object sender, EventArgs e)
+        {
+            controller.addBericht();
+        }
+
+        private void btn_Abbrechen_Click(object sender, EventArgs e)
+        {
+            controller.showBericht();
         }
     }
 }

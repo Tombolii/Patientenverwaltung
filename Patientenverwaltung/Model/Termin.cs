@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Patientenverwaltung;
+using Patientenverwaltung.Gui;
 
 namespace Patientenverwaltung.Model
 {
-    internal class Termin
+    public class Termin
     {
 
         private int _idTermin;

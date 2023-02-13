@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patientenverwaltung.Model
 {
-    internal class Adresse
+    public class Adresse
     {
 
         private string _straße;

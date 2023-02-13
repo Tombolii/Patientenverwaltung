@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patientenverwaltung.Model
 {
-    internal class Krankheitsbild
+    public class Krankheitsbild
     {
 
         private int _idKrankheitsbild;
