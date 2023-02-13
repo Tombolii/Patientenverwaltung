@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace Patientenverwaltung.Model
 {
-    internal class Krankheitsbild
+    public class Krankheitsbild
     {
+
+        private int _idKrankheitsbild;
+
+        public int idKrankheitsbild
+        {
+            get { return _idKrankheitsbild; }
+            set { _idKrankheitsbild = value; }
+        }
 
         private string _bezeichnung;
 

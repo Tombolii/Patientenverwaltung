@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patientenverwaltung.Model
 {
-    internal class Personendaten
+    public class Personendaten
     {
         private int _idPersonendaten;
 

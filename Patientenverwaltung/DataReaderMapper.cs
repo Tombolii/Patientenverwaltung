@@ -8,20 +8,27 @@ using Patientenverwaltung.Model;
 
 namespace Patientenverwaltung
 {
-    internal class DataReaderMapper
+    public class DataReaderMapper
     {
 
-        public Patient extractPatientFromReader(MySqlDataReader reader)
-        {
-            Patient patient = new Patient();
+        public List<Patient> extractPatientenFromReader(MySqlDataReader reader)
+        {   
+            List<Patient> patienten = new List<Patient>();
             while (reader.Read())
             {
+                Patient patient = new Patient();
                 patient.idPatient = reader.GetInt32("idPatient");
                 patient.versicherungsnummer = reader.GetInt32("versicherungsnummer");
-                patient.versicherung = reader.GetString("name");
+                Versicherung versicherung = new Versicherung()
+                {
+                    name = reader.GetString("name"),
+                    idVersicherung = reader.GetInt32("idVersicherung")
+                };
                 extractPersonendatenFromReader(reader, patient);
+                patienten.Add(patient);
             }
-            return patient;
+            reader.Close();
+            return patienten;
         }
 
         public Arzt extractArztFromReader(MySqlDataReader reader)
@@ -34,27 +41,26 @@ namespace Patientenverwaltung
                 arzt.titel = reader.GetString("titel");
                 extractPersonendatenFromReader(reader, arzt);
             }
+            reader.Close();
             return arzt;
         }
 
         private void extractPersonendatenFromReader(MySqlDataReader reader, Personendaten person)
         {
-            while (reader.Read())
-            {
                 person.vorname = reader.GetString("vorname");
                 person.nachname = reader.GetString("nachname");
                 person.email = reader.GetString("email");
                 person.telefonnummer = reader.GetString("telefonnummer");
                 person.geburtstag = DateTime.Parse(reader.GetString("geburtstag"));
-                Adresse adresse = new Adresse
-                {
+            Adresse adresse = new Adresse
+            {
+                    idAdresse = reader.GetInt32("idAdresse"),
                     straße = reader.GetString("straße"),
                     hausnummer = reader.GetString("hausnummer"),
                     ort = reader.GetString("ort"),
                     plz = reader.GetInt32("plz")
                 };
                 person.adresse = adresse;
-            }
         }
     }
 }
