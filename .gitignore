@@ -30,3 +30,8 @@
 /Patientenverwaltung/bin/Debug/Patientenverwaltung.pdb
 /Patientenverwaltung/bin/Debug/Patientenverwaltung.exe
 /Patientenverwaltung/bin/Debug/MySql.Data.dll
+*.sqlite
+*.json
+/Patientenverwaltung/obj/Debug
+*.user
+*.cs

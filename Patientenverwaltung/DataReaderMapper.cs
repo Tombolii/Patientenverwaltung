@@ -37,7 +37,7 @@ namespace Patientenverwaltung
             while (reader.Read())
             {
                 arzt.idArzt = reader.GetInt32("idArzt");
-                arzt.fachgebiet = reader.GetString("fachgebiet");
+                arzt.idFachgebiet = reader.GetInt32("idFachgebiet");
                 arzt.titel = reader.GetString("titel");
                 extractPersonendatenFromReader(reader, arzt);
             }

@@ -46,8 +46,12 @@ namespace Patientenverwaltung
 
     }
 
-    public Form startProgram()
-        { return programmstart; }
+        public DBAdapter dBAdapter = new DBAdapter();
+        public Form startProgram()
+        { 
+            return programmstart;
+        
+        }        
 
         public void ärzteseiteSearchPat()
         {
@@ -246,31 +250,14 @@ namespace Patientenverwaltung
             programmstart.Show();
         }
 
-        public List<Termin> GetTerminArzt(int idArzt)
+        public List<Termin> GetTermineOfArzt(int idArzt)
         {
-
-            
-
-            Patient patient= new Patient();
-            patient.idPatient = 1;
-            patient.nachname = "Müller";
-            patient.vorname = "Mascarpone";
-            Termin termin = new Termin();
-            termin.idTermin = 1;
-            DateTime dt = DateTime.Now;
-            termin.zeitpunkt = dt;
-            termin.patient =patient;
-            //return adapter.getTermineOfArzt(idArzt);            
-            List<Termin> testlist = new List<Termin>();
-            testlist.Add(termin);
-            return testlist;
-
+            return adapter.getTermineOfArzt(idArzt);               
         }
-        public List<Termin> getTerminPatient(int idPatient)
+        public List<Termin> getTermineOfPatient(int idPatient)
         {
             return adapter.getTermineOfPatient(idPatient);
         }
-
         public List<Bericht> getBericht(int idPatient)
         {
             return null;

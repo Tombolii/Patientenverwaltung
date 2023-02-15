@@ -15,7 +15,7 @@ namespace Patientenverwaltung.Datenbank
 
         public const string DB_NAME = "patientenverwaltung";
         public const string DB_PASSWORD = "";
-        public const string DB_USER = "root";
+        public const string DB_USER = "Arzt";
         public const string DB_HOST = "localhost";
 
         DataReaderMapper mapper = new DataReaderMapper();
@@ -35,9 +35,12 @@ namespace Patientenverwaltung.Datenbank
         }
         public Arzt getArztById(int idArzt)
         {
-            string sql = "SELECT arzt.idArzt, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.telefonnummer, " +
-                "personendaten.geburtstag, adresse.straße, adresse.hausnummer, adresse.ort, adresse.plz, fachgebiet.bezeichnung, arzt.titel " +
-                "FROM patient " +
+
+            string sql = "SELECT personendaten.vorname, personendaten.nachname, personendaten.email, " +
+                "personendaten.telefonnummer, personendaten.geburtstag, adresse.idAdresse, adresse.straße, " +
+                "adresse.hausnummer, adresse.ort, adresse.plz, fachgebiet.bezeichnung, " +
+                "arzt.titel, arzt.idArzt, arzt.idFachgebiet " +
+                "FROM patient, arzt " +
                 "INNER JOIN personendaten ON personendaten.idPersonendaten = arzt.idPersonendaten " +
                 "INNER JOIN adresse ON adresse.idAdresse = personendaten.idAdresse " +
                 "INNER JOIN fachgebiet ON fachgebiet.idFachgebiet = arzt.idFachgebiet " +

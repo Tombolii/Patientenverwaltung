@@ -36,7 +36,7 @@ namespace Patientenverwaltung.Gui
         private void Programmstart_Load(object sender, EventArgs e)
         {
             
-            termine = controller.GetTerminArzt(1);
+            termine = controller.GetTermineOfArzt(1);
             displayTermine();
 
 
