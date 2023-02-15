@@ -49,15 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller.cs" />
     <Compile Include="DataReaderMapper.cs" />
     <Compile Include="Datenbank\DBAdapter.cs" />
     <Compile Include="Datenbank\MySQLConnector.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Gui\Bericht.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +107,12 @@
     <Compile Include="Gui\PatientenDaten.Designer.cs">
       <DependentUpon>PatientenDaten.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gui\Programmstart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\Programmstart.Designer.cs">
+      <DependentUpon>Programmstart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gui\TerminBearbeiten.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,11 +125,11 @@
     <Compile Include="Gui\TerminDaten.Designer.cs">
       <DependentUpon>TerminDaten.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\Ärzteseite.cs">
+    <Compile Include="IntegrationTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\Ärzteseite.Designer.cs">
-      <DependentUpon>Ärzteseite.cs</DependentUpon>
+    <Compile Include="IntegrationTest.Designer.cs">
+      <DependentUpon>IntegrationTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Adresse.cs" />
     <Compile Include="Model\Arzt.cs" />
@@ -137,16 +138,20 @@
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Personendaten.cs" />
     <Compile Include="Model\Termin.cs" />
+    <Compile Include="Model\Versicherung.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gui\BerichtDaten.resx">
       <DependentUpon>BerichtDaten.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Programmstart.resx">
+      <DependentUpon>Programmstart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gui\TerminBearbeiten.resx">
       <DependentUpon>TerminBearbeiten.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntegrationTest.resx">
+      <DependentUpon>IntegrationTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

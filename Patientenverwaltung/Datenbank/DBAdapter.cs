@@ -22,6 +22,20 @@ namespace Patientenverwaltung.Datenbank
 
         MySQLConnector connector = new MySQLConnector(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+        public Termin addTermin(Termin termin)
+        {
+            string sql = "INSERT INTO termin (zeitpunkt, idArzt, idPatient) " +
+                "VALUES ('" + termin.zeitpunkt.ToString("yyyy-MM-dd HH:mm:ss") + "', " + 
+                termin.arzt.idArzt + ", " + termin.patient.idPatient + ");" +
+                "SELECT LAST_INSERT_ID() as 'idTermin';";
+
+            MySqlDataReader reader = connector.executeQuery(sql);
+            reader.Read();
+            termin.idTermin = reader.GetInt32("idTermin");
+            reader.Close();
+            return termin;
+        }
+
         public List<Termin> getTermineOfArzt(int idArzt)
         {
             string condition = "WHERE idArzt = " + idArzt;
@@ -87,7 +101,7 @@ namespace Patientenverwaltung.Datenbank
         }
 
         
-        public void modifyPatient(Patient patient)
+        public Patient modifyPatient(Patient patient)
         {
             // Update adresse
             string sql = "UPDATE adresse " +
@@ -118,6 +132,7 @@ namespace Patientenverwaltung.Datenbank
             {
                 synchVorerkrankungenOfPatient(patient.idPatient, patient.vorerkrankungen, currentVorerkrankungen);
             }
+            return patient;
         }
 
         public Patient addPatient(Patient newPatient)
@@ -186,7 +201,7 @@ namespace Patientenverwaltung.Datenbank
             return berichte;
         }
 
-        public void modifyBericht(Bericht modifiedBericht)
+        public Bericht modifyBericht(Bericht modifiedBericht)
         {
             string sql = "UPDATE bericht " +
                 "SET beschwerden = " + modifiedBericht.beschwerden + ", " +
@@ -195,9 +210,10 @@ namespace Patientenverwaltung.Datenbank
                 "WHERE idBericht = " + modifiedBericht.idBericht + ";";
 
             connector.executeNonQuery(sql);
+            return modifiedBericht;
         }
 
-        public void addBericht(Bericht newBericht)
+        public Bericht addBericht(Bericht newBericht)
         {
             string sql = "INSERT INTO bericht (idPatient, beschwerden, bemerkung, diagnose) " +
                 "VALUES(" + newBericht.patient.idPatient + ", " +
@@ -206,11 +222,83 @@ namespace Patientenverwaltung.Datenbank
                 newBericht.diagnose.idKrankheitsbild + ";";
 
             connector.executeNonQuery(sql);
+            return newBericht;
         }
 
         public void deleteBericht(Bericht bericht)
         {
             string sql = "DELETE FROM bericht WHERE idBericht = " + bericht.idBericht + ";";
+
+            connector.executeNonQuery(sql);
+        }
+
+        // KRANKHEITSBILDER VERWALTEN ------------------------------------------------------
+        // ---------------------------------------------------------------------------------
+
+       /// <summary>
+       /// Holt aus der Datenbank alle Krankheitsbilder                        
+       /// </summary>
+       /// <returns>Liste aller Krankheitsbilder</returns>
+        public List<Krankheitsbild> getKrankheitsbilder()
+        {
+            string sql = "SELECT * FROM krankheitsbild;";
+
+            MySqlDataReader reader = connector.executeQuery(sql);
+            List<Krankheitsbild> krankheitsbilder = new List<Krankheitsbild>();
+            while (reader.Read())
+            {
+                Krankheitsbild krankheitsbild = new Krankheitsbild();
+                krankheitsbild.idKrankheitsbild = reader.GetInt32("idKrankheitsbild");
+                krankheitsbild.bezeichnung = reader.GetString("bezeichnung");
+                krankheitsbild.symptome = reader.GetString("symptome");
+                krankheitsbilder.Add(krankheitsbild);
+            }
+            reader.Close();
+            return krankheitsbilder;
+        }
+
+        /// <summary>
+        /// Aktualisiert ein Krankheitsbild in der Datenbank
+        /// </summary>
+        /// <param name="modifiedKrankheitsbild">aktualisierte Krankheitsbild</param>
+        /// <returns>das aktualisierte Krankheitsbild</returns>
+        public Krankheitsbild modifyKrankheitsbild(Krankheitsbild modifiedKrankheitsbild)
+        {
+            string sql = "UPDATE krankheitsbild " +
+                "SET bezeichnung = '" + modifiedKrankheitsbild.bezeichnung + "', " +
+                "symptome = '" + modifiedKrankheitsbild.symptome + "' " +
+                "WHERE idKrankheitsbild = " + modifiedKrankheitsbild.idKrankheitsbild + ";";
+
+            connector.executeNonQuery(sql);
+            return modifiedKrankheitsbild;
+        }
+
+        /// <summary>
+        /// Fügt ein neues Krankheitsbild in die Datenbank ein
+        /// </summary>
+        /// <param name="newKrankheitsbild">neue Krankheitsbild</param>
+        /// <returns>das neue Krankheitsbild</returns>
+        public Krankheitsbild addKrankheitsbild(Krankheitsbild newKrankheitsbild)
+        {
+            string sql = "INSERT INTO krankheitsbild (bezeichnung, symptome) " +
+                "VALUES('" + newKrankheitsbild.bezeichnung + "', '" +
+                newKrankheitsbild.symptome + "'); " +
+                "SELECT LAST_INSERT_ID() as 'idKrankheitsbild'";
+
+            MySqlDataReader reader = connector.executeQuery(sql);
+            reader.Read();
+            newKrankheitsbild.idKrankheitsbild = reader.GetInt32("idKrankheitsbild");
+            reader.Close();
+            return newKrankheitsbild;
+        }
+
+        /// <summary>
+        /// Löscht ein Krankheitsbild in der Datenbank
+        /// </summary>
+        /// <param name="idKrankheitsbild">des zu löschenden Krankheitbilds</param>
+        public void deleteKrankheitsbild(int idKrankheitsbild)
+        {
+            string sql = "DELETE FROM krankheitsbild WHERE idKrankheitsbild = " + idKrankheitsbild + ";";
 
             connector.executeNonQuery(sql);
         }

@@ -12,6 +12,8 @@ namespace Patientenverwaltung
         MySQLConnector mySqlConnector;
         DBAdapter myDBAdapter = new DBAdapter();
         Patient patient;
+        Termin termin;
+        Krankheitsbild krankheitsbild;
         Krankheitsbild krankheitsbild1;
         Krankheitsbild krankheitsbild2;
 
@@ -57,7 +59,7 @@ namespace Patientenverwaltung
             };
             patient = new Patient()
             {
-                idPersonendaten= 7,
+                idPersonendaten = 7,
                 vorname = "Samuel2",
                 nachname = "Jaschke2",
                 email = "test2.test@gmail.com",
@@ -68,8 +70,21 @@ namespace Patientenverwaltung
                 vorerkrankungen = vorerkrankungen,
                 versicherung = versicherung
             };
-        }
 
+            krankheitsbild = new Krankheitsbild()
+            {
+                bezeichnung = "Test-Krankheitsbild1",
+                symptome = "Test-Symptome"
+            };
+
+            termin = new Termin()
+            {
+                arzt = new Arzt() { idArzt = 1 },
+                patient = new Patient() { idPatient = 1 },
+                zeitpunkt = DateTime.Now
+            };
+        }
+        // Patient
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -93,6 +108,41 @@ namespace Patientenverwaltung
             patient.vorerkrankungen = new List<Krankheitsbild>() { krankheitsbild1, krankheitsbild2 }; //Hinzufügen von Vorerkrankungen
             patient.idPatient = 5;
             myDBAdapter.modifyPatient(patient);
+        }
+
+
+        // Krankheitsbilder
+
+        private void btnGetKrankheitsbilder_Click(object sender, EventArgs e)
+        {
+            List<Krankheitsbild> krankheitsbilder = myDBAdapter.getKrankheitsbilder();
+            txtAusgabe.Text = krankheitsbilder.Count.ToString();
+        }
+
+        private void btnAddKrankheitsbild_Click(object sender, EventArgs e)
+        {
+            Krankheitsbild newKrankheitsbild = myDBAdapter.addKrankheitsbild(krankheitsbild);
+            txtAusgabe.Text = newKrankheitsbild.idKrankheitsbild.ToString();
+        }
+
+        private void btnModifyKrankheitsbild_Click(object sender, EventArgs e)
+        {
+            krankheitsbild.bezeichnung = "Modified Bezeichnung";
+            krankheitsbild.symptome = "Modified Symptome";
+            krankheitsbild.idKrankheitsbild = 3;
+            myDBAdapter.modifyKrankheitsbild(krankheitsbild);
+        }
+
+        private void btnDeleteKrankheitsbild_Click(object sender, EventArgs e)
+        {
+            krankheitsbild.idKrankheitsbild = 3;
+            myDBAdapter.deleteKrankheitsbild(krankheitsbild.idKrankheitsbild);
+        }
+
+        private void btnAddTermin_Click(object sender, EventArgs e)
+        {
+            Termin newTermin = myDBAdapter.addTermin(termin);
+            txtAusgabe.Text = newTermin.idTermin.ToString();
         }
     }
 }
