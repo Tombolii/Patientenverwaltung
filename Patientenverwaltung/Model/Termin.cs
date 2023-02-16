@@ -27,20 +27,20 @@ namespace Patientenverwaltung.Model
             set { _zeitpunkt = value; }
         }
 
-        private Arzt _arzt;
+        private int _idArzt;
 
-        public Arzt arzt
+        public int idArzt
         {
-            get { return _arzt; }
-            set { _arzt = value; }
+            get { return _idArzt; }
+            set { _idArzt = value; }
         }
 
-        private Patient _patient;
+        private int _idPatient;
 
-        public Patient patient
+        public int idPatient
         {
-            get { return _patient; }
-            set { _patient = value; }
+            get { return _idPatient; }
+            set { _idPatient = value; }
         }
 
 
