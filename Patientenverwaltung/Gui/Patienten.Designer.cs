@@ -210,6 +210,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1016, 461);
             this.Controls.Add(this.btn_Startseite);
             this.Controls.Add(this.lbl_Seitenanzahl);
@@ -228,7 +229,6 @@
             this.Controls.Add(this.label1);
             this.Name = "Patienten";
             this.Text = "Patienten";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Patienten_FormClosing);
             this.Load += new System.EventHandler(this.Patienten_Load);
             this.ResumeLayout(false);

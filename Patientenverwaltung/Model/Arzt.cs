@@ -18,12 +18,12 @@ namespace Patientenverwaltung.Model
         }
 
 
-        private string _fachgebiet;
+        private int _idFachgebiet;
 
-        public string fachgebiet
+        public int idFachgebiet
         {
-            get { return _fachgebiet; }
-            set { _fachgebiet = value; }
+            get { return _idFachgebiet; }
+            set { _idFachgebiet = value; }
         }
 
         private string _titel;

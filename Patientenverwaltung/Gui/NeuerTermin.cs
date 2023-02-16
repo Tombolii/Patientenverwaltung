@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Patientenverwaltung;
 using System.Windows.Forms;
+using Patientenverwaltung.Model;
+using Patientenverwaltung.Datenbank;
 
 namespace Patientenverwaltung.Gui
 {
@@ -24,12 +26,27 @@ namespace Patientenverwaltung.Gui
 
         private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
         {
-            controller.neuerTerminAddTermin();
+            int patID  = Convert.ToInt32(this.txt_ID.Text);
+            int patArztID = Convert.ToInt32(this.txt_arztID.Text);
+            String terminZeitpunkt = this.txt_Datum.Text + " " + this.txt_Uhrzeit.Text;
+
+            Termin newTermin = new Termin();
+            newTermin.zeitpunkt = Convert.ToDateTime(terminZeitpunkt);
+            newTermin.patient = new Patient() { idPatient = patID };
+            newTermin.arzt = new Arzt() { idArzt = patArztID };
+
+
+            controller.neuerTerminAddTermin(newTermin);
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
             controller.neuerTerminClose();
+        }
+
+        private void NeuerTermin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

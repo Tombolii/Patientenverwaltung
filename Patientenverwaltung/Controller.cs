@@ -28,51 +28,60 @@ namespace Patientenverwaltung
         private TerminBearbeiten terminBearbeiten = null;
         private TerminDaten terminDaten = null;
         private DBAdapter adapter = new DBAdapter();
+        private List<Termin> termine;
+        private Login login = null;
 
         public Controller()
         {
-          programmstart = new Programmstart(this);
-          bericht = new Bericht(this);
-          berichtBearbeiten = new BerichtBearbeiten(this);
-          berichtDaten = new BerichtDaten_cs(this);
-          neuerBericht = new NeuerBericht(this);
-          neuerPatient = new NeuerPatient(this);
-          neuerTermin = new NeuerTermin(this);
-          patientBearbeiten = new PatientBearbeiten(this);
-          patient = new Patienten(this);
-          patientenDaten = new PatientenDaten(this);
-          terminBearbeiten = new TerminBearbeiten(this);
-          terminDaten = new TerminDaten(this);
-
+            programmstart = new Programmstart(this);
+            bericht = new Bericht(this);
+            berichtBearbeiten = new BerichtBearbeiten(this);
+            berichtDaten = new BerichtDaten_cs(this);
+            neuerBericht = new NeuerBericht(this);
+            neuerPatient = new NeuerPatient(this);
+            neuerTermin = new NeuerTermin(this);
+            patientBearbeiten = new PatientBearbeiten(this);
+            patient = new Patienten(this);
+            patientenDaten = new PatientenDaten(this);
+            terminBearbeiten = new TerminBearbeiten(this);
+            terminDaten = new TerminDaten(this);
+            termine = new List<Termin>();
+            login = new Login(this);
     }
 
-    public Form startProgram()
-        { return programmstart; }
+        public DBAdapter dBAdapter = new DBAdapter();
+        public Form startProgram()
+        {
+            return login;
+        }
+
+        public void programmStart()
+        {
+            programmstart.displayAllTermine();
+            login.Hide();
+            programmstart.Show();
+        }
 
         public void ärzteseiteSearchPat()
         {
-            //Fertig - Ungetestet
             programmstart.Hide();
             patient.Show();
         }
 
         public void ärzteseiteAddTermin()
         {
-            //Fertig - Ungestestet
             programmstart.Hide();
             neuerTermin.Show();
         }
 
         public void berichtBackToPat()
         {
-            //Fertig - Ungestestet
             bericht.Hide();
             patient.Show();
         }
 
         public void berichtSearchBericht()
         {
-            //Fertig - Ungestestet
             bericht.Hide();
             berichtDaten.Show();
             
@@ -80,14 +89,12 @@ namespace Patientenverwaltung
 
         public void berichtAddBericht()
         {
-            //Fertig - Ungestestet
             bericht.Hide();
             neuerBericht.Show();
         }
 
         public void berichtBearbeitenSaveChange()
         {
-            //Fertig - Ungestestet
             berichtBearbeiten.Hide();
             bericht.Show();
         }
@@ -141,11 +148,15 @@ namespace Patientenverwaltung
             patient.Show();
         }
 
-        public void neuerTerminAddTermin()
+        public void neuerTerminAddTermin(Termin termin)
         {
-            //Fertig - Ungestestet
+            DBAdapter dBAdapter = new DBAdapter();
+            Termin createdTermin = dBAdapter.addTermin(termin);
+            termine.Add(createdTermin);
             neuerTermin.Hide();
             programmstart.Show();
+
+            programmstart.addTerminToFrontend(createdTermin);
         }
 
         public void neuerTerminClose()
@@ -246,31 +257,14 @@ namespace Patientenverwaltung
             programmstart.Show();
         }
 
-        public List<Termin> GetTerminArzt(int idArzt)
+        public List<Termin> GetTermineOfArzt(int idArzt)
         {
-
-            
-
-            Patient patient= new Patient();
-            patient.idPatient = 1;
-            patient.nachname = "Müller";
-            patient.vorname = "Mascarpone";
-            Termin termin = new Termin();
-            termin.idTermin = 1;
-            DateTime dt = DateTime.Now;
-            termin.zeitpunkt = dt;
-            termin.patient =patient;
-            //return adapter.getTermineOfArzt(idArzt);            
-            List<Termin> testlist = new List<Termin>();
-            testlist.Add(termin);
-            return testlist;
-
+            return adapter.getTermineOfArzt(idArzt);               
         }
-        public List<Termin> getTerminPatient(int idPatient)
+        public List<Termin> getTermineOfPatient(int idPatient)
         {
             return adapter.getTermineOfPatient(idPatient);
         }
-
         public List<Bericht> getBericht(int idPatient)
         {
             return null;
