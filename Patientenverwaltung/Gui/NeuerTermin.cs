@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Patientenverwaltung;
 using System.Windows.Forms;
 using Patientenverwaltung.Model;
+using Patientenverwaltung.Datenbank;
 
 namespace Patientenverwaltung.Gui
 {
@@ -35,7 +36,7 @@ namespace Patientenverwaltung.Gui
             newTermin.arzt = new Arzt() { idArzt = patArztID };
 
 
-            controller.neuerTerminAddTermin();
+            controller.neuerTerminAddTermin(newTermin);
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)

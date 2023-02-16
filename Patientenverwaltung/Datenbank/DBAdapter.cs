@@ -135,6 +135,11 @@ namespace Patientenverwaltung.Datenbank
             return patient;
         }
 
+        internal void addTermin(object newTermin)
+        {
+            throw new NotImplementedException();
+        }
+
         public Patient addPatient(Patient newPatient)
         {
             // Anlegen der Adresse

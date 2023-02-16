@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Patientenverwaltung.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,13 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller = Patientenverwaltung.Controller;
 
+
 namespace Patientenverwaltung.Gui
 {
     
     public partial class Programmstart : Form
     {
         private Controller controller;
-        private List<Model.Termin> termine;
+        private static int rowCount = 0;
         public Programmstart(Controller controller)
         {
             InitializeComponent();
@@ -36,21 +38,24 @@ namespace Patientenverwaltung.Gui
         private void Programmstart_Load(object sender, EventArgs e)
         {
             
-            termine = controller.GetTermineOfArzt(1);
-            displayTermine();
-
-
         }
 
-        private void displayTermine()
+        public void displayAllTermine()
         {
+            List<Termin> termine = controller.GetTermineOfArzt(1);
             for (int i = 0; i < termine.Count; i++)
             {
-                tblTermine.Controls.Add(new Label() { Text = termine[i].patient.nachname }, 2, i);
-                tblTermine.Controls.Add(new Label() { Text=termine[i].patient.vorname }, 3, i);
-                tblTermine.Controls.Add(new Label() { Text = termine[i].zeitpunkt.ToString("dd,MM,yyyy") }, 0, i);
-                tblTermine.Controls.Add(new Label() { Text = termine[i].zeitpunkt.ToString("H:mm") + " Uhr"}, 1, i);
+                addTerminToFrontend(termine[i]);
             }
         }
+        public void addTerminToFrontend(Termin termin)
+        {
+                tblTermine.Controls.Add(new Label() { Text = termin.patient.nachname }, 2, rowCount);
+                tblTermine.Controls.Add(new Label() { Text = termin.patient.vorname }, 3, rowCount);
+                tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("dd,MM,yyyy") }, 0, rowCount);
+                tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("H:mm") + " Uhr" }, 1, rowCount);
+                rowCount++;
+        }
+
     }
 }
