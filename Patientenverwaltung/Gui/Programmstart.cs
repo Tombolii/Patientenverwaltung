@@ -24,6 +24,22 @@ namespace Patientenverwaltung.Gui
             this.controller = controller;
 
         }
+        public void displayAllTermine()
+        {
+            List<Termin> termine = controller.GetTermineOfArzt(1);
+            for (int i = 0; i < termine.Count; i++)
+            {
+                addTerminToFrontend(termine[i]);
+            }
+        }
+        public void addTerminToFrontend(Termin termin)
+        {
+            tblTermine.Controls.Add(new Label() { Text = termin.patient.nachname }, 2, rowCount);
+            tblTermine.Controls.Add(new Label() { Text = termin.patient.vorname }, 3, rowCount);
+            tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("dd,MM,yyyy") }, 0, rowCount);
+            tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("H:mm") + " Uhr" }, 1, rowCount);
+            rowCount++;
+        }
 
         private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
         {
@@ -38,23 +54,6 @@ namespace Patientenverwaltung.Gui
         private void Programmstart_Load(object sender, EventArgs e)
         {
             
-        }
-
-        public void displayAllTermine()
-        {
-            List<Termin> termine = controller.GetTermineOfArzt(1);
-            for (int i = 0; i < termine.Count; i++)
-            {
-                addTerminToFrontend(termine[i]);
-            }
-        }
-        public void addTerminToFrontend(Termin termin)
-        {
-                tblTermine.Controls.Add(new Label() { Text = termin.patient.nachname }, 2, rowCount);
-                tblTermine.Controls.Add(new Label() { Text = termin.patient.vorname }, 3, rowCount);
-                tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("dd,MM,yyyy") }, 0, rowCount);
-                tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("H:mm") + " Uhr" }, 1, rowCount);
-                rowCount++;
         }
 
     }

@@ -134,11 +134,19 @@ namespace Patientenverwaltung
             bericht.Show();
         }
 
-        public void neuerPatientAddPat()
+        public void neuerPatientAddPat(Patient patienten)
         {
-            //Fertig - Ungestestet
             neuerPatient.Hide();
             patient.Show();
+            /*
+            DBAdapter dBAdapter = new DBAdapter();
+            Patient createdPatient = dBAdapter.addPatient(patienten);
+            patienten.Add(createdPatient);
+            neuerPatient.Hide();
+            patient.Show();
+
+            patient.addPatientToFrontend(createdPatient)
+            */
         }
 
         public void neuerPatientClose()
@@ -274,7 +282,6 @@ namespace Patientenverwaltung
         {
             return null;
         }
-        
 
     }
 }

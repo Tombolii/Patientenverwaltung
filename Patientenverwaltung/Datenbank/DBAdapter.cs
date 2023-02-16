@@ -326,7 +326,7 @@ namespace Patientenverwaltung.Datenbank
         {
             string sql = "SELECT termin.idTermin, termin.zeitpunkt, termin.idPatient, termin.idArzt " +
                 "FROM termin " +
-                condition + ";";
+                condition + " order by zeitpunkt;";
             MySqlDataReader reader = this.connector.executeQuery(sql);
             List<Termin> termine = new List<Termin>();
             while (reader.Read())

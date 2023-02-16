@@ -153,6 +153,9 @@
     <EmbeddedResource Include="Gui\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Patienten.resx">
+      <DependentUpon>Patienten.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gui\Programmstart.resx">
       <DependentUpon>Programmstart.cs</DependentUpon>
     </EmbeddedResource>
