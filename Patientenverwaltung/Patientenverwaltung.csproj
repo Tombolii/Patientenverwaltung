@@ -51,7 +51,15 @@
   <ItemGroup>
     <Compile Include="Controller.cs" />
     <Compile Include="DataReaderMapper.cs" />
-    <Compile Include="Datenbank\DBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\AdresseDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\ArztDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\BerichtDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\KrankheitsbildDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\PatientDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\PersonendatenDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\TerminDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\VorerkrankungDBAdapter.cs" />
+    <Compile Include="Datenbank\BaseDBAdapter.cs" />
     <Compile Include="Datenbank\MySQLConnector.cs" />
     <Compile Include="Gui\Bericht.cs">
       <SubType>Form</SubType>
