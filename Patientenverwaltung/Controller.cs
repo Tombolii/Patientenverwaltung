@@ -45,7 +45,7 @@ namespace Patientenverwaltung
         {
             // GUI-Forms
             programmstart = new ArztOverviewForm(this);
-            bericht = new Bericht(this);
+            bericht = new BerichtForm(this);
             berichtBearbeiten = new BerichtBearbeitenForm(this);
             berichtDaten = new BerichtDaten_cs(this);
             neuerBericht = new NeuerBerichtForm(this);
