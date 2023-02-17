@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Patientenverwaltung.Datenbank;
+using Patientenverwaltung.Datenbank.Adapter;
 using Patientenverwaltung.Model;
 
 namespace Patientenverwaltung
@@ -9,8 +10,10 @@ namespace Patientenverwaltung
     public partial class IntegrationTest : Form
     {
 
-        MySQLConnector mySqlConnector;
-        DBAdapter myDBAdapter = new DBAdapter();
+ 
+        KrankheitsbildDBAdapter krankheitsbildDBAdapter = new KrankheitsbildDBAdapter();
+        PatientDBAdapter patientDBAdapter= new PatientDBAdapter();
+        TerminDBAdapter terminDBAdapter= new TerminDBAdapter();
         Patient patient;
         Termin termin;
         Krankheitsbild krankheitsbild;
@@ -20,11 +23,6 @@ namespace Patientenverwaltung
         public IntegrationTest()
         {
             InitializeComponent();
-            mySqlConnector = new MySQLConnector("patientenverwaltung");
-            mySqlConnector.DBUser = "Arzt";
-            mySqlConnector.DBPassword = "";
-            mySqlConnector.DBHost = "";
-
             Adresse adresse = new Adresse()
             {
                 idAdresse = 13,
@@ -79,8 +77,8 @@ namespace Patientenverwaltung
 
             termin = new Termin()
             {
-                arzt = new Arzt() { idArzt = 1 },
-                patient = new Patient() { idPatient = 1 },
+                idArzt =  1,
+                idPatient = 1,
                 zeitpunkt = DateTime.Now
             };
         }
@@ -96,7 +94,7 @@ namespace Patientenverwaltung
 
         private void btnPatientErstellen_Click(object sender, EventArgs e)
         {
-            Patient createdPatient = myDBAdapter.addPatient(patient);
+            Patient createdPatient = patientDBAdapter.createPatient(patient);
             Console.WriteLine(createdPatient.ToString());  
         }
 
@@ -107,7 +105,7 @@ namespace Patientenverwaltung
 
             patient.vorerkrankungen = new List<Krankheitsbild>() { krankheitsbild1, krankheitsbild2 }; //Hinzufügen von Vorerkrankungen
             patient.idPatient = 5;
-            myDBAdapter.modifyPatient(patient);
+            patientDBAdapter.modifyPatient(patient);
         }
 
 
@@ -115,13 +113,13 @@ namespace Patientenverwaltung
 
         private void btnGetKrankheitsbilder_Click(object sender, EventArgs e)
         {
-            List<Krankheitsbild> krankheitsbilder = myDBAdapter.getKrankheitsbilder();
+            List<Krankheitsbild> krankheitsbilder = krankheitsbildDBAdapter.getKrankheitsbilder();
             txtAusgabe.Text = krankheitsbilder.Count.ToString();
         }
 
         private void btnAddKrankheitsbild_Click(object sender, EventArgs e)
         {
-            Krankheitsbild newKrankheitsbild = myDBAdapter.addKrankheitsbild(krankheitsbild);
+            Krankheitsbild newKrankheitsbild = krankheitsbildDBAdapter.createKrankheitsbild(krankheitsbild);
             txtAusgabe.Text = newKrankheitsbild.idKrankheitsbild.ToString();
         }
 
@@ -130,18 +128,18 @@ namespace Patientenverwaltung
             krankheitsbild.bezeichnung = "Modified Bezeichnung";
             krankheitsbild.symptome = "Modified Symptome";
             krankheitsbild.idKrankheitsbild = 3;
-            myDBAdapter.modifyKrankheitsbild(krankheitsbild);
+            krankheitsbildDBAdapter.modifyKrankheitsbild(krankheitsbild);
         }
 
         private void btnDeleteKrankheitsbild_Click(object sender, EventArgs e)
         {
             krankheitsbild.idKrankheitsbild = 3;
-            myDBAdapter.deleteKrankheitsbild(krankheitsbild.idKrankheitsbild);
+            krankheitsbildDBAdapter.deleteKrankheitsbild(krankheitsbild.idKrankheitsbild);
         }
 
         private void btnAddTermin_Click(object sender, EventArgs e)
         {
-            Termin newTermin = myDBAdapter.addTermin(termin);
+            Termin newTermin = terminDBAdapter.addTermin(termin);
             txtAusgabe.Text = newTermin.idTermin.ToString();
         }
     }

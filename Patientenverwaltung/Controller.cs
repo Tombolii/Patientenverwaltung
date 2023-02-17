@@ -8,48 +8,66 @@ using Patientenverwaltung;
 using Patientenverwaltung.Model;
 using Patientenverwaltung.Datenbank;
 using Patientenverwaltung.Gui;
-using Bericht = Patientenverwaltung.Gui.Bericht;
+using BerichtForm = Patientenverwaltung.Gui.BerichtForm;
+using Patientenverwaltung.Datenbank.Adapter;
 
 namespace Patientenverwaltung
 {
     
     public class Controller
     {
-        private Programmstart programmstart = null;
-        private Bericht bericht = null;
-        private BerichtBearbeiten berichtBearbeiten = null;
+        // GUI-Forms
+        private ArztOverviewForm programmstart = null;
+        private BerichtForm bericht = null;
+        private BerichtBearbeitenForm berichtBearbeiten = null;
         private BerichtDaten_cs berichtDaten = null;
-        private NeuerBericht neuerBericht = null;
-        private NeuerPatient neuerPatient = null;
-        private NeuerTermin neuerTermin = null;
-        private PatientBearbeiten patientBearbeiten = null;
-        private Patienten patient = null;
-        private PatientenDaten patientenDaten = null;
-        private TerminBearbeiten terminBearbeiten = null;
-        private TerminDaten terminDaten = null;
-        private DBAdapter adapter = new DBAdapter();
-        private List<Termin> termine;
+        private NeuerBerichtForm neuerBericht = null;
+        private NeuerPatientForm neuerPatient = null;
+        private NeuerTerminForm neuerTermin = null;
+        private PatientBearbeitenForm patientBearbeiten = null;
+        private PatientSucheForm patient = null;
+        private PatientenDatenForm patientenDaten = null;
+        private TerminBearbeitenForm terminBearbeiten = null;
+        private TerminDatenForm terminDaten = null;
         private Login login = null;
+
+        // Adapter
+        private TerminDBAdapter terminDBAdapter;
+        private ArztDBAdapter arztDBAdapter;
+        private BerichtDBAdapter berichtDBAdapter;
+        private PatientDBAdapter patientDBAdapter;
+
+
+        private List<Termin> termine;
+        
 
         public Controller()
         {
-            programmstart = new Programmstart(this);
-            bericht = new Bericht(this);
-            berichtBearbeiten = new BerichtBearbeiten(this);
+            // GUI-Forms
+            programmstart = new ArztOverviewForm(this);
+            bericht = new BerichtForm(this);
+            berichtBearbeiten = new BerichtBearbeitenForm(this);
             berichtDaten = new BerichtDaten_cs(this);
-            neuerBericht = new NeuerBericht(this);
-            neuerPatient = new NeuerPatient(this);
-            neuerTermin = new NeuerTermin(this);
-            patientBearbeiten = new PatientBearbeiten(this);
-            patient = new Patienten(this);
-            patientenDaten = new PatientenDaten(this);
-            terminBearbeiten = new TerminBearbeiten(this);
-            terminDaten = new TerminDaten(this);
-            termine = new List<Termin>();
+            neuerBericht = new NeuerBerichtForm(this);
+            neuerPatient = new NeuerPatientForm(this);
+            neuerTermin = new NeuerTerminForm(this);
+            patientBearbeiten = new PatientBearbeitenForm(this);
+            patient = new PatientSucheForm(this);
+            patientenDaten = new PatientenDatenForm(this);
+            terminBearbeiten = new TerminBearbeitenForm(this);
+            terminDaten = new TerminDatenForm(this);
             login = new Login(this);
+
+            // Adapter
+            terminDBAdapter = new TerminDBAdapter();
+            arztDBAdapter = new ArztDBAdapter();
+            berichtDBAdapter= new BerichtDBAdapter();
+            patientDBAdapter= new PatientDBAdapter();
+
+            termine = new List<Termin>();
+            
     }
 
-        public DBAdapter dBAdapter = new DBAdapter();
         public Form startProgram()
         {
             return login;
@@ -134,11 +152,19 @@ namespace Patientenverwaltung
             bericht.Show();
         }
 
-        public void neuerPatientAddPat()
+        public void neuerPatientAddPat(Patient patienten)
         {
-            //Fertig - Ungestestet
             neuerPatient.Hide();
             patient.Show();
+            /*
+            DBAdapter dBAdapter = new DBAdapter();
+            Patient createdPatient = dBAdapter.addPatient(patienten);
+            patienten.Add(createdPatient);
+            neuerPatient.Hide();
+            patient.Show();
+
+            patient.addPatientToFrontend(createdPatient)
+            */
         }
 
         public void neuerPatientClose()
@@ -150,8 +176,7 @@ namespace Patientenverwaltung
 
         public void neuerTerminAddTermin(Termin termin)
         {
-            DBAdapter dBAdapter = new DBAdapter();
-            Termin createdTermin = dBAdapter.addTermin(termin);
+            Termin createdTermin = terminDBAdapter.addTermin(termin);
             termine.Add(createdTermin);
             neuerTermin.Hide();
             programmstart.Show();
@@ -259,13 +284,13 @@ namespace Patientenverwaltung
 
         public List<Termin> GetTermineOfArzt(int idArzt)
         {
-            return adapter.getTermineOfArzt(idArzt);               
+            return terminDBAdapter.getTermineOfArzt(idArzt);               
         }
         public List<Termin> getTermineOfPatient(int idPatient)
         {
-            return adapter.getTermineOfPatient(idPatient);
+            return terminDBAdapter.getTermineOfPatient(idPatient);
         }
-        public List<Bericht> getBericht(int idPatient)
+        public List<BerichtForm> getBericht(int idPatient)
         {
             return null;
         }
@@ -274,7 +299,6 @@ namespace Patientenverwaltung
         {
             return null;
         }
-        
 
     }
 }

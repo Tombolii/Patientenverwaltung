@@ -35,14 +35,12 @@ namespace Patientenverwaltung.Model
             set { _idArzt = value; }
         }
 
-        private int _idPatient;
+        private SimplePatient _simplePatient;
 
-        public int idPatient
+        public SimplePatient simplePatient
         {
-            get { return _idPatient; }
-            set { _idPatient = value; }
+            get { return _simplePatient; }
+            set { _simplePatient = value; }
         }
-
-
     }
 }
