@@ -54,8 +54,11 @@ namespace Patientenverwaltung.Datenbank.Adapter
 
         private List<Termin> getTermine(string condition)
         {
-            string sql = "SELECT termin.idTermin, termin.zeitpunkt, termin.idPatient, termin.idArzt " +
+            string sql = "SELECT termin.idTermin, termin.zeitpunkt, termin.idPatient, termin.idArzt, personendaten.vorname, " +
+                "personendaten.nachname, patient.idPatient " +
                 "FROM termin " +
+                "INNER JOIN patient ON termin.idPatient = patient.idPatient " +
+                "INNER JOIN personendaten ON patient.idPersonendaten = personendaten.idPersonendaten " +
                 condition + " order by zeitpunkt;";
             MySqlDataReader reader = this.connector.executeQuery(sql);
             List<Termin> termine = new List<Termin>();
@@ -64,7 +67,12 @@ namespace Patientenverwaltung.Datenbank.Adapter
                 Termin termin = new Termin();
                 termin.idTermin = reader.GetInt32("idTermin");
                 termin.zeitpunkt = DateTime.Parse(reader.GetString("zeitpunkt"));
-                termin.idPatient = reader.GetInt32("idPatient");
+                termin.simplePatient = new SimplePatient()
+                {
+                    idPatient = reader.GetInt32("idPatient"),
+                    vorname = reader.GetString("vorname"),
+                    nachname = reader.GetString("nachname")
+                };
                 termin.idArzt = reader.GetInt32("idArzt");
                 termine.Add(termin);
             }

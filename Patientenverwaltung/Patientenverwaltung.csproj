@@ -151,6 +151,7 @@
     <Compile Include="Model\Krankheitsbild.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Personendaten.cs" />
+    <Compile Include="Model\SimplePatient.cs" />
     <Compile Include="Model\Termin.cs" />
     <Compile Include="Model\Versicherung.cs" />
     <Compile Include="Program.cs" />
@@ -160,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\NeuerTerminForm.resx">
+      <DependentUpon>NeuerTerminForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\PatientSucheForm.resx">
       <DependentUpon>PatientSucheForm.cs</DependentUpon>
@@ -195,6 +199,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\search_icon.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
