@@ -33,5 +33,5 @@
 /Patientenverwaltung/obj/Debug
 *.json
 *.sqlite
-*.cs
 *.user
+/.gitignore.bak
