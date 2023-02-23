@@ -79,11 +79,11 @@
     <Compile Include="Gui\BerichtDaten.Designer.cs">
       <DependentUpon>BerichtDaten.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\Login.cs">
+    <Compile Include="Gui\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="Gui\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Gui\NeuerBerichtForm.cs">
       <SubType>Form</SubType>
@@ -109,11 +109,11 @@
     <Compile Include="Gui\PatientBearbeitenForm.Designer.cs">
       <DependentUpon>PatientBearbeitenForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\PatientSucheForm.cs">
+    <Compile Include="Gui\PatientOverviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\PatientSucheForm.Designer.cs">
-      <DependentUpon>PatientSucheForm.cs</DependentUpon>
+    <Compile Include="Gui\PatientOverviewForm.Designer.cs">
+      <DependentUpon>PatientOverviewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Gui\PatientenDatenForm.cs">
       <SubType>Form</SubType>
@@ -159,14 +159,17 @@
     <EmbeddedResource Include="Gui\BerichtDaten.resx">
       <DependentUpon>BerichtDaten.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gui\Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="Gui\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\NeuerPatientForm.resx">
+      <DependentUpon>NeuerPatientForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\NeuerTerminForm.resx">
       <DependentUpon>NeuerTerminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gui\PatientSucheForm.resx">
-      <DependentUpon>PatientSucheForm.cs</DependentUpon>
+    <EmbeddedResource Include="Gui\PatientOverviewForm.resx">
+      <DependentUpon>PatientOverviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\ArztOverviewForm.resx">
       <DependentUpon>ArztOverviewForm.cs</DependentUpon>

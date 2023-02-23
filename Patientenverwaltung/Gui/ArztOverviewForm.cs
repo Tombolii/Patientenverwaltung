@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Controller = Patientenverwaltung.Controller;
 
 
 namespace Patientenverwaltung.Gui
@@ -18,20 +17,37 @@ namespace Patientenverwaltung.Gui
     {
         private Controller controller;
         private static int rowCount = 0;
+        private int pageIndex = 0;
+        private const int ROW_AMOUNT = 10;
+
         public ArztOverviewForm(Controller controller)
         {
             InitializeComponent();
             this.controller = controller;
 
         }
-        public void displayAllTermine()
+
+        protected override void OnVisibleChanged(EventArgs e)
         {
-            List<Termin> termine = controller.GetTermineOfArzt(1);
-            for (int i = 0; i < termine.Count; i++)
-            {
-                addTerminToFrontend(termine[i]);
+            base.OnVisibleChanged(e);
+            if (Visible)
+            {        
+                refreshPatientTable();
             }
         }
+
+        public void displayTermineOfList(List<Termin> termineToShow)
+        {
+            tblTermine.Visible = false;
+            clearTermineOverview();
+            rowCount = 0;
+            for (int i = 0; i < termineToShow.Count; i++)
+            {
+                addTerminToFrontend(termineToShow[i]);
+            }
+            tblTermine.Visible = true;
+        }
+
         public void addTerminToFrontend(Termin termin)
         {
             tblTermine.Controls.Add(new Label() { Text = termin.simplePatient.nachname }, 2, rowCount);
@@ -41,20 +57,61 @@ namespace Patientenverwaltung.Gui
             rowCount++;
         }
 
-        private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
-        {
-            controller.ärzteseiteAddTermin();
-        }
-
         private void btn_PatientenAnsehen_Click(object sender, EventArgs e)
         {
-            controller.ärzteseiteSearchPat();
+            controller.navArztOverviewToPatientOverview();
         }
 
-        private void Programmstart_Load(object sender, EventArgs e)
+        private void clearTermineOverview()
         {
-            
+            tblTermine.Controls.Clear();
         }
 
+        private void refreshPatientTable()
+        {
+            int firstTerminIndexOfPage = pageIndex * ROW_AMOUNT;
+            int lastTerminIndexOfPage = ROW_AMOUNT;
+            if (firstTerminIndexOfPage + ROW_AMOUNT >= controller.getTermine().Count)
+            {
+                lastTerminIndexOfPage = controller.getTermine().Count - firstTerminIndexOfPage;
+            }
+            displayTermineOfList(controller.getTermine().GetRange(firstTerminIndexOfPage, lastTerminIndexOfPage));
+            setVisibilityOfPageButtons();
+        }
+
+        private void btn_Weiter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Zurueck_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void setVisibilityOfPageButtons()
+        {
+            if (pageIndex == 0)
+            {
+                btn_Zurueck.Enabled = false;
+            }
+            else
+            {
+                btn_Zurueck.Enabled = true;
+            }
+            if (!validateNextPage())
+            {
+                btn_Weiter.Enabled = false;
+            }
+            else
+            {
+                btn_Weiter.Enabled = true;
+            }
+        }
+
+        private bool validateNextPage()
+        {
+            return (pageIndex + 1) * ROW_AMOUNT < controller.getPatienten().Count;
+        }
     }
 }

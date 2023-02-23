@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace Patientenverwaltung.Gui
 {
-    public partial class BerichtDaten_cs : Form
+    public partial class BerichtDatenForm : Form
     {
         private Controller controller;
 
-        public BerichtDaten_cs(Controller controller)
+        public BerichtDatenForm(Controller controller)
         {
             InitializeComponent();
             this.controller = controller;

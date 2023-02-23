@@ -26,32 +26,24 @@ namespace Patientenverwaltung.Gui
 
         private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
         {
-            int patID  = Convert.ToInt32(this.txt_ID.Text);
-            int patArztID = Convert.ToInt32(this.txt_arztID.Text);
-            String terminZeitpunkt = this.txt_Datum.Text + " " + this.txt_Uhrzeit.Text;
-
-            Termin newTermin = new Termin();
-            newTermin.zeitpunkt = Convert.ToDateTime(terminZeitpunkt);
-            newTermin.simplePatient = new SimplePatient() { idPatient = patID };
-            newTermin.arzt = new Arzt() { idArzt = patArztID };
-
-
-            controller.neuerTerminAddTermin(newTermin);
+            Patient selectedPatient = controller.getCurrentSelectedPatient();
+            Termin newTermin = new Termin()
+            {
+                idArzt = controller.getLoggedInArzt().idArzt,
+                simplePatient = new SimplePatient()
+                {
+                    idPatient = selectedPatient.idPatient,
+                    nachname = selectedPatient.nachname,
+                    vorname = selectedPatient.vorname
+                },
+                zeitpunkt = Convert.ToDateTime(txt_Datum.Text + " " + txt_Uhrzeit.Text)
+        };
+            controller.navNeuerTerminToPatientOverview(newTermin);
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
-            controller.neuerTerminClose();
-        }
-
-        private void NeuerTermin_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSearchPatient_Click(object sender, EventArgs e)
-        {
-
+            controller.navNeuerTerminToPatientOverview();
         }
     }
 }

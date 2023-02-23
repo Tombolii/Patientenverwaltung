@@ -20,7 +20,7 @@ namespace Patientenverwaltung.Datenbank.Adapter
         {
             string sql = "INSERT INTO termin (zeitpunkt, idArzt, idPatient) " +
             "VALUES ('" + termin.zeitpunkt.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-            termin.idArzt + ", " + termin.idPatient + ");" +
+            termin.idArzt + ", " + termin.simplePatient.idPatient + "); " +
             "SELECT LAST_INSERT_ID() as 'idTermin';";
 
             MySqlDataReader reader = connector.executeQuery(sql);

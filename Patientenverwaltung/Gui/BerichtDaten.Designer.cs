@@ -1,6 +1,6 @@
 ﻿namespace Patientenverwaltung.Gui
 {
-    partial class BerichtDaten_cs
+    partial class BerichtDatenForm
     {
         /// <summary>
         /// Required designer variable.

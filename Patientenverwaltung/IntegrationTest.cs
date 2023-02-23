@@ -78,7 +78,7 @@ namespace Patientenverwaltung
             termin = new Termin()
             {
                 idArzt =  1,
-                idPatient = 1,
+                simplePatient = new SimplePatient { idPatient = 1},
                 zeitpunkt = DateTime.Now
             };
         }

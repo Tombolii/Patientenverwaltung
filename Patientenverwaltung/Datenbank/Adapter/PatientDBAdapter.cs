@@ -43,6 +43,15 @@ namespace Patientenverwaltung.Datenbank.Adapter
         }
 
         /// <summary>
+        /// Gibt alle Patienten aus der Datenbank zurück
+        /// </summary>
+        /// <returns>Liste aller Patienten</returns>
+        public List<Patient> getAllPatienten()
+        {
+            return getPatientByCondition("");
+        }
+
+        /// <summary>
         /// Löscht einen bestimmten Patienten aus der Datenbank
         /// </summary>
         /// <param name="idPatient">des zu löschenden Patienten</param>
@@ -85,13 +94,13 @@ namespace Patientenverwaltung.Datenbank.Adapter
         public Patient createPatient(Patient newPatient)
         {
             // Anlegen der Adresse
-            adresseDBAdapter.createNewAdresse(newPatient.adresse);
+            Adresse adresse = adresseDBAdapter.createNewAdresse(newPatient.adresse);
 
             // Anlegen der Personendaten
-            personendatenDBAdapter.createNewPersonendaten(newPatient);
+            Personendaten personendaten = personendatenDBAdapter.createNewPersonendaten(newPatient, adresse.idAdresse);
 
             // Anlegen des Patienten und Auslesen der Id des neuen Patienten
-            addPatient(newPatient);
+            addPatient(newPatient, personendaten.idPersonendaten);
 
             // Vorerkrankungen synchronisieren
             vorerkrankungDBAdapter.synchVorerkrankungenOfPatient(
@@ -99,13 +108,13 @@ namespace Patientenverwaltung.Datenbank.Adapter
             return newPatient;
         }
 
-        private void addPatient(Patient patient)
+        private void addPatient(Patient patient, int idPersonendaten)
         {
             string sql = "INSERT INTO patient (idVersicherung, idPersonendaten, versicherungsnummer) " +
             "VALUES(" + patient.versicherung.idVersicherung + ", " +
-            "LAST_INSERT_ID(), " +
+            idPersonendaten + ", " +
             patient.versicherungsnummer + "); " +
-            "SELECT LAST_INSERT_ID() as 'idPatient'";
+            "SELECT LAST_INSERT_ID() as 'idPatient';";
             MySqlDataReader reader = connector.executeQuery(sql);
             reader.Read();
             patient.idPatient = reader.GetInt32("idPatient");

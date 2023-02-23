@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Patientenverwaltung.Model;
 
 namespace Patientenverwaltung.Gui
 {
 
-    public partial class Login : Form
+    public partial class LoginForm : Form
     {
 
         private Label lblBenutzername;
@@ -22,7 +23,7 @@ namespace Patientenverwaltung.Gui
         private ErrorProvider errorProvider;
         private Controller controller;
 
-        public Login(Controller controller)
+        public LoginForm(Controller controller)
         {
             InitializeComponent();
             this.controller = controller;
@@ -37,7 +38,8 @@ namespace Patientenverwaltung.Gui
             // Wir simulieren das hier einfach mal mit einem festen Benutzernamen und Passwort
             if (id == "admin" && passwort == "geheim")
             {
-                controller.programmStart();
+                Arzt arzt = new Arzt() { idArzt = 1};
+                controller.navLoginToArztOverview(arzt);
             }
             else
             {
