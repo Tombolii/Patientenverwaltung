@@ -18,9 +18,9 @@ namespace Patientenverwaltung.Datenbank.Adapter
         /// <returns>den Arzt</returns>
         public Arzt getArztById(int idArzt)
         {
-            string sql = "SELECT arzt.idArzt, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.telefonnummer, " +
-                "personendaten.geburtstag, adresse.straße, adresse.hausnummer, adresse.ort, adresse.plz, fachgebiet.bezeichnung, arzt.titel " +
-                "FROM patient " +
+            string sql = "SELECT arzt.idArzt, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.idPersonendaten, personendaten.telefonnummer, " +
+                "personendaten.geburtstag, adresse.idAdresse, adresse.straße, adresse.hausnummer, adresse.ort, adresse.plz, fachgebiet.idFachgebiet, fachgebiet.bezeichnung, arzt.titel " +
+                "FROM arzt " +
                 "INNER JOIN personendaten ON personendaten.idPersonendaten = arzt.idPersonendaten " +
                 "INNER JOIN adresse ON adresse.idAdresse = personendaten.idAdresse " +
                 "INNER JOIN fachgebiet ON fachgebiet.idFachgebiet = arzt.idFachgebiet " +

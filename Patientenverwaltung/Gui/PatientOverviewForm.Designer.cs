@@ -45,7 +45,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.btn_TerminHinzufuegen = new System.Windows.Forms.Button();
+            this.btn_PatientAnzeigen = new System.Windows.Forms.Button();
             this.lblPage = new System.Windows.Forms.Label();
             this.tblPatientInformationen = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
@@ -206,16 +206,16 @@
             this.label10.TabIndex = 17;
             this.label10.Text = "(Bitte Patient auswählen)";
             // 
-            // btn_TerminHinzufuegen
+            // btn_PatientAnzeigen
             // 
-            this.btn_TerminHinzufuegen.Enabled = false;
-            this.btn_TerminHinzufuegen.Location = new System.Drawing.Point(883, 148);
-            this.btn_TerminHinzufuegen.Name = "btn_TerminHinzufuegen";
-            this.btn_TerminHinzufuegen.Size = new System.Drawing.Size(111, 23);
-            this.btn_TerminHinzufuegen.TabIndex = 18;
-            this.btn_TerminHinzufuegen.Text = "Termin hinzufügen";
-            this.btn_TerminHinzufuegen.UseVisualStyleBackColor = true;
-            this.btn_TerminHinzufuegen.Click += new System.EventHandler(this.btn_TerminHinzufuegen_Click);
+            this.btn_PatientAnzeigen.Enabled = false;
+            this.btn_PatientAnzeigen.Location = new System.Drawing.Point(883, 148);
+            this.btn_PatientAnzeigen.Name = "btn_PatientAnzeigen";
+            this.btn_PatientAnzeigen.Size = new System.Drawing.Size(111, 23);
+            this.btn_PatientAnzeigen.TabIndex = 18;
+            this.btn_PatientAnzeigen.Text = "Patient anzeigen";
+            this.btn_PatientAnzeigen.UseVisualStyleBackColor = true;
+            this.btn_PatientAnzeigen.Click += new System.EventHandler(this.btn_PatientAnzeigen_Click);
             // 
             // lblPage
             // 
@@ -239,7 +239,7 @@
             this.tblPatientInformationen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.94479F));
             this.tblPatientInformationen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.33742F));
             this.tblPatientInformationen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.31902F));
-            this.tblPatientInformationen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 119F));
+            this.tblPatientInformationen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
             this.tblPatientInformationen.Location = new System.Drawing.Point(42, 31);
             this.tblPatientInformationen.Name = "tblPatientInformationen";
             this.tblPatientInformationen.RowCount = 9;
@@ -266,7 +266,7 @@
             this.ClientSize = new System.Drawing.Size(1016, 262);
             this.Controls.Add(this.tblPatientInformationen);
             this.Controls.Add(this.lblPage);
-            this.Controls.Add(this.btn_TerminHinzufuegen);
+            this.Controls.Add(this.btn_PatientAnzeigen);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -310,7 +310,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button btn_TerminHinzufuegen;
+        private System.Windows.Forms.Button btn_PatientAnzeigen;
         private System.Windows.Forms.Label lblPage;
         private System.Windows.Forms.TableLayoutPanel tblPatientInformationen;
     }

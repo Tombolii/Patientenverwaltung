@@ -32,6 +32,7 @@ namespace Patientenverwaltung.Gui
             base.OnVisibleChanged(e);
             if(Visible)
             {
+                btn_PatientAnzeigen.Enabled = false;
                 selectedPatientIndex = -1;
                 refreshPatientTable();
             }
@@ -39,15 +40,14 @@ namespace Patientenverwaltung.Gui
 
         private void displayPatientenOfList(List<Patient> patientenToShow)
         {
-            //tblPatientInformationen.Visible = false;
             rowCount = 0;
             clearPatientenOverview();
             for (int i = 0; i < patientenToShow.Count; i++)
             {
                 addPatientToFrontend(patientenToShow[i]);
             }
-            //tblPatientInformationen.Visible = true;
         }
+
         private void addPatientToFrontend(Patient patient)
         {
             Label idLabel = new Label();
@@ -130,7 +130,7 @@ namespace Patientenverwaltung.Gui
             selectedPatientIndex = tblPatientInformationen.GetRow((Control)sender);
 
             // Button zum Erstellen von Terminen aktivieren
-            btn_TerminHinzufuegen.Enabled = true;
+            btn_PatientAnzeigen.Enabled = true;
 
             // Neues Generieren der Table (Triggert tblPatientInformationen_CellPaint())
             tblPatientInformationen.Invalidate();
@@ -159,12 +159,12 @@ namespace Patientenverwaltung.Gui
             }
         }
 
-        private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
+        private void btn_PatientAnzeigen_Click(object sender, EventArgs e)
         {
             // Ausgewählten Patient im Controller setzen
             controller.setcurrentSelectedPatient(controller.getPatienten()[selectedPatientIndex]);
 
-            controller.navPatientOverviewToNeuerTermin();
+            controller.navPatientOverviewToPatientenDaten();
         }
 
         private void btn_Weiter_Click(object sender, EventArgs e)

@@ -133,7 +133,7 @@ namespace Patientenverwaltung.Datenbank.Adapter
 
         private List<Patient> getPatientByCondition(string condition)
         {
-            string sql = "SELECT patient.idPatient, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.telefonnummer, " +
+            string sql = "SELECT patient.idPatient, personendaten.idPersonendaten, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.telefonnummer, " +
                 "personendaten.geburtstag, adresse.idAdresse, adresse.straße, adresse.hausnummer, adresse.ort, adresse.plz, versicherung.name, versicherung.idVersicherung, patient.versicherungsnummer " +
                 "FROM patient " +
                 "INNER JOIN personendaten ON personendaten.idPersonendaten = patient.idPersonendaten " +

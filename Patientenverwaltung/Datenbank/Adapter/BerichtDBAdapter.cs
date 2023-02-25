@@ -22,7 +22,7 @@ namespace Patientenverwaltung.Datenbank.Adapter
                 "FROM bericht " +
                 "INNER JOIN krankheitsbild ON bericht.diagnose = krankheitsbild.idKrankheitsbild " +
                 "INNER JOIN termin ON bericht.idBericht = termin.idBericht " +
-                "WHERE idPatient = " + idPatient + ";";
+                "WHERE bericht.idPatient = " + idPatient + ";";
 
             MySqlDataReader reader = connector.executeQuery(sql);
             // TODO: Extract this to a mapper class

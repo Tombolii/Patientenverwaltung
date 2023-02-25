@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lblBenutzername = new System.Windows.Forms.Label();
+            this.lblArztId = new System.Windows.Forms.Label();
             this.lblPasswort = new System.Windows.Forms.Label();
-            this.txtBenutzername = new System.Windows.Forms.TextBox();
+            this.txtArztId = new System.Windows.Forms.TextBox();
             this.txtPasswort = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
-            // lblBenutzername
+            // lblArztId
             // 
-            this.lblBenutzername.AutoSize = true;
-            this.lblBenutzername.Location = new System.Drawing.Point(30, 30);
-            this.lblBenutzername.Name = "lblBenutzername";
-            this.lblBenutzername.Size = new System.Drawing.Size(78, 13);
-            this.lblBenutzername.TabIndex = 0;
-            this.lblBenutzername.Text = "Benutzername:";
+            this.lblArztId.AutoSize = true;
+            this.lblArztId.Location = new System.Drawing.Point(30, 30);
+            this.lblArztId.Name = "lblArztId";
+            this.lblArztId.Size = new System.Drawing.Size(37, 13);
+            this.lblArztId.TabIndex = 0;
+            this.lblArztId.Text = "ArztId:";
             // 
             // lblPasswort
             // 
@@ -56,12 +56,12 @@
             this.lblPasswort.TabIndex = 1;
             this.lblPasswort.Text = "Passwort:";
             // 
-            // txtBenutzername
+            // txtArztId
             // 
-            this.txtBenutzername.Location = new System.Drawing.Point(120, 30);
-            this.txtBenutzername.Name = "txtBenutzername";
-            this.txtBenutzername.Size = new System.Drawing.Size(150, 20);
-            this.txtBenutzername.TabIndex = 2;
+            this.txtArztId.Location = new System.Drawing.Point(120, 30);
+            this.txtArztId.Name = "txtArztId";
+            this.txtArztId.Size = new System.Drawing.Size(150, 20);
+            this.txtArztId.TabIndex = 2;
             // 
             // txtPasswort
             // 
@@ -85,15 +85,15 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // Login
+            // LoginForm
             // 
             this.ClientSize = new System.Drawing.Size(300, 150);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPasswort);
-            this.Controls.Add(this.txtBenutzername);
+            this.Controls.Add(this.txtArztId);
             this.Controls.Add(this.lblPasswort);
-            this.Controls.Add(this.lblBenutzername);
-            this.Name = "Login";
+            this.Controls.Add(this.lblArztId);
+            this.Name = "LoginForm";
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

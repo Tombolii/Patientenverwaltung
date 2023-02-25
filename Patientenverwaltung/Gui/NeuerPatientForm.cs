@@ -44,7 +44,7 @@ namespace Patientenverwaltung.Gui
                         idVersicherung = 1
                     },
                     versicherungsnummer= 1,
-                    telefonnummer = "TELEFONNUMMER",
+                    telefonnummer = txt_Telefonnummer.Text,
                     vorerkrankungen = new List<Krankheitsbild>()
                 }
                 );

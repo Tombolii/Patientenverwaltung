@@ -47,6 +47,10 @@
             this.lblPLZ = new System.Windows.Forms.Label();
             this.txt_Straße = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.txt_Email = new System.Windows.Forms.TextBox();
+            this.lbl_Telefonnummer = new System.Windows.Forms.Label();
+            this.txt_Telefonnummer = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btn_AenderungUebernehmen
@@ -62,7 +66,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 114);
+            this.label7.Location = new System.Drawing.Point(12, 199);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 13);
             this.label7.TabIndex = 33;
@@ -162,21 +166,21 @@
             // box_Vorerkrankungen
             // 
             this.box_Vorerkrankungen.FormattingEnabled = true;
-            this.box_Vorerkrankungen.Location = new System.Drawing.Point(12, 139);
+            this.box_Vorerkrankungen.Location = new System.Drawing.Point(12, 215);
             this.box_Vorerkrankungen.Name = "box_Vorerkrankungen";
-            this.box_Vorerkrankungen.Size = new System.Drawing.Size(260, 121);
+            this.box_Vorerkrankungen.Size = new System.Drawing.Size(260, 69);
             this.box_Vorerkrankungen.TabIndex = 54;
             // 
             // txt_HausNr
             // 
-            this.txt_HausNr.Location = new System.Drawing.Point(423, 81);
+            this.txt_HausNr.Location = new System.Drawing.Point(423, 80);
             this.txt_HausNr.Name = "txt_HausNr";
             this.txt_HausNr.Size = new System.Drawing.Size(31, 20);
             this.txt_HausNr.TabIndex = 61;
             // 
             // txt_Plz
             // 
-            this.txt_Plz.Location = new System.Drawing.Point(317, 104);
+            this.txt_Plz.Location = new System.Drawing.Point(317, 117);
             this.txt_Plz.Name = "txt_Plz";
             this.txt_Plz.Size = new System.Drawing.Size(100, 20);
             this.txt_Plz.TabIndex = 60;
@@ -184,7 +188,7 @@
             // lblPLZ
             // 
             this.lblPLZ.AutoSize = true;
-            this.lblPLZ.Location = new System.Drawing.Point(227, 104);
+            this.lblPLZ.Location = new System.Drawing.Point(227, 117);
             this.lblPLZ.Name = "lblPLZ";
             this.lblPLZ.Size = new System.Drawing.Size(21, 13);
             this.lblPLZ.TabIndex = 59;
@@ -206,11 +210,47 @@
             this.label5.TabIndex = 57;
             this.label5.Text = "Straße + Nr.";
             // 
-            // PatientBearbeiten
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new System.Drawing.Point(12, 117);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(36, 13);
+            this.lblEmail.TabIndex = 62;
+            this.lblEmail.Text = "E-Mail";
+            // 
+            // txt_Email
+            // 
+            this.txt_Email.Location = new System.Drawing.Point(102, 117);
+            this.txt_Email.Name = "txt_Email";
+            this.txt_Email.Size = new System.Drawing.Size(100, 20);
+            this.txt_Email.TabIndex = 63;
+            // 
+            // lbl_Telefonnummer
+            // 
+            this.lbl_Telefonnummer.AutoSize = true;
+            this.lbl_Telefonnummer.Location = new System.Drawing.Point(12, 155);
+            this.lbl_Telefonnummer.Name = "lbl_Telefonnummer";
+            this.lbl_Telefonnummer.Size = new System.Drawing.Size(80, 13);
+            this.lbl_Telefonnummer.TabIndex = 64;
+            this.lbl_Telefonnummer.Text = "Telefonnummer";
+            // 
+            // txt_Telefonnummer
+            // 
+            this.txt_Telefonnummer.Location = new System.Drawing.Point(102, 152);
+            this.txt_Telefonnummer.Name = "txt_Telefonnummer";
+            this.txt_Telefonnummer.Size = new System.Drawing.Size(100, 20);
+            this.txt_Telefonnummer.TabIndex = 65;
+            // 
+            // PatientBearbeitenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 335);
+            this.Controls.Add(this.txt_Telefonnummer);
+            this.Controls.Add(this.lbl_Telefonnummer);
+            this.Controls.Add(this.txt_Email);
+            this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.txt_HausNr);
             this.Controls.Add(this.txt_Plz);
             this.Controls.Add(this.lblPLZ);
@@ -230,7 +270,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_Nachname);
-            this.Name = "PatientBearbeiten";
+            this.Name = "PatientBearbeitenForm";
             this.Text = "PatientBearbeiten";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -258,5 +298,9 @@
         private System.Windows.Forms.Label lblPLZ;
         private System.Windows.Forms.TextBox txt_Straße;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.TextBox txt_Email;
+        private System.Windows.Forms.Label lbl_Telefonnummer;
+        private System.Windows.Forms.TextBox txt_Telefonnummer;
     }
 }

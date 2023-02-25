@@ -38,12 +38,12 @@ namespace Patientenverwaltung.Gui
                 },
                 zeitpunkt = Convert.ToDateTime(txt_Datum.Text + " " + txt_Uhrzeit.Text)
         };
-            controller.navNeuerTerminToPatientOverview(newTermin);
+            controller.navNeuerTerminToPatientenDaten(newTermin);
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
-            controller.navNeuerTerminToPatientOverview();
+            controller.navNeuerTerminToPatientenDaten();
         }
     }
 }

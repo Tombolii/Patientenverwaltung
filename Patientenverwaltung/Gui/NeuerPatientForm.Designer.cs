@@ -49,6 +49,8 @@
             this.txt_HausNr = new System.Windows.Forms.TextBox();
             this.txt_Email = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.lblTelefonnummer = new System.Windows.Forms.Label();
+            this.txt_Telefonnummer = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btn_Abbrechen
@@ -74,7 +76,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 153);
+            this.label7.Location = new System.Drawing.Point(12, 201);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 13);
             this.label7.TabIndex = 49;
@@ -180,14 +182,14 @@
             // box_Vorerkrankungen
             // 
             this.box_Vorerkrankungen.FormattingEnabled = true;
-            this.box_Vorerkrankungen.Location = new System.Drawing.Point(12, 178);
+            this.box_Vorerkrankungen.Location = new System.Drawing.Point(12, 217);
             this.box_Vorerkrankungen.Name = "box_Vorerkrankungen";
-            this.box_Vorerkrankungen.Size = new System.Drawing.Size(260, 82);
+            this.box_Vorerkrankungen.Size = new System.Drawing.Size(260, 43);
             this.box_Vorerkrankungen.TabIndex = 53;
             // 
             // txt_Plz
             // 
-            this.txt_Plz.Location = new System.Drawing.Point(317, 103);
+            this.txt_Plz.Location = new System.Drawing.Point(317, 115);
             this.txt_Plz.Name = "txt_Plz";
             this.txt_Plz.Size = new System.Drawing.Size(100, 20);
             this.txt_Plz.TabIndex = 55;
@@ -195,7 +197,7 @@
             // lblPLZ
             // 
             this.lblPLZ.AutoSize = true;
-            this.lblPLZ.Location = new System.Drawing.Point(227, 103);
+            this.lblPLZ.Location = new System.Drawing.Point(227, 115);
             this.lblPLZ.Name = "lblPLZ";
             this.lblPLZ.Size = new System.Drawing.Size(21, 13);
             this.lblPLZ.TabIndex = 54;
@@ -224,11 +226,29 @@
             this.label8.TabIndex = 58;
             this.label8.Text = "E-Mail";
             // 
+            // lblTelefonnummer
+            // 
+            this.lblTelefonnummer.AutoSize = true;
+            this.lblTelefonnummer.Location = new System.Drawing.Point(12, 147);
+            this.lblTelefonnummer.Name = "lblTelefonnummer";
+            this.lblTelefonnummer.Size = new System.Drawing.Size(80, 13);
+            this.lblTelefonnummer.TabIndex = 59;
+            this.lblTelefonnummer.Text = "Telefonnummer";
+            // 
+            // txt_Telefonnummer
+            // 
+            this.txt_Telefonnummer.Location = new System.Drawing.Point(102, 147);
+            this.txt_Telefonnummer.Name = "txt_Telefonnummer";
+            this.txt_Telefonnummer.Size = new System.Drawing.Size(100, 20);
+            this.txt_Telefonnummer.TabIndex = 60;
+            // 
             // NeuerPatientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(466, 333);
+            this.Controls.Add(this.txt_Telefonnummer);
+            this.Controls.Add(this.lblTelefonnummer);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txt_Email);
             this.Controls.Add(this.txt_HausNr);
@@ -280,5 +300,7 @@
         private System.Windows.Forms.TextBox txt_HausNr;
         private System.Windows.Forms.TextBox txt_Email;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblTelefonnummer;
+        private System.Windows.Forms.TextBox txt_Telefonnummer;
     }
 }

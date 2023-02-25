@@ -79,6 +79,12 @@
     <Compile Include="Gui\BerichtDaten.Designer.cs">
       <DependentUpon>BerichtDaten.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gui\DeleteConfirmationPopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\DeleteConfirmationPopupForm.Designer.cs">
+      <DependentUpon>DeleteConfirmationPopupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gui\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,12 @@
     <EmbeddedResource Include="Gui\BerichtDaten.resx">
       <DependentUpon>BerichtDaten.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Gui\BerichtForm.resx">
+      <DependentUpon>BerichtForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\DeleteConfirmationPopupForm.resx">
+      <DependentUpon>DeleteConfirmationPopupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gui\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +179,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\NeuerTerminForm.resx">
       <DependentUpon>NeuerTerminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\PatientBearbeitenForm.resx">
+      <DependentUpon>PatientBearbeitenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\PatientenDatenForm.resx">
+      <DependentUpon>PatientenDatenForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\PatientOverviewForm.resx">
       <DependentUpon>PatientOverviewForm.cs</DependentUpon>

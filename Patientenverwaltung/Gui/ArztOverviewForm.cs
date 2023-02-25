@@ -31,7 +31,9 @@ namespace Patientenverwaltung.Gui
         {
             base.OnVisibleChanged(e);
             if (Visible)
-            {        
+            {
+                Arzt loggedInArzt = controller.getLoggedInArzt();
+                lbl_Name.Text = "Hallo " + loggedInArzt.vorname + " " + loggedInArzt.nachname;
                 refreshPatientTable();
             }
         }

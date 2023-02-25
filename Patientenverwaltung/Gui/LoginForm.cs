@@ -15,9 +15,9 @@ namespace Patientenverwaltung.Gui
     public partial class LoginForm : Form
     {
 
-        private Label lblBenutzername;
+        private Label lblArztId;
         private Label lblPasswort;
-        private TextBox txtBenutzername;
+        private TextBox txtArztId;
         private TextBox txtPasswort;
         private Button btnLogin;
         private ErrorProvider errorProvider;
@@ -31,15 +31,14 @@ namespace Patientenverwaltung.Gui
 
         private void btnLogin_Click_1(object sender, EventArgs e)
         {
-            string id = txtBenutzername.Text;
+            int id = Convert.ToInt32(txtArztId.Text);
             string passwort = txtPasswort.Text;
 
             // Hier würde man normalerweise die Benutzerdaten gegen eine Datenbank oder ein anderes Authentifizierungssystem prüfen
             // Wir simulieren das hier einfach mal mit einem festen Benutzernamen und Passwort
-            if (id == "admin" && passwort == "geheim")
+            if (passwort == "geheim")
             {
-                Arzt arzt = new Arzt() { idArzt = 1};
-                controller.navLoginToArztOverview(arzt);
+                controller.navLoginToArztOverview(id);
             }
             else
             {
