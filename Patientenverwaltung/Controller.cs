@@ -17,7 +17,6 @@ namespace Patientenverwaltung
         private ArztOverviewForm arztOverview;
         private BerichtOverviewForm berichtOverviewForm;
         private BerichtBearbeitenForm berichtBearbeitenForm;
-        private BerichtDatenForm berichtDatenForm;
         private NeuerBerichtForm neuerBerichtForm;
         private NeuerPatientForm neuerPatientForm;
         private NeuerTerminForm neuerTerminForm;
@@ -37,6 +36,7 @@ namespace Patientenverwaltung
 
         private Arzt loggedInArzt;
         private Patient currentSelectedPatient;
+        private Bericht currentSelectedBericht;
         private List<Termin> termine;
         private List<Patient> patienten;
         
@@ -47,7 +47,6 @@ namespace Patientenverwaltung
             arztOverview = new ArztOverviewForm(this);
             berichtOverviewForm = new BerichtOverviewForm(this);
             berichtBearbeitenForm = new BerichtBearbeitenForm(this);
-            berichtDatenForm = new BerichtDatenForm(this);
             neuerBerichtForm = new NeuerBerichtForm(this);
             neuerPatientForm = new NeuerPatientForm(this);
             neuerTerminForm = new NeuerTerminForm(this);
@@ -118,50 +117,31 @@ namespace Patientenverwaltung
             patientenDatenForm.Show();
         }
 
-        public void berichtAddBericht()
+        /// <summary>
+        /// Navigation von der BerichtOverviewForm zur BerichtBearbeitenForm
+        /// </summary>
+        public void navBerichtOverviewToBerichtBearbeiten()
         {
             berichtOverviewForm.Hide();
-            neuerBerichtForm.Show();
-        }
-
-        public void berichtBearbeitenSaveChange()
-        {
-            berichtBearbeitenForm.Hide();
-            berichtOverviewForm.Show();
-        }
-
-        public void berichtBearbeitenClose()
-        {
-            //Fertig - Ungestestet
-            berichtBearbeitenForm.Hide();
-            berichtOverviewForm.Show();
-        }
-
-        public void berichtDatenChange()
-        {
-            //Fertig - Ungestestet
-            berichtDatenForm.Hide();
             berichtBearbeitenForm.Show();
         }
 
-        public void berichtDatenBack()
+        /// <summary>
+        /// Navigation von der BerichtBearbeitenForm zur BerichtOverviewForm, wenn Bericht aktualisiert wurde
+        /// </summary>
+        /// <param name="updatedBericht">aktualisierter Bericht</param>
+        public void navBerichtBearbeitenToBerichtOverview(Bericht updatedBericht)
         {
-            //Fertig - Ungestestet
-            berichtDatenForm.Hide();
-            berichtOverviewForm.Show();
+            currentSelectedBericht = berichtDBAdapter.modifyBericht(updatedBericht);
+            navBerichtBearbeitenToBerichtOverview();
         }
 
-        public void neuerBerichtAddBericht()
+        /// <summary>
+        /// Navigation von der BerichtBearbeitenForm zur BerichtOverviewForm
+        /// </summary>
+        public void navBerichtBearbeitenToBerichtOverview()
         {
-            //Fertig - Ungestestet
-            neuerBerichtForm.Hide();
-            berichtOverviewForm.Show();
-        }
-
-        public void neuerBerichtClose()
-        {
-            //Fertig - Ungestestet
-            neuerBerichtForm.Hide();
+            berichtBearbeitenForm.Hide();
             berichtOverviewForm.Show();
         }
 
@@ -415,9 +395,19 @@ namespace Patientenverwaltung
         ///  Setz die idPatient des aktuell selektierten Patienten
         /// </summary>
         /// <param name="currentSelectedIdPatient">Patient</param>
-        public void setcurrentSelectedPatient(Patient currentSelectedPatient)
+        public void setCurrentSelectedPatient(Patient currentSelectedPatient)
         {
             this.currentSelectedPatient= currentSelectedPatient;
+        }
+
+        public void setCurrentSelectedBericht(Bericht currentSelectedBericht)
+        {
+            this.currentSelectedBericht= currentSelectedBericht;
+        }
+
+        public Bericht getCurrentSelectedBericht()
+        {
+            return currentSelectedBericht;
         }
 
         private Arzt getArztById(int idArzt)

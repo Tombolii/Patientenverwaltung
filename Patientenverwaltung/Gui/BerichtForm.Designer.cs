@@ -33,9 +33,6 @@
             this.btn_Weiter = new System.Windows.Forms.Button();
             this.txt_BerichtSuche = new System.Windows.Forms.TextBox();
             this.btn_BerichtSuchen = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.tbl_Berichte = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,13 +40,13 @@
             this.btn_ToPatientenDaten = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.lblPage = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_Seitenzahl
             // 
             this.lbl_Seitenzahl.AutoSize = true;
-            this.lbl_Seitenzahl.Location = new System.Drawing.Point(926, 201);
+            this.lbl_Seitenzahl.Location = new System.Drawing.Point(310, 191);
             this.lbl_Seitenzahl.Name = "lbl_Seitenzahl";
             this.lbl_Seitenzahl.Size = new System.Drawing.Size(31, 13);
             this.lbl_Seitenzahl.TabIndex = 26;
@@ -57,7 +54,7 @@
             // 
             // btn_Zurueck
             // 
-            this.btn_Zurueck.Location = new System.Drawing.Point(900, 197);
+            this.btn_Zurueck.Location = new System.Drawing.Point(284, 187);
             this.btn_Zurueck.Name = "btn_Zurueck";
             this.btn_Zurueck.Size = new System.Drawing.Size(20, 20);
             this.btn_Zurueck.TabIndex = 25;
@@ -67,7 +64,7 @@
             // 
             // btn_Weiter
             // 
-            this.btn_Weiter.Location = new System.Drawing.Point(991, 197);
+            this.btn_Weiter.Location = new System.Drawing.Point(381, 187);
             this.btn_Weiter.Name = "btn_Weiter";
             this.btn_Weiter.Size = new System.Drawing.Size(20, 20);
             this.btn_Weiter.TabIndex = 24;
@@ -77,14 +74,14 @@
             // 
             // txt_BerichtSuche
             // 
-            this.txt_BerichtSuche.Location = new System.Drawing.Point(900, 83);
+            this.txt_BerichtSuche.Location = new System.Drawing.Point(290, 51);
             this.txt_BerichtSuche.Name = "txt_BerichtSuche";
             this.txt_BerichtSuche.Size = new System.Drawing.Size(111, 20);
             this.txt_BerichtSuche.TabIndex = 22;
             // 
             // btn_BerichtSuchen
             // 
-            this.btn_BerichtSuchen.Location = new System.Drawing.Point(900, 109);
+            this.btn_BerichtSuchen.Location = new System.Drawing.Point(290, 77);
             this.btn_BerichtSuchen.Name = "btn_BerichtSuchen";
             this.btn_BerichtSuchen.Size = new System.Drawing.Size(111, 23);
             this.btn_BerichtSuchen.TabIndex = 21;
@@ -92,42 +89,15 @@
             this.btn_BerichtSuchen.UseVisualStyleBackColor = true;
             this.btn_BerichtSuchen.Click += new System.EventHandler(this.btn_BerichtSuchen_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(625, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 13);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Bemerkungen";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(316, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 13);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Beschwerden";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(472, 13);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 13);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Diagnose";
-            // 
             // tbl_Berichte
             // 
             this.tbl_Berichte.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetPartial;
-            this.tbl_Berichte.ColumnCount = 5;
-            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbl_Berichte.ColumnCount = 2;
+            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.45454F));
+            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.54546F));
+            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbl_Berichte.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tbl_Berichte.Location = new System.Drawing.Point(11, 29);
             this.tbl_Berichte.Name = "tbl_Berichte";
             this.tbl_Berichte.RowCount = 10;
@@ -141,17 +111,7 @@
             this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbl_Berichte.Size = new System.Drawing.Size(775, 185);
+            this.tbl_Berichte.Size = new System.Drawing.Size(256, 185);
             this.tbl_Berichte.TabIndex = 17;
             // 
             // label3
@@ -174,7 +134,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(168, 13);
+            this.label1.Location = new System.Drawing.Point(129, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 14;
@@ -182,7 +142,7 @@
             // 
             // btn_ToPatientenDaten
             // 
-            this.btn_ToPatientenDaten.Location = new System.Drawing.Point(900, 12);
+            this.btn_ToPatientenDaten.Location = new System.Drawing.Point(290, 3);
             this.btn_ToPatientenDaten.Name = "btn_ToPatientenDaten";
             this.btn_ToPatientenDaten.Size = new System.Drawing.Size(111, 23);
             this.btn_ToPatientenDaten.TabIndex = 28;
@@ -193,7 +153,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(897, 67);
+            this.label7.Location = new System.Drawing.Point(287, 35);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 13);
             this.label7.TabIndex = 29;
@@ -202,27 +162,27 @@
             // lblPage
             // 
             this.lblPage.AutoSize = true;
-            this.lblPage.Location = new System.Drawing.Point(963, 201);
+            this.lblPage.Location = new System.Drawing.Point(347, 191);
             this.lblPage.Name = "lblPage";
             this.lblPage.Size = new System.Drawing.Size(13, 13);
             this.lblPage.TabIndex = 30;
             this.lblPage.Text = "1";
             // 
-            // label8
+            // label9
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(963, 201);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(13, 13);
-            this.label8.TabIndex = 30;
-            this.label8.Text = "1";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(287, 134);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(127, 26);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "(Doppel-Klick auf Bericht \r\nfür weitere Infos)";
             // 
             // BerichtOverviewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1023, 233);
-            this.Controls.Add(this.label8);
+            this.ClientSize = new System.Drawing.Size(425, 233);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.lblPage);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btn_ToPatientenDaten);
@@ -231,15 +191,12 @@
             this.Controls.Add(this.btn_Weiter);
             this.Controls.Add(this.txt_BerichtSuche);
             this.Controls.Add(this.btn_BerichtSuchen);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.tbl_Berichte);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "BerichtOverviewForm";
-            this.Text = "Bericht";
+            this.Text = "Berichte";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,9 +209,6 @@
         private System.Windows.Forms.Button btn_Weiter;
         private System.Windows.Forms.TextBox txt_BerichtSuche;
         private System.Windows.Forms.Button btn_BerichtSuchen;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel tbl_Berichte;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -262,6 +216,6 @@
         private System.Windows.Forms.Button btn_ToPatientenDaten;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblPage;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

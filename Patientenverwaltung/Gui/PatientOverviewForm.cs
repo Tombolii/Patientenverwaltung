@@ -162,7 +162,7 @@ namespace Patientenverwaltung.Gui
         private void btn_PatientAnzeigen_Click(object sender, EventArgs e)
         {
             // Ausgewählten Patient im Controller setzen
-            controller.setcurrentSelectedPatient(controller.getPatienten()[selectedPatientIndex]);
+            controller.setCurrentSelectedPatient(controller.getPatienten()[selectedPatientIndex]);
 
             controller.navPatientOverviewToPatientenDaten();
         }

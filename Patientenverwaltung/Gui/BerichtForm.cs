@@ -18,7 +18,6 @@ namespace Patientenverwaltung.Gui
         private Controller controller;
         private List<Bericht> berichte;
         private static int rowCount = 0;
-        private int selectedBerichtIndex;
         private int pageIndex = 0;
         private const int ROW_AMOUNT = 9;
 
@@ -34,14 +33,13 @@ namespace Patientenverwaltung.Gui
             if (Visible)
             {
                 berichte = controller.getBerichteOfPatient();
-                selectedBerichtIndex = -1;
                 refreshBerichtTable();
             }
         }
 
         private void btn_BerichtHinzufuegen_Click(object sender, EventArgs e)
         {
-            controller.berichtAddBericht();
+            
         }
 
         private void btn_BerichtSuchen_Click(object sender, EventArgs e)
@@ -78,36 +76,25 @@ namespace Patientenverwaltung.Gui
         private void addBerichtToFrontend(Bericht bericht)
         {
             Label datumLabel = new Label();
-            datumLabel.Click += onBerichtSelected;
+            datumLabel.DoubleClick += onBerichtDoubleClick;
             datumLabel.Text = bericht.zeitpunkt.Date.ToString();
 
             Label uhrzeitLabel = new Label();
-            uhrzeitLabel.Click += onBerichtSelected;
+            uhrzeitLabel.DoubleClick += onBerichtDoubleClick;
             uhrzeitLabel.Text = bericht.zeitpunkt.TimeOfDay.ToString();
-
-            Label beschwerdenLabel = new Label();
-            beschwerdenLabel.Click += onBerichtSelected;
-            beschwerdenLabel.Text = bericht.beschwerden;
-
-            Label diagnoseLabel = new Label();
-            diagnoseLabel.Click += onBerichtSelected;
-            diagnoseLabel.Text = bericht.diagnose.bezeichnung;
-
-            Label bemerkungLabel = new Label();
-            bemerkungLabel.Click += onBerichtSelected;
-            bemerkungLabel.Text = bericht.bemerkung;
 
             tbl_Berichte.Controls.Add(datumLabel, 0, rowCount); ;
             tbl_Berichte.Controls.Add(uhrzeitLabel, 1, rowCount);
-            tbl_Berichte.Controls.Add(beschwerdenLabel, 2, rowCount);
-            tbl_Berichte.Controls.Add(diagnoseLabel, 3, rowCount);
-            tbl_Berichte.Controls.Add(bemerkungLabel, 4, rowCount);
             rowCount++;
         }
 
-        private void onBerichtSelected(object sender, EventArgs e)
+        private void onBerichtDoubleClick(object sender, EventArgs e)
         {
+            // Auslesen des Indexes bzw. Zeile des ausgewählten Berichts
+            int selectedBerichtIndex = tbl_Berichte.GetRow((Control)sender);
 
+            controller.setCurrentSelectedBericht(berichte[selectedBerichtIndex]);
+            controller.navBerichtOverviewToBerichtBearbeiten();
         }
 
         private void clearPatientTable()

@@ -42,7 +42,7 @@ namespace Patientenverwaltung.Gui
         {
             tblTermine.Visible = false;
             clearTermineOverview();
-            rowCount = 0;
+            rowCount = 0;               
             for (int i = 0; i < termineToShow.Count; i++)
             {
                 addTerminToFrontend(termineToShow[i]);

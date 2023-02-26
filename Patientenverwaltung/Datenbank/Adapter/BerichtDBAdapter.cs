@@ -18,7 +18,7 @@ namespace Patientenverwaltung.Datenbank.Adapter
         /// <returns>Liste aller Berichte</returns>
         public List<Bericht> getBerichteOfPatient(int idPatient)
         {
-            string sql = "SELECT bericht.idPatient, bericht.beschwerden, bericht.bemerkung, krankheitsbild.bezeichnung, krankheitsbild.symptome, termin.zeitpunkt " +
+            string sql = "SELECT bericht.idBericht, bericht.idPatient, bericht.beschwerden, bericht.bemerkung, bericht.diagnose, krankheitsbild.bezeichnung, krankheitsbild.symptome, termin.zeitpunkt " +
                 "FROM bericht " +
                 "INNER JOIN krankheitsbild ON bericht.diagnose = krankheitsbild.idKrankheitsbild " +
                 "INNER JOIN termin ON bericht.idBericht = termin.idBericht " +
@@ -30,10 +30,12 @@ namespace Patientenverwaltung.Datenbank.Adapter
             while (reader.Read())
             {
                 Bericht bericht = new Bericht();
+                bericht.idBericht = reader.GetInt32("idBericht");
                 bericht.beschwerden = reader.GetString("beschwerden");
                 bericht.bemerkung = reader.GetString("bemerkung");
                 Krankheitsbild diagnose = new Krankheitsbild
                 {
+                    idKrankheitsbild = reader.GetInt32("diagnose"),
                     bezeichnung = reader.GetString("bezeichnung"),
                     symptome = reader.GetString("symptome")
                 };
@@ -53,8 +55,8 @@ namespace Patientenverwaltung.Datenbank.Adapter
         public Bericht modifyBericht(Bericht modifiedBericht)
         {
             string sql = "UPDATE bericht " +
-                "SET beschwerden = " + modifiedBericht.beschwerden + ", " +
-                "bemerkung = " + modifiedBericht.bemerkung + ", " +
+                "SET beschwerden = '" + modifiedBericht.beschwerden + "', " +
+                "bemerkung = '" + modifiedBericht.bemerkung + "', " +
                 "diagnose = " + modifiedBericht.diagnose.idKrankheitsbild + " " +
                 "WHERE idBericht = " + modifiedBericht.idBericht + ";";
 

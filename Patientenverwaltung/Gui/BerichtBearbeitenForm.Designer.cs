@@ -35,17 +35,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btn_Abbrechen = new System.Windows.Forms.Button();
             this.btn_AenderungUebernehmen = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txt_Kasse = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txt_Geb = new System.Windows.Forms.TextBox();
-            this.txt_Vorname = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txt_Nachname = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.lbl_Vorerkrankungen = new System.Windows.Forms.Label();
+            this.txtUhrzeit = new System.Windows.Forms.TextBox();
+            this.lblUhrzeit = new System.Windows.Forms.Label();
+            this.lblDatum = new System.Windows.Forms.Label();
+            this.txtDatum = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txt_Diagnose
@@ -110,83 +105,6 @@
             this.btn_AenderungUebernehmen.UseVisualStyleBackColor = true;
             this.btn_AenderungUebernehmen.Click += new System.EventHandler(this.btn_AenderungUebernehmen_Click);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(438, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 13);
-            this.label7.TabIndex = 55;
-            this.label7.Text = "Vorerkrankungen";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(227, 47);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 13);
-            this.label6.TabIndex = 52;
-            this.label6.Text = "Krankenkasse";
-            // 
-            // txt_Kasse
-            // 
-            this.txt_Kasse.Enabled = false;
-            this.txt_Kasse.Location = new System.Drawing.Point(317, 47);
-            this.txt_Kasse.Name = "txt_Kasse";
-            this.txt_Kasse.Size = new System.Drawing.Size(100, 20);
-            this.txt_Kasse.TabIndex = 51;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 44);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 13);
-            this.label4.TabIndex = 48;
-            this.label4.Text = "Geburtsdatum";
-            // 
-            // txt_Geb
-            // 
-            this.txt_Geb.Enabled = false;
-            this.txt_Geb.Location = new System.Drawing.Point(102, 44);
-            this.txt_Geb.Name = "txt_Geb";
-            this.txt_Geb.Size = new System.Drawing.Size(100, 20);
-            this.txt_Geb.TabIndex = 47;
-            // 
-            // txt_Vorname
-            // 
-            this.txt_Vorname.Enabled = false;
-            this.txt_Vorname.Location = new System.Drawing.Point(317, 9);
-            this.txt_Vorname.Name = "txt_Vorname";
-            this.txt_Vorname.Size = new System.Drawing.Size(100, 20);
-            this.txt_Vorname.TabIndex = 46;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(227, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 45;
-            this.label2.Text = "Vorname";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
-            this.label1.TabIndex = 44;
-            this.label1.Text = "Nachname";
-            // 
-            // txt_Nachname
-            // 
-            this.txt_Nachname.Enabled = false;
-            this.txt_Nachname.Location = new System.Drawing.Point(102, 9);
-            this.txt_Nachname.Name = "txt_Nachname";
-            this.txt_Nachname.Size = new System.Drawing.Size(100, 20);
-            this.txt_Nachname.TabIndex = 43;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -204,11 +122,53 @@
             this.lbl_Vorerkrankungen.Size = new System.Drawing.Size(0, 13);
             this.lbl_Vorerkrankungen.TabIndex = 84;
             // 
-            // BerichtBearbeiten
+            // txtUhrzeit
+            // 
+            this.txtUhrzeit.Enabled = false;
+            this.txtUhrzeit.Location = new System.Drawing.Point(289, 17);
+            this.txtUhrzeit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtUhrzeit.Name = "txtUhrzeit";
+            this.txtUhrzeit.Size = new System.Drawing.Size(148, 20);
+            this.txtUhrzeit.TabIndex = 88;
+            // 
+            // lblUhrzeit
+            // 
+            this.lblUhrzeit.AutoSize = true;
+            this.lblUhrzeit.Location = new System.Drawing.Point(241, 20);
+            this.lblUhrzeit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUhrzeit.Name = "lblUhrzeit";
+            this.lblUhrzeit.Size = new System.Drawing.Size(40, 13);
+            this.lblUhrzeit.TabIndex = 87;
+            this.lblUhrzeit.Text = "Uhrzeit";
+            // 
+            // lblDatum
+            // 
+            this.lblDatum.AutoSize = true;
+            this.lblDatum.Location = new System.Drawing.Point(15, 20);
+            this.lblDatum.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDatum.Name = "lblDatum";
+            this.lblDatum.Size = new System.Drawing.Size(38, 13);
+            this.lblDatum.TabIndex = 86;
+            this.lblDatum.Text = "Datum";
+            // 
+            // txtDatum
+            // 
+            this.txtDatum.Enabled = false;
+            this.txtDatum.Location = new System.Drawing.Point(74, 17);
+            this.txtDatum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDatum.Name = "txtDatum";
+            this.txtDatum.Size = new System.Drawing.Size(148, 20);
+            this.txtDatum.TabIndex = 85;
+            // 
+            // BerichtBearbeitenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 306);
+            this.Controls.Add(this.txtUhrzeit);
+            this.Controls.Add(this.lblUhrzeit);
+            this.Controls.Add(this.lblDatum);
+            this.Controls.Add(this.txtDatum);
             this.Controls.Add(this.lbl_Vorerkrankungen);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txt_Diagnose);
@@ -218,16 +178,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btn_Abbrechen);
             this.Controls.Add(this.btn_AenderungUebernehmen);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.txt_Kasse);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txt_Geb);
-            this.Controls.Add(this.txt_Vorname);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txt_Nachname);
-            this.Name = "BerichtBearbeiten";
+            this.Name = "BerichtBearbeitenForm";
             this.Text = "BerichtBearbeiten";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -243,16 +194,11 @@
     private System.Windows.Forms.Label label9;
     private System.Windows.Forms.Button btn_Abbrechen;
     private System.Windows.Forms.Button btn_AenderungUebernehmen;
-    private System.Windows.Forms.Label label7;
-    private System.Windows.Forms.Label label6;
-    private System.Windows.Forms.TextBox txt_Kasse;
-    private System.Windows.Forms.Label label4;
-    private System.Windows.Forms.TextBox txt_Geb;
-    private System.Windows.Forms.TextBox txt_Vorname;
-    private System.Windows.Forms.Label label2;
-    private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.TextBox txt_Nachname;
     private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lbl_Vorerkrankungen;
+        private System.Windows.Forms.TextBox txtUhrzeit;
+        private System.Windows.Forms.Label lblUhrzeit;
+        private System.Windows.Forms.Label lblDatum;
+        private System.Windows.Forms.TextBox txtDatum;
     }
 }

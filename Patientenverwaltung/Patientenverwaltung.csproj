@@ -73,12 +73,6 @@
     <Compile Include="Gui\BerichtBearbeitenForm.Designer.cs">
       <DependentUpon>BerichtBearbeitenForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\BerichtDaten.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Gui\BerichtDaten.Designer.cs">
-      <DependentUpon>BerichtDaten.cs</DependentUpon>
-    </Compile>
     <Compile Include="Gui\DeleteConfirmationPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,8 +156,8 @@
     <Compile Include="Model\Versicherung.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Gui\BerichtDaten.resx">
-      <DependentUpon>BerichtDaten.cs</DependentUpon>
+    <EmbeddedResource Include="Gui\BerichtBearbeitenForm.resx">
+      <DependentUpon>BerichtBearbeitenForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\BerichtForm.resx">
       <DependentUpon>BerichtForm.cs</DependentUpon>
