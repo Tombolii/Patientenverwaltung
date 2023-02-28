@@ -34,7 +34,7 @@ namespace Patientenverwaltung.Gui
             {
                 Arzt loggedInArzt = controller.getLoggedInArzt();
                 lbl_Name.Text = "Hallo " + loggedInArzt.vorname + " " + loggedInArzt.nachname;
-                refreshPatientTable();
+                refreshTerminTable();
             }
         }
 
@@ -52,10 +52,26 @@ namespace Patientenverwaltung.Gui
 
         public void addTerminToFrontend(Termin termin)
         {
-            tblTermine.Controls.Add(new Label() { Text = termin.simplePatient.nachname }, 2, rowCount);
-            tblTermine.Controls.Add(new Label() { Text = termin.simplePatient.vorname }, 3, rowCount);
-            tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("dd,MM,yyyy") }, 0, rowCount);
-            tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("H:mm") + " Uhr" }, 1, rowCount);
+            Label datumLabel = new Label();
+            datumLabel.DoubleClick += onTerminDoubleClick;
+            datumLabel.Text = termin.zeitpunkt.ToShortDateString();
+
+            Label uhrzeitLabel = new Label();
+            uhrzeitLabel.DoubleClick += onTerminDoubleClick;
+            uhrzeitLabel.Text = termin.zeitpunkt.ToShortTimeString() + " Uhr";
+
+            Label nachnameLabel = new Label();
+            nachnameLabel.DoubleClick += onTerminDoubleClick;
+            nachnameLabel.Text = termin.simplePatient.nachname;
+
+            Label vornameLabel = new Label();
+            vornameLabel.DoubleClick += onTerminDoubleClick;
+            vornameLabel.Text = termin.simplePatient.vorname;
+
+            tblTermine.Controls.Add(nachnameLabel, 2, rowCount);
+            tblTermine.Controls.Add(vornameLabel, 3, rowCount);
+            tblTermine.Controls.Add(datumLabel, 0, rowCount);
+            tblTermine.Controls.Add(uhrzeitLabel, 1, rowCount);
             rowCount++;
         }
 
@@ -69,7 +85,7 @@ namespace Patientenverwaltung.Gui
             tblTermine.Controls.Clear();
         }
 
-        private void refreshPatientTable()
+        private void refreshTerminTable()
         {
             int firstTerminIndexOfPage = pageIndex * ROW_AMOUNT;
             int lastTerminIndexOfPage = ROW_AMOUNT;
@@ -77,18 +93,40 @@ namespace Patientenverwaltung.Gui
             {
                 lastTerminIndexOfPage = controller.getTermine().Count - firstTerminIndexOfPage;
             }
-            displayTermineOfList(controller.getTermine().GetRange(firstTerminIndexOfPage, lastTerminIndexOfPage));
+            List<Termin> termineToShow = controller.getTermine().GetRange(firstTerminIndexOfPage, lastTerminIndexOfPage);
+            if (!checkAlleTermine.Checked)
+            {
+                // Termine des aktuellen Tages anzeigen
+                DateTime currentDate = DateTime.Now;
+                termineToShow = termineToShow.FindAll(termin =>
+                    termin.zeitpunkt.Date.Equals(currentDate.Date)
+                );
+            }
+            displayTermineOfList(termineToShow);
+            
             setVisibilityOfPageButtons();
         }
 
         private void btn_Weiter_Click(object sender, EventArgs e)
         {
-
+            if (validateNextPage())
+            {
+                pageIndex++;
+                lblPage.Text = (pageIndex + 1).ToString();
+                setVisibilityOfPageButtons();
+                refreshTerminTable();
+            }
         }
 
         private void btn_Zurueck_Click(object sender, EventArgs e)
         {
-
+            if (pageIndex != 0)
+            {
+                pageIndex--;
+                lblPage.Text = (pageIndex + 1).ToString();
+                setVisibilityOfPageButtons();
+                refreshTerminTable();
+            }
         }
 
         private void setVisibilityOfPageButtons()
@@ -114,6 +152,17 @@ namespace Patientenverwaltung.Gui
         private bool validateNextPage()
         {
             return (pageIndex + 1) * ROW_AMOUNT < controller.getPatienten().Count;
+        }
+
+        private void checkAlleTermine_CheckedChanged(object sender, EventArgs e)
+        {
+           refreshTerminTable();
+        }
+
+        public void onTerminDoubleClick(object sender, EventArgs e)
+        {
+            controller.setCurrentSelectedTermin(controller.getTermine()[tblTermine.GetRow((Control)sender)]);
+            controller.navArztOverviewToTerminDaten();
         }
     }
 }

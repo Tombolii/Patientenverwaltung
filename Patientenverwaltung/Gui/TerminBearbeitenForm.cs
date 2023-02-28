@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Patientenverwaltung;
+using Patientenverwaltung.Model;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Patientenverwaltung.Gui
 {
@@ -21,19 +15,39 @@ namespace Patientenverwaltung.Gui
             this.controller = controller;
         }
 
+        protected override void OnVisibleChanged(EventArgs e)
+        {
+            base.OnVisibleChanged(e);
+            if (Visible)
+            {
+                displayTerminDaten();
+            }
+        }
+
         private void btn_AenderungUebernehmen_Click(object sender, EventArgs e)
         {
-            controller.terminBearbeitenSaveChange();
+            Termin updatedTermin = controller.getCurrentSelectedTermin();
+            updatedTermin.zeitpunkt = Convert.ToDateTime(txt_Datum.Text + txt_Uhrzeit.Text);
+            try
+            {
+                controller.navTerminBearbeitenToTerminDaten(updatedTermin);
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
-            controller.terminBearbeitenClose();
+            controller.navTerminBearbeitenToTerminDaten();
         }
 
-        private void TerminBearbeiten_Load(object sender, EventArgs e)
+        private void displayTerminDaten()
         {
-
+            Termin termin = controller.getCurrentSelectedTermin();
+            txt_Datum.Text = termin.zeitpunkt.ToShortDateString();
+            txt_Uhrzeit.Text = termin.zeitpunkt.ToShortTimeString();
         }
     }
 }

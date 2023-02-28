@@ -48,6 +48,41 @@ namespace Patientenverwaltung.Datenbank.Adapter
         }
 
         /// <summary>
+        /// Holte einen Bericht aus der Datenbank
+        /// </summary>
+        /// <param name="idBericht">des Berichts</param>
+        /// <returns>den gesuchten Bericht</returns>
+        public Bericht getBericht(int idBericht)
+        {
+            string sql = "SELECT bericht.idBericht, bericht.idPatient, bericht.beschwerden, " +
+                "bericht.bemerkung, bericht.diagnose, krankheitsbild.bezeichnung, " +
+                "krankheitsbild.symptome, termin.zeitpunkt FROM bericht " +
+                "INNER JOIN krankheitsbild ON bericht.diagnose = krankheitsbild.idKrankheitsbild " +
+                "INNER JOIN termin ON bericht.idBericht = termin.idBericht " +
+                "WHERE bericht.idBericht = " + idBericht + ";";
+
+            MySqlDataReader reader = connector.executeQuery(sql);
+            Bericht bericht = new Bericht();
+            while (reader.Read())
+            {
+                bericht.idBericht = reader.GetInt32("idBericht");
+                bericht.beschwerden = reader.GetString("beschwerden");
+                bericht.bemerkung = reader.GetString("bemerkung");
+                Krankheitsbild diagnose = new Krankheitsbild
+                {
+                    idKrankheitsbild = reader.GetInt32("diagnose"),
+                    bezeichnung = reader.GetString("bezeichnung"),
+                    symptome = reader.GetString("symptome")
+                };
+                bericht.diagnose = diagnose;
+                bericht.zeitpunkt = DateTime.Parse(reader.GetString("zeitpunkt"));
+
+            }
+            reader.Close();
+            return bericht;
+        }
+
+        /// <summary>
         /// Aktualisiert einen Bericht in der Datenbank
         /// </summary>
         /// <param name="modifiedBericht">aktualisierter Bericht</param>
@@ -72,10 +107,10 @@ namespace Patientenverwaltung.Datenbank.Adapter
         public Bericht addBericht(Bericht newBericht)
         {
             string sql = "INSERT INTO bericht (idPatient, beschwerden, bemerkung, diagnose) " +
-                "VALUES(" + newBericht.patient.idPatient + ", " +
-                newBericht.beschwerden + ", " +
-                newBericht.bemerkung + ", " +
-                newBericht.diagnose.idKrankheitsbild + ";" +
+                "VALUES(" + newBericht.idPatient + ", '" +
+                newBericht.beschwerden + "', '" +
+                newBericht.bemerkung + "', " +
+                newBericht.diagnose.idKrankheitsbild + "); " +
                 "SELECT LAST_INSERT_ID() as 'idBericht';";
 
             MySqlDataReader reader = connector.executeQuery(sql);

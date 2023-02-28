@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Patientenverwaltung;
+using Patientenverwaltung.Model;
 using System.Windows.Forms;
 
 namespace Patientenverwaltung.Gui
@@ -21,19 +14,66 @@ namespace Patientenverwaltung.Gui
             this.controller = controller;
         }
 
+        protected override void OnVisibleChanged(EventArgs e)
+        {
+            base.OnVisibleChanged(e);
+            if (Visible)
+            {
+                displayTerminDaten();
+                setUpBerichtButton();
+            }
+        }
+
+
         private void btn_TerminBearbeiten_Click(object sender, EventArgs e)
         {
-            controller.terminDatenChangeTermin();
+            controller.navTerminDatenToTerminBearbeiten();
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
-            controller.terminDatenClose();
+            controller.navTerminDatenToArztOverview();
         }
 
         private void btn_TerminLoeschen_Click(object sender, EventArgs e)
         {
-            controller.terminDatenDeleteTermin();
+            controller.navTerminDatenToDeleteTerminConfirmationPopup();
+        }
+
+        private void displayTerminDaten()
+        {
+            
+            Termin termin = controller.getCurrentSelectedTermin();
+            txt_Nachname.Text = termin.simplePatient.nachname;
+            txt_Vorname.Text = termin.simplePatient.vorname;
+            txt_Datum.Text = termin.zeitpunkt.ToShortDateString();
+            txt_Uhrzeit.Text = termin.zeitpunkt.ToShortTimeString();
+        }
+
+        private void setUpBerichtButton()
+        {
+            if(controller.getCurrentSelectedTermin().idBericht == 0)
+            {
+                btnBericht.Text = "Bericht erstellen";
+            }
+            else
+            {
+                btnBericht.Text = "Bericht anzeigen";
+            }
+        }
+
+        private void btnBericht_Click(object sender, EventArgs e)
+        {
+            if(btnBericht.Text == "Bericht erstellen")
+            {
+                controller.navTerminDatenToNeuerBericht();
+            }
+            else
+            {
+                Bericht bericht = controller.getBerichtById(controller.getCurrentSelectedTermin().idBericht);
+                controller.setCurrentSelectedBericht(bericht);
+                controller.navTerminDatenToBerichtDaten();
+            }
         }
     }
 }

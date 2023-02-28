@@ -66,20 +66,25 @@ namespace Patientenverwaltung.Gui
             geburtstagLabel.Click += onPatientSelected;
             geburtstagLabel.Text = Convert.ToString(patient.geburtstag);
 
+            Label ortLabel = new Label();
+            ortLabel.Click += onPatientSelected;
+            ortLabel.Text = Convert.ToString(patient.adresse.ort);
+
             Label adresseLabel = new Label();
             adresseLabel.Click += onPatientSelected;
-            adresseLabel.Text = Convert.ToString(patient.adresse);
+            adresseLabel.Text = Convert.ToString(patient.adresse.straße + " " + patient.adresse.hausnummer);
 
             Label versicherungLabel = new Label();
             versicherungLabel.Click += onPatientSelected;
-            versicherungLabel.Text = Convert.ToString(patient.versicherung);
+            versicherungLabel.Text = Convert.ToString(patient.versicherung.name);
 
             tblPatientInformationen.Controls.Add(idLabel, 0, rowCount); ;
             tblPatientInformationen.Controls.Add(nachnameLabel, 1, rowCount);
             tblPatientInformationen.Controls.Add(vornameLabel, 2, rowCount);
             tblPatientInformationen.Controls.Add(geburtstagLabel, 3, rowCount);
-            tblPatientInformationen.Controls.Add(adresseLabel, 4, rowCount);
-            tblPatientInformationen.Controls.Add(versicherungLabel, 5, rowCount);
+            tblPatientInformationen.Controls.Add(ortLabel, 4, rowCount);
+            tblPatientInformationen.Controls.Add(adresseLabel, 5, rowCount);
+            tblPatientInformationen.Controls.Add(versicherungLabel, 6, rowCount);
             rowCount++;
         }
 
@@ -98,7 +103,9 @@ namespace Patientenverwaltung.Gui
             string patientNachname = txtSucheNachname.Text;
             List<Patient> matchingPatienten = controller.getPatienten().FindAll
                 (patient => patient.nachname.Contains(patientNachname));
+            tblPatientInformationen.Visible = false;
             displayPatientenOfList(matchingPatienten);
+            tblPatientInformationen.Visible = true;
         }
 
         private void clearPatientenOverview()
@@ -123,9 +130,7 @@ namespace Patientenverwaltung.Gui
         /// Wird aufgerufen, wenn ein Patient geklickt wird
         /// </summary>
         private void onPatientSelected(object sender, EventArgs e)
-        {
-            Label label = (Label) sender;
-            
+        {            
             // Auslesen des Indexes bzw. Zeile des ausgewählten Patienten
             selectedPatientIndex = tblPatientInformationen.GetRow((Control)sender);
 

@@ -43,7 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txt_Nachname = new System.Windows.Forms.TextBox();
             this.box_Krankenkasse = new System.Windows.Forms.ComboBox();
-            this.box_Vorerkrankungen = new System.Windows.Forms.ListBox();
+            this.box_Vorerkrankungen = new System.Windows.Forms.ComboBox();
             this.txt_Plz = new System.Windows.Forms.TextBox();
             this.lblPLZ = new System.Windows.Forms.Label();
             this.txt_HausNr = new System.Windows.Forms.TextBox();
@@ -294,7 +294,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_Nachname;
         private System.Windows.Forms.ComboBox box_Krankenkasse;
-        private System.Windows.Forms.ListBox box_Vorerkrankungen;
+        private System.Windows.Forms.ComboBox box_Vorerkrankungen;
         private System.Windows.Forms.TextBox txt_Plz;
         private System.Windows.Forms.Label lblPLZ;
         private System.Windows.Forms.TextBox txt_HausNr;

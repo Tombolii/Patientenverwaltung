@@ -26,20 +26,27 @@ namespace Patientenverwaltung
         private TerminBearbeitenForm terminBearbeitenForm;
         private TerminDatenForm terminDatenForm;
         private LoginForm loginForm;
-        DeleteConfirmationPopupForm deleteConfirmationPopupForm;
+        private DeletePatientConfirmationPopupForm deletePatientConfirmationPopupForm;
+        private DeleteTerminConfirmationPopupForm deleteTerminConfirmationPopupForm;
+
 
         // Adapter
         private TerminDBAdapter terminDBAdapter;
         private ArztDBAdapter arztDBAdapter;
         private BerichtDBAdapter berichtDBAdapter;
         private PatientDBAdapter patientDBAdapter;
+        private KrankheitsbildDBAdapter krankheitsbildDBAdapter;
+        private VersicherungDBAdapter versicherungDBAdapter;
 
         private Arzt loggedInArzt;
         private Patient currentSelectedPatient;
         private Bericht currentSelectedBericht;
+        private Termin currentSelectedTermin;
         private List<Termin> termine;
         private List<Patient> patienten;
-        
+        private List<Krankheitsbild> krankheitsbilder;
+        private List<Versicherung> versicherungen;
+
 
         public Controller()
         {
@@ -56,16 +63,21 @@ namespace Patientenverwaltung
             terminBearbeitenForm = new TerminBearbeitenForm(this);
             terminDatenForm = new TerminDatenForm(this);
             loginForm = new LoginForm(this);
-            deleteConfirmationPopupForm = new DeleteConfirmationPopupForm(this);
+            deletePatientConfirmationPopupForm = new DeletePatientConfirmationPopupForm(this);
+            deleteTerminConfirmationPopupForm = new DeleteTerminConfirmationPopupForm(this);    
 
             // Adapter
             terminDBAdapter = new TerminDBAdapter();
             arztDBAdapter = new ArztDBAdapter();
             berichtDBAdapter= new BerichtDBAdapter();
             patientDBAdapter= new PatientDBAdapter();
+            krankheitsbildDBAdapter = new KrankheitsbildDBAdapter();
+            versicherungDBAdapter = new VersicherungDBAdapter();
 
             termine = new List<Termin>();
             patienten = new List<Patient>();
+            versicherungen = new List<Versicherung>();
+            krankheitsbilder = new List<Krankheitsbild>();
 
     }
 
@@ -82,11 +94,15 @@ namespace Patientenverwaltung
         /// Lädt Daten und navigiert von der LoginForm zur ArztOverviewForm
         /// </summary>
         /// <param name="loggedInArzt">angemeldeter Arzt</param>
+        /// 
         public void navLoginToArztOverview(int loggedInArztId)
         {
             loggedInArzt = getArztById(loggedInArztId);
             patienten = patientDBAdapter.getAllPatienten();
             termine = terminDBAdapter.getTermineOfArzt(loggedInArzt.idArzt);
+            krankheitsbilder = krankheitsbildDBAdapter.getKrankheitsbilder();
+            versicherungen = versicherungDBAdapter.getAllVersicherungen();
+            
             loginForm.Hide();
             arztOverview.Show();
         }
@@ -101,11 +117,47 @@ namespace Patientenverwaltung
         }
 
         /// <summary>
+        /// Navigation von der ArztOverviewForm zur TerminDatenForm
+        /// </summary>
+        public void navArztOverviewToTerminDaten()
+        {
+            arztOverview.Hide();
+            terminDatenForm.Show();
+        }
+
+        /// <summary>
         /// Navigation von der PatientOverviewForm zur NeuerTerminForm
         /// </summary>
         public void navPatientOverviewToNeuerTermin()
         {
             neuerTerminForm.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der PatientOverviewForm zur NeuerPatientForm
+        /// </summary>
+        public void navPatientOverviewToNeuerPatient()
+        {
+            patientOverviewForm.Hide();
+            neuerPatientForm.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der PatientOverviewForm zur ArztOverviewForm
+        /// </summary>
+        public void navPatientOverviewToArztOverview()
+        {
+            patientOverviewForm.Hide();
+            arztOverview.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der PatientOverviewForm zur PatientenDatenForm
+        /// </summary>
+        public void navPatientOverviewToPatientenDaten()
+        {
+            patientOverviewForm.Hide();
+            patientenDatenForm.Show();
         }
 
         /// <summary>
@@ -146,6 +198,25 @@ namespace Patientenverwaltung
         }
 
         /// <summary>
+        /// Navigation von der NeuerBerichtForm zur TerminDatenForm, wenn neuer Bericht erstellt wurde
+        /// </summary>
+        public void navNeuerBerichtToTerminDaten(Bericht neuerBericht)
+        {
+            Bericht bericht = berichtDBAdapter.addBericht(neuerBericht);
+            currentSelectedTermin.idBericht = bericht.idBericht;
+            navNeuerBerichtToTerminDaten();
+        }
+
+        /// <summary>
+        /// Navigation von der NeuerBerichtForm zur TerminDatenForm
+        /// </summary>
+        public void navNeuerBerichtToTerminDaten()
+        {
+            neuerBerichtForm.Hide();
+            terminDatenForm.Show();
+        }
+
+        /// <summary>
         /// Navigation von der NeuerPatientForm zur PatientOverviewForm, wenn neuer Patient hinzugefügt wurde
         /// </summary>
         /// <param name="patient">der neue Patient</param>
@@ -161,30 +232,6 @@ namespace Patientenverwaltung
         public void navNeuerPatientToPatientOverview()
         {
             neuerPatientForm.Close();
-            patientOverviewForm.Show();
-        }
-
-        /// <summary>
-        /// Navigation von der NeuerTerminForm zur PatientenDatenForm, wenn neuer Termin hinzugefügt wurde
-        /// </summary>
-        /// <param name="termin"der neue Termin></param>
-        public void navNeuerTerminToPatientenDaten(Termin termin)
-        {
-            termine.Add(terminDBAdapter.addTermin(termin));
-            navNeuerTerminToPatientenDaten();
-        }
-
-        /// <summary>
-        /// Navigation von der NeuerTerminForm zur PatientenDatenForm
-        /// </summary>
-        public void navNeuerTerminToPatientenDaten()
-        {
-            neuerTerminForm.Hide();
-        }
-
-        public void neuerTerminSearchPatient()
-        {
-            neuerTerminForm.Hide();
             patientOverviewForm.Show();
         }
 
@@ -210,40 +257,6 @@ namespace Patientenverwaltung
         }
 
         /// <summary>
-        /// Navigation von der PatientOverviewForm zur ArztOverviewForm
-        /// </summary>
-        public void navPatientOverviewToArztOverview()
-        {
-            patientOverviewForm.Hide();
-            arztOverview.Show();
-        }
-
-        /// <summary>
-        /// Navigation von der PatientOverviewForm zur PatientenDatenForm
-        /// </summary>
-        public void navPatientOverviewToPatientenDaten()
-        {
-            patientOverviewForm.Hide();
-            patientenDatenForm.Show();
-        }
-
-        public void patientSearchPat()
-        {
-            //Fertig - Ungestestet
-            patientOverviewForm.Hide();
-            patientenDatenForm.Show();
-        }
-
-        /// <summary>
-        /// Navigation von der PatientOverviewForm zur NeuerPatientForm
-        /// </summary>
-        public void navPatientOverviewToNeuerPatient()
-        {
-            patientOverviewForm.Hide();
-            neuerPatientForm.Show();
-        }
-
-        /// <summary>
         /// Navigation von der PatientenDatenForm zur PatientBearbeitenForm
         /// </summary>
         public void navPatientenDatenToPatientBearbeiten()
@@ -266,72 +279,141 @@ namespace Patientenverwaltung
         /// </summary>
         public void navPatientenDatenToDeleteConfirmationPopup()
         {
-            deleteConfirmationPopupForm.Show();
+            deletePatientConfirmationPopupForm.Show();
         }
 
+        /// <summary>
+        /// Navigation von der DeletePatientConfirmationPopupForm zur PatientOverviewForm
+        /// </summary>
+        public void navDeletePatientConfirmationPopupToPatientOverview()
+        {
+            patientenDatenForm.Hide();
+            deletePatientConfirmationPopupForm.Hide();
+            patientOverviewForm.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der DeletePatientConfirmationPopupForm zur PatientenDatenForm
+        /// </summary>
+        public void navDeletePatientConfirmationPopupToPatientenDaten()
+        {
+            deletePatientConfirmationPopupForm.Hide();
+            patientenDatenForm.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der PatientenDatenForm zur PatientenOverviewForm
+        /// </summary>
         public void navPatientenDatenToPatientOverview()
         {
             patientenDatenForm.Hide();
             patientOverviewForm.Show();
         }
 
-        public void terminBearbeitenSaveChange()
+        /// <summary>
+        /// Navigation von der TerminBearbeitenForm zur TerminDatenForm, wenn Termin aktualisiert wurde
+        /// </summary>
+        public void navTerminBearbeitenToTerminDaten(Termin updatedTermin)
         {
-            //Fertig - Ungestestet
-            terminBearbeitenForm.Hide();
-            arztOverview.Show();
+            termine.Remove(currentSelectedTermin);
+            currentSelectedTermin = terminDBAdapter.modifyTermin(updatedTermin);
+            termine.Add(currentSelectedTermin);
+            navTerminBearbeitenToTerminDaten();
         }
 
-        public void terminBearbeitenClose()
+        /// <summary>
+        /// Navigation von der TerminBearbeitenForm zur TerminDatenForm, wenn Termin aktualisiert wurde
+        /// </summary>
+        public void navTerminBearbeitenToTerminDaten()
         {
-            //Fertig - Ungestestet
             terminBearbeitenForm.Hide();
-            arztOverview.Show();
+            terminDatenForm.Show();
         }
 
-        public void terminDatenChangeTermin()
+        /// <summary>
+        /// Navigation von der TerminDatenForm zur TerminBearbeitenForm
+        /// </summary>
+        public void navTerminDatenToTerminBearbeiten()
         {
-            //Fertig - Ungestestet
             terminDatenForm.Hide();
             terminBearbeitenForm.Show();
         }
 
-        public void terminDatenDeleteTermin()
+        /// <summary>
+        /// Navigation von der TerminDatenForm zur ArztOverviewForm
+        /// </summary>
+        public void navTerminDatenToArztOverview()
         {
-            //Fertig - Ungestestet
-            terminDatenForm.Hide();
-            arztOverview.Show();
-        }
-
-        public void terminDatenClose()
-        {
-            //Fertig - Ungestestet
             terminDatenForm.Hide();
             arztOverview.Show();
         }
 
         /// <summary>
-        /// Navigation von der DeleteConfirmationPopupForm zur PatientOverviewForm
+        /// Navigation von der TerminDatenForm zur DeleteTerminConfirmationForm
         /// </summary>
-        public void navDeleteConfirmationPopupToPatientOverview()
+        public void navTerminDatenToDeleteTerminConfirmationPopup()
         {
-            patientenDatenForm.Hide();
-            deleteConfirmationPopupForm.Hide();
-            patientOverviewForm.Show();
+            deleteTerminConfirmationPopupForm.Show();
         }
 
         /// <summary>
-        /// Navigation von der DeleteConfirmationPopupForm zur PatientenDatenForm
+        /// Navigation von der TerminDatenForm zur NeuerBerichtForm
         /// </summary>
-        public void navDeleteConfirmationPopupToPatientenDaten()
+        public void navTerminDatenToNeuerBericht()
         {
-            deleteConfirmationPopupForm.Hide();
-            patientenDatenForm.Show();
+            terminDatenForm.Hide();
+            neuerBerichtForm.Show();
         }
 
-        public List<Termin> getTermineOfPatient(int idPatient)
+        /// <summary>
+        /// Navigation von der NeuerTerminForm zur PatientenDatenForm, wenn neuer Termin hinzugefügt wurde
+        /// </summary>
+        /// <param name="termin"der neue Termin></param>
+        public void navNeuerTerminToPatientenDaten(Termin termin)
         {
-            return terminDBAdapter.getTermineOfPatient(idPatient);
+            termine.Add(terminDBAdapter.addTermin(termin));
+            navNeuerTerminToPatientenDaten();
+        }
+
+        /// <summary>
+        /// Navigation von der NeuerTerminForm zur PatientenDatenForm
+        /// </summary>
+        public void navNeuerTerminToPatientenDaten()
+        {
+            neuerTerminForm.Hide();
+        }
+
+        /// <summary>
+        /// Navigation von der TerminDatenForm zur BerichtDatenForm
+        /// </summary>
+        public void navTerminDatenToBerichtDaten()
+        {
+            
+            berichtBearbeitenForm.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der DeleteTerminConfirmationPopupForm zur ArztOverviewForm
+        /// </summary>
+        public void navDeleteTerminConfirmationPopupToArztOverview()
+        {
+            terminDatenForm.Hide();
+            deleteTerminConfirmationPopupForm.Hide();
+            arztOverview.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der DeleteTerminConfirmationPopupForm zur TerminDatenForm
+        /// </summary>
+        public void navDeleteTerminConfirmationPopupToTerminDaten()
+        {
+            deleteTerminConfirmationPopupForm.Hide();
+            terminDatenForm.Show();
+        }
+
+        private Arzt getArztById(int idArzt)
+        {
+            return arztDBAdapter.getArztById(idArzt);
         }
 
         /// <summary>
@@ -343,19 +425,19 @@ namespace Patientenverwaltung
             return berichtDBAdapter.getBerichteOfPatient(currentSelectedPatient.idPatient);
         }
 
-        public List<Krankheitsbild> getKrankheiten(int idPatient)
+        /// <summary>
+        /// Gibt einen bestimmten Bericht zurück
+        /// </summary>
+        /// <param name="idBericht">des gesuchten Berichts</param>
+        /// <returns>den gesuchten Bericht</returns>
+        public Bericht getBerichtById(int idBericht)
+        {
+            return berichtDBAdapter.getBericht(idBericht);
+        }
+
+        public Bericht createNewBericht()
         {
             return null;
-        }
-
-        public List<Patient> searchPatient(string vorname)
-        {
-            return patientDBAdapter.getPatient(vorname);
-        }
-
-        public List<Patient> getPatienten()
-        {
-            return patienten;
         }
 
         /// <summary>
@@ -368,41 +450,55 @@ namespace Patientenverwaltung
             currentSelectedPatient = null;
         }
 
-        public List<Termin> getTermine()
+        /// <summary>
+        /// Löscht den aktuell ausgewählten Termin
+        /// </summary>
+        public void deleteCurrentTermin()
         {
-            return termine;
+            terminDBAdapter.deleteTermin(currentSelectedTermin);
+            termine.Remove(currentSelectedTermin);
+            currentSelectedTermin = null;
         }
 
-        /// <summary>
-        /// Gibt den aktuell angemeldeten Arzt zurück
-        /// </summary>
-        /// <returns>Arzt</returns>
         public Arzt getLoggedInArzt()
         {
             return loggedInArzt;
         }
 
-        /// <summary>
-        ///  Gibt den aktuell selektierten Patient zurück
-        /// </summary>
-        /// <returns>Patient</returns>
+        public List<Krankheitsbild> getKrankheitsbilder()
+        {
+            return krankheitsbilder;
+        }
+
+        public List<Versicherung> getVersicherungen()
+        {
+
+            return versicherungen;
+        }
+
+        public List<Termin> getTermine()
+        {
+            return termine;
+        }
+
+        public List<Patient> getPatienten()
+        {
+            return patienten;
+        }
+
         public Patient getCurrentSelectedPatient()
         {
             return currentSelectedPatient;
         }
 
-        /// <summary>
-        ///  Setz die idPatient des aktuell selektierten Patienten
-        /// </summary>
-        /// <param name="currentSelectedIdPatient">Patient</param>
         public void setCurrentSelectedPatient(Patient currentSelectedPatient)
         {
-            this.currentSelectedPatient= currentSelectedPatient;
+            this.currentSelectedPatient = currentSelectedPatient;
         }
 
         public void setCurrentSelectedBericht(Bericht currentSelectedBericht)
         {
-            this.currentSelectedBericht= currentSelectedBericht;
+            this.currentSelectedBericht = currentSelectedBericht;
         }
 
         public Bericht getCurrentSelectedBericht()
@@ -410,11 +506,14 @@ namespace Patientenverwaltung
             return currentSelectedBericht;
         }
 
-        private Arzt getArztById(int idArzt)
+        public void setCurrentSelectedTermin(Termin currentSelectedTermin)
         {
-            return arztDBAdapter.getArztById(idArzt);
+            this.currentSelectedTermin = currentSelectedTermin;
         }
 
-
+        public Termin getCurrentSelectedTermin()
+        {
+            return currentSelectedTermin;
+        }
     }
 }

@@ -10,6 +10,7 @@ using Patientenverwaltung;
 using System.Windows.Forms;
 using Patientenverwaltung.Model;
 using Patientenverwaltung.Datenbank;
+using MySql.Data.MySqlClient;
 
 namespace Patientenverwaltung.Gui
 {
@@ -38,7 +39,14 @@ namespace Patientenverwaltung.Gui
                 },
                 zeitpunkt = Convert.ToDateTime(txt_Datum.Text + " " + txt_Uhrzeit.Text)
         };
-            controller.navNeuerTerminToPatientenDaten(newTermin);
+            try
+            {
+                controller.navNeuerTerminToPatientenDaten(newTermin);
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)

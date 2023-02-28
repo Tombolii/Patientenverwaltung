@@ -58,6 +58,7 @@
     <Compile Include="Datenbank\Adapter\PatientDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\PersonendatenDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\TerminDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\VersicherungDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\VorerkrankungDBAdapter.cs" />
     <Compile Include="Datenbank\BaseDBAdapter.cs" />
     <Compile Include="Datenbank\MySQLConnector.cs" />
@@ -73,11 +74,17 @@
     <Compile Include="Gui\BerichtBearbeitenForm.Designer.cs">
       <DependentUpon>BerichtBearbeitenForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\DeleteConfirmationPopupForm.cs">
+    <Compile Include="Gui\DeletePatientConfirmationPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\DeleteConfirmationPopupForm.Designer.cs">
-      <DependentUpon>DeleteConfirmationPopupForm.cs</DependentUpon>
+    <Compile Include="Gui\DeletePatientConfirmationPopupForm.Designer.cs">
+      <DependentUpon>DeletePatientConfirmationPopupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\DeleteTerminConfirmationPopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\DeleteTerminConfirmationPopupForm.Designer.cs">
+      <DependentUpon>DeleteTerminConfirmationPopupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Gui\LoginForm.cs">
       <SubType>Form</SubType>
@@ -162,11 +169,17 @@
     <EmbeddedResource Include="Gui\BerichtForm.resx">
       <DependentUpon>BerichtForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gui\DeleteConfirmationPopupForm.resx">
-      <DependentUpon>DeleteConfirmationPopupForm.cs</DependentUpon>
+    <EmbeddedResource Include="Gui\DeletePatientConfirmationPopupForm.resx">
+      <DependentUpon>DeletePatientConfirmationPopupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\DeleteTerminConfirmationPopupForm.resx">
+      <DependentUpon>DeleteTerminConfirmationPopupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\NeuerBerichtForm.resx">
+      <DependentUpon>NeuerBerichtForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\NeuerPatientForm.resx">
       <DependentUpon>NeuerPatientForm.cs</DependentUpon>
@@ -188,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\TerminBearbeitenForm.resx">
       <DependentUpon>TerminBearbeitenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\TerminDatenForm.resx">
+      <DependentUpon>TerminDatenForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IntegrationTest.resx">
       <DependentUpon>IntegrationTest.cs</DependentUpon>
@@ -213,9 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\search_icon.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

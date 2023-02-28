@@ -1,6 +1,6 @@
 ﻿namespace Patientenverwaltung.Gui
 {
-    partial class DeleteConfirmationPopupForm
+    partial class DeletePatientConfirmationPopupForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,9 +40,9 @@
             this.label1.Location = new System.Drawing.Point(18, 11);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(359, 16);
+            this.label1.Size = new System.Drawing.Size(436, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Möchtest Sie folgenden Patienten wirklich löschen?";
+            this.label1.Text = "Möchten Sie folgenden Patienten wirklich löschen?";
             // 
             // lblPatientName
             // 
@@ -50,7 +50,7 @@
             this.lblPatientName.Location = new System.Drawing.Point(181, 42);
             this.lblPatientName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPatientName.Name = "lblPatientName";
-            this.lblPatientName.Size = new System.Drawing.Size(55, 16);
+            this.lblPatientName.Size = new System.Drawing.Size(68, 20);
             this.lblPatientName.TabIndex = 1;
             this.lblPatientName.Text = "Patient";
             // 
@@ -58,7 +58,7 @@
             // 
             this.btn_Confirm.Location = new System.Drawing.Point(12, 88);
             this.btn_Confirm.Name = "btn_Confirm";
-            this.btn_Confirm.Size = new System.Drawing.Size(183, 23);
+            this.btn_Confirm.Size = new System.Drawing.Size(183, 30);
             this.btn_Confirm.TabIndex = 2;
             this.btn_Confirm.Text = "Löschen bestätigen";
             this.btn_Confirm.UseVisualStyleBackColor = true;
@@ -68,24 +68,24 @@
             // 
             this.btn_Cancel.Location = new System.Drawing.Point(201, 88);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(183, 23);
+            this.btn_Cancel.Size = new System.Drawing.Size(183, 30);
             this.btn_Cancel.TabIndex = 3;
             this.btn_Cancel.Text = "Abbrechen";
             this.btn_Cancel.UseVisualStyleBackColor = true;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
-            // DeleteConfirmationPopupForm
+            // DeletePatientConfirmationPopupForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(426, 140);
+            this.ClientSize = new System.Drawing.Size(467, 157);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Confirm);
             this.Controls.Add(this.lblPatientName);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "DeleteConfirmationPopupForm";
+            this.Name = "DeletePatientConfirmationPopupForm";
             this.Text = "DeleteConfirmationPopupForm";
             this.ResumeLayout(false);
             this.PerformLayout();

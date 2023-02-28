@@ -31,6 +31,30 @@ namespace Patientenverwaltung.Datenbank.Adapter
         }
 
         /// <summary>
+        /// ktualisiert einen Termin in der Datenbank
+        /// </summary>
+        /// <param name="termin">aktualisierter Termin</param>
+        /// <returns>den aktualisierten Termin</returns>
+        public Termin modifyTermin(Termin termin)
+        {
+            string sql = "UPDATE termin SET zeitpunkt = '" + termin.zeitpunkt.ToString() + "' WHERE idTermin = " + termin.idTermin + ";";
+            connector.executeNonQuery(sql);
+            return termin;
+        }
+
+        /// <summary>
+        /// Löscht einen Termin aus der Datenbank
+        /// </summary>
+        /// <param name="termin">der gelöscht werden soll</param>
+        public void deleteTermin(Termin termin)
+        {
+            {
+            string sql = "DELETE FROM termin WHERE idTermin = " + termin.idTermin + ";";
+            connector.executeQuery(sql);
+            }
+        }
+
+        /// <summary>
         /// Liest alle Termine eines Arztes aus der Datenbank
         /// </summary>
         /// <param name="idArzt">des Arztes</param>
@@ -55,7 +79,7 @@ namespace Patientenverwaltung.Datenbank.Adapter
         private List<Termin> getTermine(string condition)
         {
             string sql = "SELECT termin.idTermin, termin.zeitpunkt, termin.idPatient, termin.idArzt, personendaten.vorname, " +
-                "personendaten.nachname, patient.idPatient " +
+                "personendaten.nachname, patient.idPatient, termin.idBericht " +
                 "FROM termin " +
                 "INNER JOIN patient ON termin.idPatient = patient.idPatient " +
                 "INNER JOIN personendaten ON patient.idPersonendaten = personendaten.idPersonendaten " +
@@ -74,6 +98,10 @@ namespace Patientenverwaltung.Datenbank.Adapter
                     nachname = reader.GetString("nachname")
                 };
                 termin.idArzt = reader.GetInt32("idArzt");
+                if (!reader.IsDBNull(reader.GetOrdinal("idBericht")))
+                {
+                   termin.idBericht = reader.GetInt32("idBericht");
+                }
                 termine.Add(termin);
             }
             reader.Close();

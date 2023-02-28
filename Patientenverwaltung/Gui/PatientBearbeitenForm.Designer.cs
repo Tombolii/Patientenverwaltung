@@ -165,6 +165,7 @@
             // 
             // box_Vorerkrankungen
             // 
+            this.box_Vorerkrankungen.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.box_Vorerkrankungen.FormattingEnabled = true;
             this.box_Vorerkrankungen.Location = new System.Drawing.Point(12, 215);
             this.box_Vorerkrankungen.Name = "box_Vorerkrankungen";

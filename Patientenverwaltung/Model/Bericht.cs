@@ -16,12 +16,12 @@ namespace Patientenverwaltung.Model
             set { _idBericht = value; }
         }
 
-        private Patient _patient;
+        private int _idPatient;
 
-        public Patient patient
+        public int idPatient
         {
-            get { return _patient; }
-            set { _patient = value; }
+            get { return _idPatient; }
+            set { _idPatient = value; }
         }
 
         private string _beschwerden;
@@ -55,6 +55,5 @@ namespace Patientenverwaltung.Model
             get { return _zeitpunkt; }
             set { _zeitpunkt = value; }
         }
-
     }
 }

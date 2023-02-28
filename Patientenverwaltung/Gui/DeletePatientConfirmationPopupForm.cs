@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
 using Patientenverwaltung.Model;
+using MySql.Data.MySqlClient;
 
 namespace Patientenverwaltung.Gui
 {
-    public partial class DeleteConfirmationPopupForm : Form
+    public partial class DeletePatientConfirmationPopupForm : Form
     {
         private Controller controller;
 
-        public DeleteConfirmationPopupForm(Controller controller)
+        public DeletePatientConfirmationPopupForm(Controller controller)
         {
             InitializeComponent();
             this.controller = controller;
@@ -26,13 +27,20 @@ namespace Patientenverwaltung.Gui
 
         private void btn_Confirm_Click(object sender, EventArgs e)
         {
-            controller.deletePatient();
-            controller.navDeleteConfirmationPopupToPatientOverview();
+            try
+            {
+                controller.deletePatient();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            controller.navDeletePatientConfirmationPopupToPatientOverview();
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
-            controller.navDeleteConfirmationPopupToPatientenDaten();
+            controller.navDeletePatientConfirmationPopupToPatientenDaten();
         }
     }
 }

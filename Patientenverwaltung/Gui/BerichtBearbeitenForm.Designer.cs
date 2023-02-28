@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-            this.txt_Diagnose = new System.Windows.Forms.RichTextBox();
+            this.txt_Diagnose = new System.Windows.Forms.ComboBox();
             this.txt_Bemerkungen = new System.Windows.Forms.RichTextBox();
             this.txt_Beschwerden = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -187,7 +187,7 @@
 
     #endregion
 
-    private System.Windows.Forms.RichTextBox txt_Diagnose;
+    private System.Windows.Forms.ComboBox txt_Diagnose;
     private System.Windows.Forms.RichTextBox txt_Bemerkungen;
     private System.Windows.Forms.RichTextBox txt_Beschwerden;
     private System.Windows.Forms.Label label8;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using Patientenverwaltung.Model;
 
 namespace Patientenverwaltung.Gui
@@ -34,7 +35,14 @@ namespace Patientenverwaltung.Gui
             updatedBericht.beschwerden = txt_Beschwerden.Text;
             updatedBericht.bemerkung = txt_Bemerkungen.Text;
             // TODO: Diagnose updaten 
-            controller.navBerichtBearbeitenToBerichtOverview(updatedBericht);
+            try
+            {
+                controller.navBerichtBearbeitenToBerichtOverview(updatedBericht);
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void displayBerichtDaten()
