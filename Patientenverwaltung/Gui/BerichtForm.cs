@@ -37,11 +37,6 @@ namespace Patientenverwaltung.Gui
             }
         }
 
-        private void btn_BerichtHinzufuegen_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btn_BerichtSuchen_Click(object sender, EventArgs e)
         {
             if (txt_BerichtSuche.Text == "")

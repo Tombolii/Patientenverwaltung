@@ -53,29 +53,28 @@ namespace Patientenverwaltung.Gui
 
             try
             {
-                controller.navNeuerPatientToPatientOverview(
-                    new Patient()
+                controller.createPatient(new Patient()
+                {
+                    vorname = txt_Vorname.Text,
+                    nachname = txt_Nachname.Text,
+                    email = txt_Email.Text,
+                    geburtstag = Convert.ToDateTime(txt_Geburtsdatum.Text),
+                    adresse = new Adresse()
                     {
-                        vorname = txt_Vorname.Text,
-                        nachname = txt_Nachname.Text,
-                        email = txt_Email.Text,
-                        geburtstag = Convert.ToDateTime(txt_Geburtsdatum.Text),
-                        adresse = new Adresse()
-                        {
-                            straße = txt_Straße.Text,
-                            hausnummer = txt_HausNr.Text,
-                            plz = Convert.ToInt32(txt_Plz.Text),
-                            ort = txt_Ort.Text
-                        },
-                        versicherung = new Versicherung()
-                        {
-                            idVersicherung = 1,
-                        },
-                        versicherungsnummer = 1,
-                        telefonnummer = txt_Telefonnummer.Text,
-                        vorerkrankungen = new List<Krankheitsbild>()
-                    }
-                    );
+                        straße = txt_Straße.Text,
+                        hausnummer = txt_HausNr.Text,
+                        plz = Convert.ToInt32(txt_Plz.Text),
+                        ort = txt_Ort.Text
+                    },
+                    versicherung = new Versicherung()
+                    {
+                        idVersicherung = 1,
+                    },
+                    versicherungsnummer = 1,
+                    telefonnummer = txt_Telefonnummer.Text,
+                    vorerkrankungen = new List<Krankheitsbild>()
+                });
+                controller.navNeuerPatientToPatientOverview();
             } catch(MySqlException ex)
             {
                 Console.WriteLine(ex.Message);

@@ -81,7 +81,8 @@ namespace Patientenverwaltung.Gui
             updatedPatient.vorerkrankungen = new List<Krankheitsbild>();
             try
             {
-                controller.navPatientBearbeitenToPatientenDaten(updatedPatient);
+                controller.updatePatient(updatedPatient);
+                controller.navPatientBearbeitenToPatientenDaten();
             }
             catch (MySqlException ex)
             {

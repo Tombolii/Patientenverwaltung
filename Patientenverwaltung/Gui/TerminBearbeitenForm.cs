@@ -30,7 +30,8 @@ namespace Patientenverwaltung.Gui
             updatedTermin.zeitpunkt = Convert.ToDateTime(txt_Datum.Text + txt_Uhrzeit.Text);
             try
             {
-                controller.navTerminBearbeitenToTerminDaten(updatedTermin);
+                controller.updateTermin(updatedTermin);
+                controller.navTerminBearbeitenToTerminDaten();
             }
             catch (MySqlException ex)
             {

@@ -41,7 +41,8 @@ namespace Patientenverwaltung.Gui
         };
             try
             {
-                controller.navNeuerTerminToPatientenDaten(newTermin);
+                controller.createTermin(newTermin);
+                controller.navNeuerTerminToPatientenDaten();
             }
             catch (MySqlException ex)
             {

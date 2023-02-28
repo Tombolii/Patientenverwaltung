@@ -104,7 +104,7 @@ namespace Patientenverwaltung.Datenbank.Adapter
         /// </summary>
         /// <param name="newBericht">der neue Bericht</param>
         /// <returns>der neu erstellte Bericht</returns>
-        public Bericht addBericht(Bericht newBericht)
+        public Bericht createBericht(Bericht newBericht)
         {
             string sql = "INSERT INTO bericht (idPatient, beschwerden, bemerkung, diagnose) " +
                 "VALUES(" + newBericht.idPatient + ", '" +

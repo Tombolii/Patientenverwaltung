@@ -25,17 +25,21 @@ namespace Patientenverwaltung.Gui
         private void btn_BerhichtHinzufuegen_Click(object sender, EventArgs e)
         {
             Bericht neuerBericht = new Bericht();
-            neuerBericht.idPatient = controller.getCurrentSelectedTermin().simplePatient.idPatient;
+            Termin currentTermin = controller.getCurrentSelectedTermin();
+            neuerBericht.idPatient = currentTermin.simplePatient.idPatient;
+            neuerBericht.zeitpunkt = currentTermin.zeitpunkt;
             neuerBericht.beschwerden = txt_Beschwerden.Text;
             neuerBericht.bemerkung = txt_Bemerkungen.Text;
             neuerBericht.diagnose = new Krankheitsbild()
             {
-                idKrankheitsbild = 1
+                idKrankheitsbild = 1,
+                bezeichnung = "ToBeReplaced"
             };
 
             try
             {
-                controller.navNeuerBerichtToTerminDaten(neuerBericht);
+                controller.createBericht(neuerBericht);
+                controller.navNeuerBerichtToTerminDaten();
             }
             catch (MySqlException ex)
             {

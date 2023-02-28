@@ -31,13 +31,14 @@ namespace Patientenverwaltung.Datenbank.Adapter
         }
 
         /// <summary>
-        /// ktualisiert einen Termin in der Datenbank
+        /// Aktualisiert einen Termin in der Datenbank
         /// </summary>
         /// <param name="termin">aktualisierter Termin</param>
         /// <returns>den aktualisierten Termin</returns>
         public Termin modifyTermin(Termin termin)
         {
-            string sql = "UPDATE termin SET zeitpunkt = '" + termin.zeitpunkt.ToString() + "' WHERE idTermin = " + termin.idTermin + ";";
+            string sql = "UPDATE termin SET zeitpunkt = '" + termin.zeitpunkt.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                "idBericht = " + termin.idBericht + " WHERE idTermin = " + termin.idTermin + ";";
             connector.executeNonQuery(sql);
             return termin;
         }
@@ -84,7 +85,7 @@ namespace Patientenverwaltung.Datenbank.Adapter
                 "INNER JOIN patient ON termin.idPatient = patient.idPatient " +
                 "INNER JOIN personendaten ON patient.idPersonendaten = personendaten.idPersonendaten " +
                 condition + " order by zeitpunkt;";
-            MySqlDataReader reader = this.connector.executeQuery(sql);
+            MySqlDataReader reader = connector.executeQuery(sql);
             List<Termin> termine = new List<Termin>();
             while (reader.Read())
             {

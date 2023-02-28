@@ -97,6 +97,7 @@ namespace Patientenverwaltung
         /// 
         public void navLoginToArztOverview(int loggedInArztId)
         {
+            // Laden der Datensätze aus der DB
             loggedInArzt = getArztById(loggedInArztId);
             patienten = patientDBAdapter.getAllPatienten();
             termine = terminDBAdapter.getTermineOfArzt(loggedInArzt.idArzt);
@@ -179,16 +180,6 @@ namespace Patientenverwaltung
         }
 
         /// <summary>
-        /// Navigation von der BerichtBearbeitenForm zur BerichtOverviewForm, wenn Bericht aktualisiert wurde
-        /// </summary>
-        /// <param name="updatedBericht">aktualisierter Bericht</param>
-        public void navBerichtBearbeitenToBerichtOverview(Bericht updatedBericht)
-        {
-            currentSelectedBericht = berichtDBAdapter.modifyBericht(updatedBericht);
-            navBerichtBearbeitenToBerichtOverview();
-        }
-
-        /// <summary>
         /// Navigation von der BerichtBearbeitenForm zur BerichtOverviewForm
         /// </summary>
         public void navBerichtBearbeitenToBerichtOverview()
@@ -197,14 +188,10 @@ namespace Patientenverwaltung
             berichtOverviewForm.Show();
         }
 
-        /// <summary>
-        /// Navigation von der NeuerBerichtForm zur TerminDatenForm, wenn neuer Bericht erstellt wurde
-        /// </summary>
-        public void navNeuerBerichtToTerminDaten(Bericht neuerBericht)
+        public void navBerichtBearbeitenToTerminDaten()
         {
-            Bericht bericht = berichtDBAdapter.addBericht(neuerBericht);
-            currentSelectedTermin.idBericht = bericht.idBericht;
-            navNeuerBerichtToTerminDaten();
+            berichtBearbeitenForm.Hide();
+            terminDatenForm.Show();
         }
 
         /// <summary>
@@ -217,34 +204,12 @@ namespace Patientenverwaltung
         }
 
         /// <summary>
-        /// Navigation von der NeuerPatientForm zur PatientOverviewForm, wenn neuer Patient hinzugefügt wurde
-        /// </summary>
-        /// <param name="patient">der neue Patient</param>
-        public void navNeuerPatientToPatientOverview(Patient patient)
-        {
-            patienten.Add(patientDBAdapter.createPatient(patient));
-            navNeuerPatientToPatientOverview();
-        }
-
-        /// <summary>
         /// Navigation von der NeuerPatientForm zur PatientOverviewForm
         /// </summary>
         public void navNeuerPatientToPatientOverview()
         {
             neuerPatientForm.Close();
             patientOverviewForm.Show();
-        }
-
-        /// <summary>
-        /// Navigation von der PatientBearbeitenForm zur PatientenDatenForm, wenn Patient aktualisiert wird
-        /// </summary>
-        /// <param name="updatedPatient">aktualisierter Patient</param>
-        public void navPatientBearbeitenToPatientenDaten(Patient updatedPatient)
-        {
-            patienten.Remove(currentSelectedPatient);
-            currentSelectedPatient = patientDBAdapter.modifyPatient(updatedPatient);
-            patienten.Add(currentSelectedPatient);
-            navPatientBearbeitenToPatientenDaten();
         }
 
         /// <summary>
@@ -313,17 +278,6 @@ namespace Patientenverwaltung
         /// <summary>
         /// Navigation von der TerminBearbeitenForm zur TerminDatenForm, wenn Termin aktualisiert wurde
         /// </summary>
-        public void navTerminBearbeitenToTerminDaten(Termin updatedTermin)
-        {
-            termine.Remove(currentSelectedTermin);
-            currentSelectedTermin = terminDBAdapter.modifyTermin(updatedTermin);
-            termine.Add(currentSelectedTermin);
-            navTerminBearbeitenToTerminDaten();
-        }
-
-        /// <summary>
-        /// Navigation von der TerminBearbeitenForm zur TerminDatenForm, wenn Termin aktualisiert wurde
-        /// </summary>
         public void navTerminBearbeitenToTerminDaten()
         {
             terminBearbeitenForm.Hide();
@@ -366,16 +320,6 @@ namespace Patientenverwaltung
         }
 
         /// <summary>
-        /// Navigation von der NeuerTerminForm zur PatientenDatenForm, wenn neuer Termin hinzugefügt wurde
-        /// </summary>
-        /// <param name="termin"der neue Termin></param>
-        public void navNeuerTerminToPatientenDaten(Termin termin)
-        {
-            termine.Add(terminDBAdapter.addTermin(termin));
-            navNeuerTerminToPatientenDaten();
-        }
-
-        /// <summary>
         /// Navigation von der NeuerTerminForm zur PatientenDatenForm
         /// </summary>
         public void navNeuerTerminToPatientenDaten()
@@ -411,11 +355,6 @@ namespace Patientenverwaltung
             terminDatenForm.Show();
         }
 
-        private Arzt getArztById(int idArzt)
-        {
-            return arztDBAdapter.getArztById(idArzt);
-        }
-
         /// <summary>
         /// Gibt alle Berichte des aktuell ausgewählten Patienten zurück
         /// </summary>
@@ -433,11 +372,6 @@ namespace Patientenverwaltung
         public Bericht getBerichtById(int idBericht)
         {
             return berichtDBAdapter.getBericht(idBericht);
-        }
-
-        public Bericht createNewBericht()
-        {
-            return null;
         }
 
         /// <summary>
@@ -458,6 +392,71 @@ namespace Patientenverwaltung
             terminDBAdapter.deleteTermin(currentSelectedTermin);
             termine.Remove(currentSelectedTermin);
             currentSelectedTermin = null;
+        }
+
+        /// <summary>
+        /// Erstellt einen neuen Bericht
+        /// </summary>
+        /// <param name="neuerBericht">der neue Bericht</param>
+        public void createBericht(Bericht neuerBericht)
+        {
+            Bericht bericht = berichtDBAdapter.createBericht(neuerBericht);
+            currentSelectedBericht = bericht;
+            currentSelectedTermin.idBericht = bericht.idBericht;
+            updateTermin(currentSelectedTermin);
+        }
+
+        /// <summary>
+        /// Aktualisiert einen Bericht
+        /// </summary>
+        /// <param name="updatedBericht">aktualisierter Bericht</param>
+        public void updateBericht(Bericht updatedBericht)
+        {
+            currentSelectedBericht = berichtDBAdapter.modifyBericht(updatedBericht);
+        }
+
+        /// <summary>
+        /// Erstellt einen neuen Patient
+        /// </summary>
+        /// <param name="patient">der neue Patient</param>
+        public void createPatient(Patient patient)
+        {
+            patienten.Add(patientDBAdapter.createPatient(patient));
+        }
+
+        /// <summary>
+        /// Aktualisiert einen Patienten
+        /// </summary>
+        /// <param name="updatedPatient">aktualisierter Patient</param>
+        public void updatePatient(Patient updatedPatient)
+        {
+            patienten.Remove(currentSelectedPatient);
+            currentSelectedPatient = patientDBAdapter.modifyPatient(updatedPatient);
+            patienten.Add(currentSelectedPatient);
+        }
+
+        /// <summary>
+        /// Erstellt einen neuen Termin
+        /// </summary>
+        /// <param name="termin">der neue Termin</param>
+        public void createTermin(Termin termin)
+        {
+            termine.Add(terminDBAdapter.addTermin(termin));
+        }
+
+        /// <summary>
+        /// Aktualisiert einen Termin
+        /// </summary>
+        /// <param name="updatedTermin">aktualisierter Termin</param>
+        public void updateTermin(Termin updatedTermin)
+        {
+            Termin updatedTerminOfDb = terminDBAdapter.modifyTermin(updatedTermin);
+            currentSelectedTermin = updatedTerminOfDb;
+        }
+
+        private Arzt getArztById(int idArzt)
+        {
+            return arztDBAdapter.getArztById(idArzt);
         }
 
         public Arzt getLoggedInArzt()
@@ -506,9 +505,17 @@ namespace Patientenverwaltung
             return currentSelectedBericht;
         }
 
+        /// <summary>
+        /// Setzt den aktuell ausgewählten Bericht und falls für diesen bereits ein Bericht existiert, wird dieser ebenfalls als markiert gesetzt
+        /// </summary>
+        /// <param name="currentSelectedTermin">ausgewählter Termin</param>
         public void setCurrentSelectedTermin(Termin currentSelectedTermin)
         {
             this.currentSelectedTermin = currentSelectedTermin;
+            if(currentSelectedTermin.idBericht != 0)
+            {
+                currentSelectedBericht = getBerichtById(currentSelectedTermin.idBericht);
+            }
         }
 
         public Termin getCurrentSelectedTermin()

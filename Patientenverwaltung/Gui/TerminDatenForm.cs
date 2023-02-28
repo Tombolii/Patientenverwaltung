@@ -20,7 +20,7 @@ namespace Patientenverwaltung.Gui
             if (Visible)
             {
                 displayTerminDaten();
-                setUpBerichtButton();
+                setUpBericht();
             }
         }
 
@@ -50,7 +50,10 @@ namespace Patientenverwaltung.Gui
             txt_Uhrzeit.Text = termin.zeitpunkt.ToShortTimeString();
         }
 
-        private void setUpBerichtButton()
+        /// <summary>
+        /// Überprüft ob bereits ein Bericht vorhanden ist, wenn nicht wird Button entsprechend benannt
+        /// </summary>
+        private void setUpBericht()
         {
             if(controller.getCurrentSelectedTermin().idBericht == 0)
             {
@@ -70,7 +73,7 @@ namespace Patientenverwaltung.Gui
             }
             else
             {
-                Bericht bericht = controller.getBerichtById(controller.getCurrentSelectedTermin().idBericht);
+                Bericht bericht = controller.getCurrentSelectedBericht();
                 controller.setCurrentSelectedBericht(bericht);
                 controller.navTerminDatenToBerichtDaten();
             }

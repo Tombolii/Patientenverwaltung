@@ -26,7 +26,14 @@ namespace Patientenverwaltung.Gui
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
-            controller.navBerichtBearbeitenToBerichtOverview();
+            if(isNavigatedFromTerminDaten())
+            {
+                controller.navBerichtBearbeitenToTerminDaten();
+            }
+            else
+            {
+                controller.navBerichtBearbeitenToBerichtOverview();
+            }
         }
 
         private void btn_AenderungUebernehmen_Click(object sender, EventArgs e)
@@ -37,7 +44,15 @@ namespace Patientenverwaltung.Gui
             // TODO: Diagnose updaten 
             try
             {
-                controller.navBerichtBearbeitenToBerichtOverview(updatedBericht);
+                controller.updateBericht(updatedBericht);
+                if (isNavigatedFromTerminDaten())
+                {
+                    controller.navBerichtBearbeitenToTerminDaten();
+                }
+                else
+                {
+                    controller.navBerichtBearbeitenToBerichtOverview();
+                }
             }
             catch (MySqlException ex)
             {
@@ -53,6 +68,22 @@ namespace Patientenverwaltung.Gui
             txt_Bemerkungen.Text = currentBericht.bemerkung;
             txt_Beschwerden.Text = currentBericht.beschwerden;
             txt_Diagnose.Text = currentBericht.diagnose.bezeichnung;
+        }
+
+        /// <summary>
+        /// Überprüft ob die aufrufende Form die TerminDatenForm ist
+        /// </summary>
+        /// <returns>true, wenn TerminDatenForm aufrufende Form ist</returns>
+        private bool isNavigatedFromTerminDaten()
+        {
+            foreach (Form openedForm in Application.OpenForms)
+            {
+                if(openedForm.Name == "TerminDatenForm" && openedForm.Visible)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
