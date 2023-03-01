@@ -32,16 +32,19 @@ namespace Patientenverwaltung.Gui
             {
                 controller.updateTermin(updatedTermin);
                 controller.navTerminBearbeitenToTerminDaten();
+                MessageBox.Show("Termin wurde bearbeitet!");
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
+                MessageBox.Show("Termin konnte nicht bearbeitet werden!");
             }
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
             controller.navTerminBearbeitenToTerminDaten();
+            MessageBox.Show("Termin wurde nicht bearbeitet!");
         }
 
         private void displayTerminDaten()

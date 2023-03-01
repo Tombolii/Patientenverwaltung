@@ -43,16 +43,19 @@ namespace Patientenverwaltung.Gui
             {
                 controller.createTermin(newTermin);
                 controller.navNeuerTerminToPatientenDaten();
+                MessageBox.Show("Termin hinzugefügt!");
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
+                MessageBox.Show("Es konnte kein Termin hinzugefügt werden!");
             }
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
             controller.navNeuerTerminToPatientenDaten();
+            System.Windows.Forms.MessageBox.Show("Keinen Termin hinzugefügt!");
         }
     }
 }

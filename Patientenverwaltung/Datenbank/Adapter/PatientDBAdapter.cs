@@ -142,7 +142,9 @@ namespace Patientenverwaltung.Datenbank.Adapter
                 condition + ";";
 
             MySqlDataReader reader = connector.executeQuery(sql);
-            return mapper.extractPatientenFromReader(reader);
+            List<Patient> patienten = mapper.extractPatientenFromReader(reader);
+            patienten.ForEach(patient => patient.vorerkrankungen = vorerkrankungDBAdapter.getVorerkrankungenOfPatient(patient.idPatient));
+            return patienten;
         }
     }
 }

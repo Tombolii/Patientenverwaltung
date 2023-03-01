@@ -40,16 +40,19 @@ namespace Patientenverwaltung.Gui
             {
                 controller.createBericht(neuerBericht);
                 controller.navNeuerBerichtToTerminDaten();
+                MessageBox.Show("Bericht hinzugefügt!");
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
+                MessageBox.Show("Es konnte kein Bericht hinzugefügt werden!");
             }
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
             controller.navNeuerBerichtToTerminDaten();
+            System.Windows.Forms.MessageBox.Show("Keinen Bericht hinzugefügt!");
         }
     }
 }

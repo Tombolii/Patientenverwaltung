@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btn_AenderungUebernehmen = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -41,7 +42,7 @@
             this.txt_Nachname = new System.Windows.Forms.TextBox();
             this.btn_Abbrechen = new System.Windows.Forms.Button();
             this.box_Krankenkasse = new System.Windows.Forms.ComboBox();
-            this.box_Vorerkrankungen = new System.Windows.Forms.ListBox();
+            this.boxSelectableVorerkrankungen = new System.Windows.Forms.ListBox();
             this.txt_HausNr = new System.Windows.Forms.TextBox();
             this.txt_Plz = new System.Windows.Forms.TextBox();
             this.lblPLZ = new System.Windows.Forms.Label();
@@ -51,11 +52,18 @@
             this.txt_Email = new System.Windows.Forms.TextBox();
             this.lbl_Telefonnummer = new System.Windows.Forms.Label();
             this.txt_Telefonnummer = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.boxSelectedVorerkrankungen = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnAddSelectedVorerkrankungen = new System.Windows.Forms.Button();
+            this.btnRemoveSelectedVorerkrankungen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_AenderungUebernehmen
             // 
-            this.btn_AenderungUebernehmen.Location = new System.Drawing.Point(12, 290);
+            this.btn_AenderungUebernehmen.Location = new System.Drawing.Point(10, 323);
             this.btn_AenderungUebernehmen.Name = "btn_AenderungUebernehmen";
             this.btn_AenderungUebernehmen.Size = new System.Drawing.Size(140, 23);
             this.btn_AenderungUebernehmen.TabIndex = 34;
@@ -66,7 +74,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 199);
+            this.label7.Location = new System.Drawing.Point(10, 184);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 13);
             this.label7.TabIndex = 33;
@@ -147,7 +155,7 @@
             // 
             // btn_Abbrechen
             // 
-            this.btn_Abbrechen.Location = new System.Drawing.Point(158, 290);
+            this.btn_Abbrechen.Location = new System.Drawing.Point(158, 323);
             this.btn_Abbrechen.Name = "btn_Abbrechen";
             this.btn_Abbrechen.Size = new System.Drawing.Size(103, 23);
             this.btn_Abbrechen.TabIndex = 35;
@@ -163,14 +171,14 @@
             this.box_Krankenkasse.Size = new System.Drawing.Size(100, 21);
             this.box_Krankenkasse.TabIndex = 53;
             // 
-            // box_Vorerkrankungen
+            // boxSelectableVorerkrankungen
             // 
-            this.box_Vorerkrankungen.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.box_Vorerkrankungen.FormattingEnabled = true;
-            this.box_Vorerkrankungen.Location = new System.Drawing.Point(12, 215);
-            this.box_Vorerkrankungen.Name = "box_Vorerkrankungen";
-            this.box_Vorerkrankungen.Size = new System.Drawing.Size(260, 69);
-            this.box_Vorerkrankungen.TabIndex = 54;
+            this.boxSelectableVorerkrankungen.FormattingEnabled = true;
+            this.boxSelectableVorerkrankungen.Location = new System.Drawing.Point(10, 236);
+            this.boxSelectableVorerkrankungen.Name = "boxSelectableVorerkrankungen";
+            this.boxSelectableVorerkrankungen.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.boxSelectableVorerkrankungen.Size = new System.Drawing.Size(141, 69);
+            this.boxSelectableVorerkrankungen.TabIndex = 54;
             // 
             // txt_HausNr
             // 
@@ -230,7 +238,7 @@
             // lbl_Telefonnummer
             // 
             this.lbl_Telefonnummer.AutoSize = true;
-            this.lbl_Telefonnummer.Location = new System.Drawing.Point(12, 155);
+            this.lbl_Telefonnummer.Location = new System.Drawing.Point(12, 152);
             this.lbl_Telefonnummer.Name = "lbl_Telefonnummer";
             this.lbl_Telefonnummer.Size = new System.Drawing.Size(80, 13);
             this.lbl_Telefonnummer.TabIndex = 64;
@@ -243,11 +251,75 @@
             this.txt_Telefonnummer.Size = new System.Drawing.Size(100, 20);
             this.txt_Telefonnummer.TabIndex = 65;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 219);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(167, 13);
+            this.label8.TabIndex = 66;
+            this.label8.Text = "Bitte Vorerkrankungen auswählen";
+            // 
+            // boxSelectedVorerkrankungen
+            // 
+            this.boxSelectedVorerkrankungen.FormattingEnabled = true;
+            this.boxSelectedVorerkrankungen.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.boxSelectedVorerkrankungen.Location = new System.Drawing.Point(183, 236);
+            this.boxSelectedVorerkrankungen.Name = "boxSelectedVorerkrankungen";
+            this.boxSelectedVorerkrankungen.Size = new System.Drawing.Size(150, 69);
+            this.boxSelectedVorerkrankungen.TabIndex = 67;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(181, 219);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(130, 13);
+            this.label9.TabIndex = 68;
+            this.label9.Text = "Aktuelle Voerkerkrankung";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+            // 
+            // btnAddSelectedVorerkrankungen
+            // 
+            this.btnAddSelectedVorerkrankungen.Location = new System.Drawing.Point(156, 236);
+            this.btnAddSelectedVorerkrankungen.Name = "btnAddSelectedVorerkrankungen";
+            this.btnAddSelectedVorerkrankungen.Size = new System.Drawing.Size(21, 23);
+            this.btnAddSelectedVorerkrankungen.TabIndex = 69;
+            this.btnAddSelectedVorerkrankungen.Text = "+";
+            this.btnAddSelectedVorerkrankungen.UseVisualStyleBackColor = true;
+            this.btnAddSelectedVorerkrankungen.Click += new System.EventHandler(this.btnAddSelectedVorerkrankungen_Click);
+            // 
+            // btnRemoveSelectedVorerkrankungen
+            // 
+            this.btnRemoveSelectedVorerkrankungen.Location = new System.Drawing.Point(156, 265);
+            this.btnRemoveSelectedVorerkrankungen.Name = "btnRemoveSelectedVorerkrankungen";
+            this.btnRemoveSelectedVorerkrankungen.Size = new System.Drawing.Size(21, 23);
+            this.btnRemoveSelectedVorerkrankungen.TabIndex = 70;
+            this.btnRemoveSelectedVorerkrankungen.Text = "-";
+            this.btnRemoveSelectedVorerkrankungen.UseVisualStyleBackColor = true;
+            this.btnRemoveSelectedVorerkrankungen.Click += new System.EventHandler(this.btnRemoveSelectedVorerkrankungen_Click);
+            // 
             // PatientBearbeitenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 335);
+            this.ClientSize = new System.Drawing.Size(463, 356);
+            this.Controls.Add(this.btnRemoveSelectedVorerkrankungen);
+            this.Controls.Add(this.btnAddSelectedVorerkrankungen);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.boxSelectedVorerkrankungen);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.txt_Telefonnummer);
             this.Controls.Add(this.lbl_Telefonnummer);
             this.Controls.Add(this.txt_Email);
@@ -257,7 +329,7 @@
             this.Controls.Add(this.lblPLZ);
             this.Controls.Add(this.txt_Straße);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.box_Vorerkrankungen);
+            this.Controls.Add(this.boxSelectableVorerkrankungen);
             this.Controls.Add(this.box_Krankenkasse);
             this.Controls.Add(this.btn_Abbrechen);
             this.Controls.Add(this.btn_AenderungUebernehmen);
@@ -293,7 +365,7 @@
         private System.Windows.Forms.TextBox txt_Nachname;
         private System.Windows.Forms.Button btn_Abbrechen;
         private System.Windows.Forms.ComboBox box_Krankenkasse;
-        private System.Windows.Forms.ListBox box_Vorerkrankungen;
+        private System.Windows.Forms.ListBox boxSelectableVorerkrankungen;
         private System.Windows.Forms.TextBox txt_HausNr;
         private System.Windows.Forms.TextBox txt_Plz;
         private System.Windows.Forms.Label lblPLZ;
@@ -303,5 +375,12 @@
         private System.Windows.Forms.TextBox txt_Email;
         private System.Windows.Forms.Label lbl_Telefonnummer;
         private System.Windows.Forms.TextBox txt_Telefonnummer;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.Button btnAddSelectedVorerkrankungen;
+        private System.Windows.Forms.Button btnRemoveSelectedVorerkrankungen;
+        private System.Windows.Forms.ListBox boxSelectedVorerkrankungen;
     }
 }

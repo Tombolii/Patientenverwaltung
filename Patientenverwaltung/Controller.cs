@@ -188,6 +188,9 @@ namespace Patientenverwaltung
             berichtOverviewForm.Show();
         }
 
+        /// <summary>
+        /// Navigation von der BerichtBearbeitenForm zur TerminDatenForm
+        /// </summary>
         public void navBerichtBearbeitenToTerminDaten()
         {
             berichtBearbeitenForm.Hide();

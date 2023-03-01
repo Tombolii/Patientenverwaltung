@@ -29,10 +29,12 @@ namespace Patientenverwaltung.Gui
             if(isNavigatedFromTerminDaten())
             {
                 controller.navBerichtBearbeitenToTerminDaten();
+                MessageBox.Show("Nichts bearbeitet!");
             }
             else
             {
                 controller.navBerichtBearbeitenToBerichtOverview();
+                MessageBox.Show("Nichts bearbeitet!");
             }
         }
 
@@ -48,15 +50,18 @@ namespace Patientenverwaltung.Gui
                 if (isNavigatedFromTerminDaten())
                 {
                     controller.navBerichtBearbeitenToTerminDaten();
+                    MessageBox.Show("Bericht wurde bearbeitet!");
                 }
                 else
                 {
                     controller.navBerichtBearbeitenToBerichtOverview();
+                    MessageBox.Show("Bericht wurde bearbeitet!");
                 }
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
+                MessageBox.Show("Bericht konnte nicht bearbeitet werden!");
             }
         }
 

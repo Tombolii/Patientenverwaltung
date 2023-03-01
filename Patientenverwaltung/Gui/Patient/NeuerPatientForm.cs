@@ -75,15 +75,18 @@ namespace Patientenverwaltung.Gui
                     vorerkrankungen = new List<Krankheitsbild>()
                 });
                 controller.navNeuerPatientToPatientOverview();
+                MessageBox.Show("Patient hinzugefügt!");
             } catch(MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
+                MessageBox.Show("Es konnte kein Patient hinzugefügt werden!");
             }
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
             controller.navNeuerPatientToPatientOverview();
+            MessageBox.Show("Keinen Patienten hinzugefügt!");
         }
 
         private void box_Krankenkasse_SelectedIndexChanged(object sender, EventArgs e)

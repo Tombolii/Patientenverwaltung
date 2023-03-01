@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Patientenverwaltung;
 using System.Windows.Forms;
 using Patientenverwaltung.Model;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Patientenverwaltung.Gui
 {
@@ -52,6 +43,9 @@ namespace Patientenverwaltung.Gui
             controller.navPatientOverviewToNeuerTermin();
         }
 
+        /// <summary>
+        /// Zeigt alle Daten des Patienten in der Form an
+        /// </summary>
         private void displayPatientDaten()
         {
             Patient currentPatient = controller.getCurrentSelectedPatient();
@@ -63,11 +57,23 @@ namespace Patientenverwaltung.Gui
             txt_Adresse.Text = currentPatient.adresse.straße + " " + currentPatient.adresse.hausnummer;
             txt_Ort.Text = currentPatient.adresse.ort;
             txt_Kasse.Text = currentPatient.versicherung.name;
+            displayVorerkrankungen(currentPatient);
         }
 
         private void btn_PatientLoeschen_Click(object sender, EventArgs e)
         {
             controller.navPatientenDatenToDeleteConfirmationPopup();
+        }
+
+        /// <summary>
+        /// Zeigt alle Vorerkrankungen des Patienten in der Form an
+        /// </summary>
+        /// <param name="patient">der Patient</param>
+        private void displayVorerkrankungen(Patient patient)
+        {
+            boxVorerkrankungen.Items.Clear();
+            patient.vorerkrankungen.ForEach(k =>
+                boxVorerkrankungen.Items.Add(k.idKrankheitsbild + ": " + k.bezeichnung));
         }
     }
 }

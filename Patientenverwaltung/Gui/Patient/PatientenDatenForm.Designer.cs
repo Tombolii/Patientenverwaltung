@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txt_Vorerkrankung = new System.Windows.Forms.RichTextBox();
+            this.boxVorerkrankungen = new System.Windows.Forms.ListBox();
             this.txt_Nachname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,21 +53,21 @@
             this.txt_Telefonnummer = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // txt_Vorerkrankung
+            // boxVorerkrankungen
             // 
-            this.txt_Vorerkrankung.Enabled = false;
-            this.txt_Vorerkrankung.Location = new System.Drawing.Point(10, 170);
-            this.txt_Vorerkrankung.Name = "txt_Vorerkrankung";
-            this.txt_Vorerkrankung.Size = new System.Drawing.Size(230, 115);
-            this.txt_Vorerkrankung.TabIndex = 0;
-            this.txt_Vorerkrankung.Text = "";
+            this.boxVorerkrankungen.Enabled = false;
+            this.boxVorerkrankungen.FormattingEnabled = true;
+            this.boxVorerkrankungen.Location = new System.Drawing.Point(10, 170);
+            this.boxVorerkrankungen.Name = "boxVorerkrankungen";
+            this.boxVorerkrankungen.Size = new System.Drawing.Size(230, 108);
+            this.boxVorerkrankungen.TabIndex = 0;
             // 
             // txt_Nachname
             // 
             this.txt_Nachname.Enabled = false;
             this.txt_Nachname.Location = new System.Drawing.Point(100, 10);
             this.txt_Nachname.Name = "txt_Nachname";
-            this.txt_Nachname.Size = new System.Drawing.Size(100, 20);
+            this.txt_Nachname.Size = new System.Drawing.Size(171, 20);
             this.txt_Nachname.TabIndex = 1;
             // 
             // label1
@@ -82,7 +82,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(225, 10);
+            this.label2.Location = new System.Drawing.Point(306, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 3;
@@ -91,9 +91,9 @@
             // txt_Vorname
             // 
             this.txt_Vorname.Enabled = false;
-            this.txt_Vorname.Location = new System.Drawing.Point(315, 10);
+            this.txt_Vorname.Location = new System.Drawing.Point(396, 10);
             this.txt_Vorname.Name = "txt_Vorname";
-            this.txt_Vorname.Size = new System.Drawing.Size(100, 20);
+            this.txt_Vorname.Size = new System.Drawing.Size(154, 20);
             this.txt_Vorname.TabIndex = 4;
             // 
             // btn_Berichte
@@ -109,15 +109,15 @@
             // txt_Ort
             // 
             this.txt_Ort.Enabled = false;
-            this.txt_Ort.Location = new System.Drawing.Point(315, 45);
+            this.txt_Ort.Location = new System.Drawing.Point(396, 45);
             this.txt_Ort.Name = "txt_Ort";
-            this.txt_Ort.Size = new System.Drawing.Size(100, 20);
+            this.txt_Ort.Size = new System.Drawing.Size(154, 20);
             this.txt_Ort.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(225, 45);
+            this.label3.Location = new System.Drawing.Point(306, 45);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(21, 13);
             this.label3.TabIndex = 8;
@@ -137,21 +137,21 @@
             this.txt_Geburtstag.Enabled = false;
             this.txt_Geburtstag.Location = new System.Drawing.Point(100, 45);
             this.txt_Geburtstag.Name = "txt_Geburtstag";
-            this.txt_Geburtstag.Size = new System.Drawing.Size(100, 20);
+            this.txt_Geburtstag.Size = new System.Drawing.Size(171, 20);
             this.txt_Geburtstag.TabIndex = 6;
             // 
             // txt_Adresse
             // 
             this.txt_Adresse.Enabled = false;
-            this.txt_Adresse.Location = new System.Drawing.Point(315, 80);
+            this.txt_Adresse.Location = new System.Drawing.Point(396, 80);
             this.txt_Adresse.Name = "txt_Adresse";
-            this.txt_Adresse.Size = new System.Drawing.Size(100, 20);
+            this.txt_Adresse.Size = new System.Drawing.Size(154, 20);
             this.txt_Adresse.TabIndex = 13;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(225, 80);
+            this.label5.Location = new System.Drawing.Point(306, 80);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 12;
@@ -171,7 +171,7 @@
             this.txt_Kasse.Enabled = false;
             this.txt_Kasse.Location = new System.Drawing.Point(100, 80);
             this.txt_Kasse.Name = "txt_Kasse";
-            this.txt_Kasse.Size = new System.Drawing.Size(100, 20);
+            this.txt_Kasse.Size = new System.Drawing.Size(171, 20);
             this.txt_Kasse.TabIndex = 10;
             // 
             // label7
@@ -195,7 +195,7 @@
             // 
             // btn_Zurueck
             // 
-            this.btn_Zurueck.Location = new System.Drawing.Point(349, 291);
+            this.btn_Zurueck.Location = new System.Drawing.Point(460, 291);
             this.btn_Zurueck.Name = "btn_Zurueck";
             this.btn_Zurueck.Size = new System.Drawing.Size(90, 23);
             this.btn_Zurueck.TabIndex = 36;
@@ -235,15 +235,15 @@
             // txt_Email
             // 
             this.txt_Email.Enabled = false;
-            this.txt_Email.Location = new System.Drawing.Point(100, 116);
+            this.txt_Email.Location = new System.Drawing.Point(100, 113);
             this.txt_Email.Name = "txt_Email";
-            this.txt_Email.Size = new System.Drawing.Size(100, 20);
+            this.txt_Email.Size = new System.Drawing.Size(171, 20);
             this.txt_Email.TabIndex = 40;
             // 
             // lbl_Telefonnummer
             // 
             this.lbl_Telefonnummer.AutoSize = true;
-            this.lbl_Telefonnummer.Location = new System.Drawing.Point(225, 116);
+            this.lbl_Telefonnummer.Location = new System.Drawing.Point(306, 116);
             this.lbl_Telefonnummer.Name = "lbl_Telefonnummer";
             this.lbl_Telefonnummer.Size = new System.Drawing.Size(80, 13);
             this.lbl_Telefonnummer.TabIndex = 41;
@@ -252,16 +252,16 @@
             // txt_Telefonnummer
             // 
             this.txt_Telefonnummer.Enabled = false;
-            this.txt_Telefonnummer.Location = new System.Drawing.Point(315, 116);
+            this.txt_Telefonnummer.Location = new System.Drawing.Point(396, 116);
             this.txt_Telefonnummer.Name = "txt_Telefonnummer";
-            this.txt_Telefonnummer.Size = new System.Drawing.Size(100, 20);
+            this.txt_Telefonnummer.Size = new System.Drawing.Size(154, 20);
             this.txt_Telefonnummer.TabIndex = 42;
             // 
             // PatientenDatenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 326);
+            this.ClientSize = new System.Drawing.Size(584, 326);
             this.Controls.Add(this.txt_Telefonnummer);
             this.Controls.Add(this.lbl_Telefonnummer);
             this.Controls.Add(this.txt_Email);
@@ -284,7 +284,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_Nachname);
-            this.Controls.Add(this.txt_Vorerkrankung);
+            this.Controls.Add(this.boxVorerkrankungen);
             this.Name = "PatientenDatenForm";
             this.Text = "Patientendaten";
             this.ResumeLayout(false);
@@ -294,7 +294,7 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox txt_Vorerkrankung;
+        private System.Windows.Forms.ListBox boxVorerkrankungen;
         private System.Windows.Forms.TextBox txt_Nachname;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
