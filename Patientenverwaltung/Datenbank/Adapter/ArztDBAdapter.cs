@@ -11,6 +11,9 @@ namespace Patientenverwaltung.Datenbank.Adapter
     public class ArztDBAdapter: BaseDBAdapter
     {
 
+        private AdresseDBAdapter adresseDBAdapter = new AdresseDBAdapter();
+        private PersonendatenDBAdapter personendatenDBAdapter = new PersonendatenDBAdapter();
+
         /// <summary>
         /// Liest einen Arzt aus der Datenbank aus
         /// </summary>
@@ -29,5 +32,19 @@ namespace Patientenverwaltung.Datenbank.Adapter
             MySqlDataReader reader = connector.executeQuery(sql);
             return mapper.extractArztFromReader(reader);
         }
+        
+        public Arzt createNewArzt(Arzt arzt)
+        {
+            string sql = "INSERT INTO arzt(titel, idPersonendaten, idFachgebiet, passwort) VALUES(" +
+                arzt.titel + ", " + arzt.idPersonendaten + ", " + arzt.idFachgebiet + ", " + arzt.passwort + "); \n" +
+                "SELECT LAST_INSERT_ID() as 'idArzt';";
+                MySqlDataReader reader = connector.executeQuery(sql);
+                reader.Read();
+                arzt.idArzt= reader.GetInt32("idArzt");
+                reader.Close(); ;
+
+            return arzt;
+        }
+
     }
 }

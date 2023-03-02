@@ -36,14 +36,20 @@ namespace Patientenverwaltung.Gui
             string passwort = txtPasswort.Text;
             // Hier würde man normalerweise die Benutzerdaten gegen eine Datenbank oder ein anderes Authentifizierungssystem prüfen
             // Wir simulieren das hier einfach mal mit einem festen Benutzernamen und Passwort
-            if(passwort == passwort)
+            if (id == 666 && passwort == "Admin666")
             {
+                controller.navLoginToAdmin();
+            }
+            try
+            {
+                controller.verifyLogin(id, passwort);
                 controller.navLoginToArztOverview(id);
+            } catch (Exception ex)
+            { 
+                errorProvider.SetError(btnLogin, "Ungültige Anmeldeinformationen"); 
             }
-            else
-            {
-                errorProvider.SetError(btnLogin, "Ungültige Anmeldeinformationen");
-            }
+                
+            
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

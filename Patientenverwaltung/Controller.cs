@@ -26,6 +26,7 @@ namespace Patientenverwaltung
         private TerminBearbeitenForm terminBearbeitenForm;
         private TerminDatenForm terminDatenForm;
         private LoginForm loginForm;
+        private AdminForm adminForm;
         private DeletePatientConfirmationPopupForm deletePatientConfirmationPopupForm;
         private DeleteTerminConfirmationPopupForm deleteTerminConfirmationPopupForm;
 
@@ -38,6 +39,8 @@ namespace Patientenverwaltung
         private KrankheitsbildDBAdapter krankheitsbildDBAdapter;
         private VersicherungDBAdapter versicherungDBAdapter;
         private LoginDBAdapter loginDBAdapter;
+        private AdresseDBAdapter adresseDBAdapter;
+        private PersonendatenDBAdapter personendatenDBAdapter;
 
         private Arzt loggedInArzt;
         private Patient currentSelectedPatient;
@@ -65,6 +68,7 @@ namespace Patientenverwaltung
             terminBearbeitenForm = new TerminBearbeitenForm(this);
             terminDatenForm = new TerminDatenForm(this);
             loginForm = new LoginForm(this);
+            adminForm = new AdminForm(this);
             deletePatientConfirmationPopupForm = new DeletePatientConfirmationPopupForm(this);
             deleteTerminConfirmationPopupForm = new DeleteTerminConfirmationPopupForm(this);    
 
@@ -76,8 +80,10 @@ namespace Patientenverwaltung
             krankheitsbildDBAdapter = new KrankheitsbildDBAdapter();
             versicherungDBAdapter = new VersicherungDBAdapter();
             loginDBAdapter = new LoginDBAdapter();
+            adresseDBAdapter = new AdresseDBAdapter();
+            personendatenDBAdapter = new PersonendatenDBAdapter();
 
-            termine = new List<Termin>();
+        termine = new List<Termin>();
             patienten = new List<Patient>();
             versicherungen = new List<Versicherung>();
             krankheitsbilder = new List<Krankheitsbild>();
@@ -461,6 +467,16 @@ namespace Patientenverwaltung
             currentSelectedTermin = updatedTerminOfDb;
         }
 
+        public Arzt createArzt(Arzt arzt)
+        {
+            arzt.adresse = adresseDBAdapter.createNewAdresse(arzt.adresse);
+            Personendaten newPerson = personendatenDBAdapter.createNewPersonendaten(arzt, arzt.adresse.idAdresse);
+            arzt.idPersonendaten = newPerson.idPersonendaten;
+
+            arztDBAdapter.createNewArzt(arzt);
+            return arzt;
+        }
+
         private Arzt getArztById(int idArzt)
         {
             return arztDBAdapter.getArztById(idArzt);
@@ -541,9 +557,18 @@ namespace Patientenverwaltung
             {
                 return false;
             }
+        }
+        public void navLoginToAdmin()
+        {
+            loginForm.Hide();
+            adminForm.Show();
+            MessageBox.Show("Erfolgreich als Admin angemeldet, bitte beachten Sie, dass die Admin-Seite in Entwicklung ist und keine Funktionen bietet!");
+        }
 
-
-
+        public void navAdminToLogin()
+        {
+            adminForm.Hide();
+            loginForm.Show();
         }
     }
 }
