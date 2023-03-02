@@ -24,7 +24,6 @@ namespace Patientenverwaltung.Gui
             }
         }
 
-
         private void btn_TerminBearbeiten_Click(object sender, EventArgs e)
         {
             controller.navTerminDatenToTerminBearbeiten();

@@ -56,6 +56,18 @@ namespace Patientenverwaltung.Datenbank.Adapter
         }
 
         /// <summary>
+        /// Löscht alle Termine eines Patienten aus der Datenbank
+        /// </summary>
+        /// <param name="idPatient">des Patienten</param>
+        public void deleteAllTermineOfPatient(int idPatient)
+        {
+            {
+            string sql = "DELETE FROM termin WHERE idPatient = " + idPatient + ";";
+            connector.executeQuery(sql);
+            }
+        }
+
+        /// <summary>
         /// Liest alle Termine eines Arztes aus der Datenbank
         /// </summary>
         /// <param name="idArzt">des Arztes</param>

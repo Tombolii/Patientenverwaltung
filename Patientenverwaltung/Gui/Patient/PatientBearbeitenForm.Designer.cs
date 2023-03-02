@@ -170,6 +170,7 @@
             this.box_Krankenkasse.Name = "box_Krankenkasse";
             this.box_Krankenkasse.Size = new System.Drawing.Size(100, 21);
             this.box_Krankenkasse.TabIndex = 53;
+            this.box_Krankenkasse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             // 
             // boxSelectableVorerkrankungen
             // 

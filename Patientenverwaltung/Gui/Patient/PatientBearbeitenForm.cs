@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Patientenverwaltung.Model;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace Patientenverwaltung.Gui
 {
@@ -39,18 +33,24 @@ namespace Patientenverwaltung.Gui
 
         private void btn_AenderungUebernehmen_Click(object sender, EventArgs e)
         {
-            Patient updatedPatient = getPatientenDatenOfForm();
-            try
-            {
-                controller.updatePatient(updatedPatient);
-                controller.navPatientBearbeitenToPatientenDaten();
-                MessageBox.Show("Patient wurde bearbeitet!");
+            if (validateInputs()){
+                try
+                {
+                    Patient updatedPatient = getPatientenDatenOfForm();
+                    controller.updatePatient(updatedPatient);
+                    controller.navPatientBearbeitenToPatientenDaten();
+                    MessageBox.Show("Der Patient wurde bearbeitet!");
 
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    MessageBox.Show("Patient konnte nicht bearbeitet werden! Bitte Eingabe überprüfen.");
+                }
             }
-            catch (MySqlException ex)
+            else
             {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("Patient konnte nicht bearbeitet werden!");
+                MessageBox.Show("Bitte alle Felder füllen!");
             }
         }
 
@@ -102,13 +102,12 @@ namespace Patientenverwaltung.Gui
         private Versicherung getKrankenversicherungOfForm()
         {
             // Ausgewählte Krankenversicherung abziehen
-            string krankenversicherung = box_Krankenkasse.GetItemText(box_Krankenkasse.Text);
-            string[] krankenversicherungSubs = krankenversicherung.Split(':');
+            string[] krankenversicherungSubs = box_Krankenkasse.GetItemText(box_Krankenkasse.SelectedItem).Split(':');
 
             return new Versicherung()
             {
                 idVersicherung = Convert.ToInt32(krankenversicherungSubs[0]),
-                name = krankenversicherungSubs[1]
+                name = krankenversicherungSubs[1].Trim()
             };
         }
 
@@ -126,7 +125,7 @@ namespace Patientenverwaltung.Gui
                     new Krankheitsbild()
                     {
                         idKrankheitsbild = Convert.ToInt32(split[0]),
-                        bezeichnung= split[1]
+                        bezeichnung= split[1].Trim()
                     }
                     );
             }
@@ -196,6 +195,20 @@ namespace Patientenverwaltung.Gui
                 int index = listBox.SelectedIndices[i];
                 listBox.Items.RemoveAt(index);
             }
+        }
+
+        private bool validateInputs()
+        {
+            return txt_Vorname.Text != "" ||
+                txt_Nachname.Text != "" ||
+                txt_Email.Text != "" ||
+                txt_Geburtsdatum.Text != "" ||
+                txt_Ort.Text != "" ||
+                txt_Straße.Text != "" ||
+                txt_Ort.Text != "" ||
+                txt_Plz.Text != "" ||
+                txt_HausNr.Text != "" ||
+                txt_Telefonnummer.Text != "";
         }
     }
 }

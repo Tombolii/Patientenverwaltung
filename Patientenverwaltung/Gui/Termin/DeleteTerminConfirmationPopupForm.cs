@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Patientenverwaltung.Gui
@@ -18,10 +17,12 @@ namespace Patientenverwaltung.Gui
             try
             {
                 controller.deleteCurrentTermin();
+                MessageBox.Show("Termin erfolgreich gelöscht!");
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                MessageBox.Show("Termin konnte nicht gelöscht werden!");
             }
             controller.navDeleteTerminConfirmationPopupToArztOverview();
         }

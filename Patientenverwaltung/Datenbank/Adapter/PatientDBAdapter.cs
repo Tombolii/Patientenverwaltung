@@ -5,12 +5,17 @@ using System.Collections.Generic;
 
 namespace Patientenverwaltung.Datenbank.Adapter
 {
+    /// <summary>
+    /// Verwaltung von Patienten in der Datenbank
+    /// </summary>
     public class PatientDBAdapter : BaseDBAdapter
     {
 
         private AdresseDBAdapter adresseDBAdapter = new AdresseDBAdapter();
         private PersonendatenDBAdapter personendatenDBAdapter= new PersonendatenDBAdapter();
         private VorerkrankungDBAdapter vorerkrankungDBAdapter = new VorerkrankungDBAdapter();
+        private BerichtDBAdapter berichtDBAdapter = new BerichtDBAdapter();
+        private TerminDBAdapter terminDBAdapter = new TerminDBAdapter();
 
         /// <summary>
         /// Liest einen Patient mit Hilfe der idPatient aus
@@ -52,13 +57,20 @@ namespace Patientenverwaltung.Datenbank.Adapter
         }
 
         /// <summary>
-        /// Löscht einen bestimmten Patienten aus der Datenbank
+        /// Löscht einen bestimmten Patienten aus der Datenbank und alle dazugehörigen Informationen
         /// </summary>
         /// <param name="idPatient">des zu löschenden Patienten</param>
-        public void deletePatient(int idPatient)
+        public void deletePatient(Patient patient)
         {
-            string sql = "DELETE FROM patient WHERE idPatient = " + idPatient + ";";
+            vorerkrankungDBAdapter.deleteAllVorerkrankungenOfPatient(patient.idPatient);
+            terminDBAdapter.deleteAllTermineOfPatient(patient.idPatient);
+            berichtDBAdapter.deleteAllBerichteOfPatient(patient.idPatient);
+
+            string sql = "DELETE FROM patient WHERE idPatient = " + patient.idPatient + ";";
             connector.executeNonQuery(sql);
+
+            personendatenDBAdapter.deletePersonendaten(patient.idPersonendaten);
+            adresseDBAdapter.deleteAdresse(patient.adresse.idAdresse);
         }
 
         /// <summary>

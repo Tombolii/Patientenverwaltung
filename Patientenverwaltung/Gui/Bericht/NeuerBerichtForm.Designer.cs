@@ -35,14 +35,14 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txt_Beschwerden = new System.Windows.Forms.RichTextBox();
             this.txt_Bemerkungen = new System.Windows.Forms.RichTextBox();
-            this.txt_Diagnose = new System.Windows.Forms.RichTextBox();
             this.lbl_Vorerkrankungen = new System.Windows.Forms.Label();
+            this.boxDiagnose = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btn_BerhichtHinzufuegen
             // 
             this.btn_BerhichtHinzufuegen.Location = new System.Drawing.Point(13, 226);
-            this.btn_BerhichtHinzufuegen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_BerhichtHinzufuegen.Margin = new System.Windows.Forms.Padding(4);
             this.btn_BerhichtHinzufuegen.Name = "btn_BerhichtHinzufuegen";
             this.btn_BerhichtHinzufuegen.Size = new System.Drawing.Size(137, 28);
             this.btn_BerhichtHinzufuegen.TabIndex = 34;
@@ -53,7 +53,7 @@
             // btn_Abbrechen
             // 
             this.btn_Abbrechen.Location = new System.Drawing.Point(158, 226);
-            this.btn_Abbrechen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Abbrechen.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Abbrechen.Name = "btn_Abbrechen";
             this.btn_Abbrechen.Size = new System.Drawing.Size(137, 28);
             this.btn_Abbrechen.TabIndex = 35;
@@ -94,7 +94,7 @@
             // txt_Beschwerden
             // 
             this.txt_Beschwerden.Location = new System.Drawing.Point(13, 29);
-            this.txt_Beschwerden.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_Beschwerden.Margin = new System.Windows.Forms.Padding(4);
             this.txt_Beschwerden.Name = "txt_Beschwerden";
             this.txt_Beschwerden.Size = new System.Drawing.Size(296, 179);
             this.txt_Beschwerden.TabIndex = 39;
@@ -103,20 +103,11 @@
             // txt_Bemerkungen
             // 
             this.txt_Bemerkungen.Location = new System.Drawing.Point(338, 29);
-            this.txt_Bemerkungen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_Bemerkungen.Margin = new System.Windows.Forms.Padding(4);
             this.txt_Bemerkungen.Name = "txt_Bemerkungen";
             this.txt_Bemerkungen.Size = new System.Drawing.Size(296, 179);
             this.txt_Bemerkungen.TabIndex = 40;
             this.txt_Bemerkungen.Text = "";
-            // 
-            // txt_Diagnose
-            // 
-            this.txt_Diagnose.Location = new System.Drawing.Point(660, 29);
-            this.txt_Diagnose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txt_Diagnose.Name = "txt_Diagnose";
-            this.txt_Diagnose.Size = new System.Drawing.Size(296, 179);
-            this.txt_Diagnose.TabIndex = 41;
-            this.txt_Diagnose.Text = "";
             // 
             // lbl_Vorerkrankungen
             // 
@@ -127,13 +118,22 @@
             this.lbl_Vorerkrankungen.Size = new System.Drawing.Size(0, 16);
             this.lbl_Vorerkrankungen.TabIndex = 42;
             // 
+            // boxDiagnose
+            // 
+            this.boxDiagnose.Location = new System.Drawing.Point(660, 29);
+            this.boxDiagnose.Margin = new System.Windows.Forms.Padding(4);
+            this.boxDiagnose.Name = "boxDiagnose";
+            this.boxDiagnose.Size = new System.Drawing.Size(296, 24);
+            this.boxDiagnose.TabIndex = 63;
+            this.boxDiagnose.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            // 
             // NeuerBerichtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 292);
+            this.Controls.Add(this.boxDiagnose);
             this.Controls.Add(this.lbl_Vorerkrankungen);
-            this.Controls.Add(this.txt_Diagnose);
             this.Controls.Add(this.txt_Bemerkungen);
             this.Controls.Add(this.txt_Beschwerden);
             this.Controls.Add(this.label8);
@@ -141,7 +141,7 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btn_Abbrechen);
             this.Controls.Add(this.btn_BerhichtHinzufuegen);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "NeuerBerichtForm";
             this.Text = "NeuerBericht";
             this.ResumeLayout(false);
@@ -157,8 +157,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox txt_Beschwerden;
-        private System.Windows.Forms.RichTextBox txt_Diagnose;
         private System.Windows.Forms.RichTextBox txt_Bemerkungen;
         private System.Windows.Forms.Label lbl_Vorerkrankungen;
+        private System.Windows.Forms.ComboBox boxDiagnose;
     }
 }

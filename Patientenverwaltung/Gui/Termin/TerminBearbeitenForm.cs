@@ -1,7 +1,6 @@
 ﻿using System;
 using Patientenverwaltung.Model;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace Patientenverwaltung.Gui
 {
@@ -26,25 +25,33 @@ namespace Patientenverwaltung.Gui
 
         private void btn_AenderungUebernehmen_Click(object sender, EventArgs e)
         {
-            Termin updatedTermin = controller.getCurrentSelectedTermin();
-            updatedTermin.zeitpunkt = Convert.ToDateTime(txt_Datum.Text + txt_Uhrzeit.Text);
             try
             {
-                controller.updateTermin(updatedTermin);
+                controller.updateTermin(getTerminFromForm());
                 controller.navTerminBearbeitenToTerminDaten();
                 MessageBox.Show("Termin wurde bearbeitet!");
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 MessageBox.Show("Termin konnte nicht bearbeitet werden!");
             }
         }
 
+        /// <summary>
+        /// Holt die neuen Daten des Termins aus der Form
+        /// </summary>
+        /// <returns>aktualisierten Termin</returns>
+        private Termin getTerminFromForm()
+        {
+            Termin updatedTermin = controller.getCurrentSelectedTermin();
+            updatedTermin.zeitpunkt = Convert.ToDateTime(txt_Datum.Text + txt_Uhrzeit.Text);
+            return updatedTermin;
+        }
+
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
             controller.navTerminBearbeitenToTerminDaten();
-            MessageBox.Show("Termin wurde nicht bearbeitet!");
         }
 
         private void displayTerminDaten()

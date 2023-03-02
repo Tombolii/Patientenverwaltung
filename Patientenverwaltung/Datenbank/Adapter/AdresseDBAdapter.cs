@@ -1,13 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
 using Patientenverwaltung.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Patientenverwaltung.Datenbank.Adapter
 {
+    /// <summary>
+    /// Verwaltung von Adressen in der Datenbank
+    /// </summary>
     public class AdresseDBAdapter: BaseDBAdapter
     {
         /// <summary>
@@ -47,5 +45,14 @@ namespace Patientenverwaltung.Datenbank.Adapter
             return adresse;
         }
 
+        /// <summary>
+        /// Löscht eine Adresse aus der Datenbank
+        /// </summary>
+        /// <param name="idAdresse">der Adresse</param>
+        public void deleteAdresse(int idAdresse)
+        {
+            string sql = "DELETE FROM adresse WHERE idAdresse = " + idAdresse + ";";
+            connector.executeNonQuery(sql);
+        }
     }
 }

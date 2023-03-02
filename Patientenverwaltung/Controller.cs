@@ -382,7 +382,14 @@ namespace Patientenverwaltung
         /// </summary>
         public void deletePatient()
         {
-            patientDBAdapter.deletePatient(currentSelectedPatient.idPatient);
+            patientDBAdapter.deletePatient(currentSelectedPatient);
+            for (int i = 0; i < termine.Count; i++)
+            {
+                if (termine[i].simplePatient.idPatient == currentSelectedPatient.idPatient)
+                {
+                    termine.RemoveAt(i);
+                }
+            }
             patienten.Remove(currentSelectedPatient);
             currentSelectedPatient = null;
         }

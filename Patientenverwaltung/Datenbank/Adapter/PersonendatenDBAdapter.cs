@@ -49,5 +49,15 @@ namespace Patientenverwaltung.Datenbank.Adapter
             connector.executeNonQuery(sql);
             return personendaten;
         }
+
+        /// <summary>
+        /// Löscht einen Personendatensatz aus der Datenbank
+        /// </summary>
+        /// <param name="idPersonendaten">der Personendaten</param>
+        public void deletePersonendaten(int idPersonendaten)
+        {
+            string sql = "DELETE FROM personendaten WHERE idPersonendaten = " + idPersonendaten + ";";
+            connector.executeNonQuery(sql);
+        }
     }
 }

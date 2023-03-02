@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using Patientenverwaltung.Model;
-using MySql.Data.MySqlClient;
 
 namespace Patientenverwaltung.Gui
 {
@@ -20,9 +19,14 @@ namespace Patientenverwaltung.Gui
             base.OnVisibleChanged(e);
             if (Visible)
             {
-                Patient currentPatient = controller.getCurrentSelectedPatient();
-                lblPatientName.Text = currentPatient.nachname + ", " + currentPatient.vorname;
+                displayPatientName();
             }
+        }
+
+        private void displayPatientName()
+        {
+            Patient currentPatient = controller.getCurrentSelectedPatient();
+            lblPatientName.Text = currentPatient.nachname + ", " + currentPatient.vorname;
         }
 
         private void btn_Confirm_Click(object sender, EventArgs e)
@@ -30,9 +34,11 @@ namespace Patientenverwaltung.Gui
             try
             {
                 controller.deletePatient();
+                MessageBox.Show("Der Patient wurde erfolgreich gelöscht!");
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
+                MessageBox.Show("Der Patient konnte nicht gelöscht werden! Bitte Eingabe überprüfen.");
                 Console.WriteLine(ex.Message);
             }
             controller.navDeletePatientConfirmationPopupToPatientOverview();

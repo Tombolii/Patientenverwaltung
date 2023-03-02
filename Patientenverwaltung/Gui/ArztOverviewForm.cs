@@ -1,12 +1,6 @@
 ﻿using Patientenverwaltung.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -24,7 +18,6 @@ namespace Patientenverwaltung.Gui
         {
             InitializeComponent();
             this.controller = controller;
-
         }
 
         protected override void OnVisibleChanged(EventArgs e)
@@ -129,6 +122,9 @@ namespace Patientenverwaltung.Gui
             }
         }
 
+        /// <summary>
+        /// Setzt die Sichtbarkeit der Buttons für die Seiten
+        /// </summary>
         private void setVisibilityOfPageButtons()
         {
             if (pageIndex == 0)
@@ -149,6 +145,10 @@ namespace Patientenverwaltung.Gui
             }
         }
 
+        /// <summary>
+        /// Überprüft ob es noch eine weitere Seite gibt
+        /// </summary>
+        /// <returns></returns>
         private bool validateNextPage()
         {
             return (pageIndex + 1) * ROW_AMOUNT < controller.getPatienten().Count;

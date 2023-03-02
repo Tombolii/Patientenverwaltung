@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Patientenverwaltung;
 using System.Windows.Forms;
 using Patientenverwaltung.Model;
-using System.Diagnostics.SymbolStore;
 
 namespace Patientenverwaltung.Gui
 {
@@ -114,6 +107,9 @@ namespace Patientenverwaltung.Gui
             rowCount = 0;
         }
 
+        /// <summary>
+        /// Aktualisiert die Patienten-Daten der aktuellen Seite
+        /// </summary>
         private void refreshPatientTable()
         {
             int firstPatientIndexOfPage = pageIndex * ROW_AMOUNT;
@@ -195,6 +191,9 @@ namespace Patientenverwaltung.Gui
             }
         }
 
+        /// <summary>
+        /// Setzt die Sichtbarkeit der Buttons zur Navigation zwischen den Seiten
+        /// </summary>
         private void setVisibilityOfPageButtons()
         {
             if (pageIndex == 0)
@@ -215,6 +214,10 @@ namespace Patientenverwaltung.Gui
             }
         }
 
+        /// <summary>
+        /// Überprüft, ob es noch eine weitere Seite gibt
+        /// </summary>
+        /// <returns>true, falls ja</returns>
         private bool validateNextPage()
         {
             return (pageIndex + 1) * ROW_AMOUNT < controller.getPatienten().Count;

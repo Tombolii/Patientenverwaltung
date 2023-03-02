@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Patientenverwaltung.Model;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -22,7 +15,35 @@ namespace Patientenverwaltung.Gui
             this.controller = controller;
         }
 
+        protected override void OnVisibleChanged(EventArgs e)
+        {
+            base.OnVisibleChanged(e);
+            if (Visible)
+            {
+                displayDiagnoseDropdown();
+            }
+        }
+
         private void btn_BerhichtHinzufuegen_Click(object sender, EventArgs e)
+        {
+                try
+                {
+                    controller.createBericht(getBerichtFromForm());
+                    controller.navNeuerBerichtToTerminDaten();
+                    MessageBox.Show("Der Bericht wurde hinzugefügt!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    MessageBox.Show("Es konnte kein Bericht hinzugefügt werden!");
+                }
+        }
+
+        /// <summary>
+        /// Holt die Daten des neuen Berichts aus der Form
+        /// </summary>
+        /// <returns>neuer Bericht</returns>
+        private Bericht getBerichtFromForm()
         {
             Bericht neuerBericht = new Bericht();
             Termin currentTermin = controller.getCurrentSelectedTermin();
@@ -30,29 +51,29 @@ namespace Patientenverwaltung.Gui
             neuerBericht.zeitpunkt = currentTermin.zeitpunkt;
             neuerBericht.beschwerden = txt_Beschwerden.Text;
             neuerBericht.bemerkung = txt_Bemerkungen.Text;
+            string[] diagnoseSplits = boxDiagnose.Text.Split(':');
             neuerBericht.diagnose = new Krankheitsbild()
             {
-                idKrankheitsbild = 1,
-                bezeichnung = "ToBeReplaced"
+                idKrankheitsbild = Convert.ToInt32(diagnoseSplits[0]),
+                bezeichnung = diagnoseSplits[1].Trim()
             };
-
-            try
-            {
-                controller.createBericht(neuerBericht);
-                controller.navNeuerBerichtToTerminDaten();
-                MessageBox.Show("Bericht hinzugefügt!");
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("Es konnte kein Bericht hinzugefügt werden!");
-            }
+            return neuerBericht;
         }
 
         private void btn_Abbrechen_Click(object sender, EventArgs e)
         {
             controller.navNeuerBerichtToTerminDaten();
-            System.Windows.Forms.MessageBox.Show("Keinen Bericht hinzugefügt!");
+        }
+
+        /// <summary>
+        /// Füllt das DiagnoseDropdown
+        /// </summary>
+        private void displayDiagnoseDropdown()
+        {
+            foreach (var krankheitsbild in controller.getKrankheitsbilder())
+            {
+                boxDiagnose.Items.Add(krankheitsbild.idKrankheitsbild + ": " + krankheitsbild.bezeichnung);
+            }
         }
     }
 }

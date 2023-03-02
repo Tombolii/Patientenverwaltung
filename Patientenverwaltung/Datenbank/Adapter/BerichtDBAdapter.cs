@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace Patientenverwaltung.Datenbank.Adapter
 {
+ 
+    /// <summary>
+    /// Verwaltung von Bericht in der Datenbank
+    /// </summary>
     public class BerichtDBAdapter: BaseDBAdapter
     {
 
@@ -124,6 +128,17 @@ namespace Patientenverwaltung.Datenbank.Adapter
         public void deleteBericht(Bericht bericht)
         {
             string sql = "DELETE FROM bericht WHERE idBericht = " + bericht.idBericht + ";";
+
+            connector.executeNonQuery(sql);
+        }
+
+        /// <summary>
+        /// Löscht alle Berichte eines Patienten aus der Datenbank
+        /// </summary>
+        /// <param name="idPatient">des Patienten</param>
+        public void deleteAllBerichteOfPatient(int idPatient)
+        {
+            string sql = "DELETE FROM bericht WHERE idPatient = " + idPatient + ";";
 
             connector.executeNonQuery(sql);
         }

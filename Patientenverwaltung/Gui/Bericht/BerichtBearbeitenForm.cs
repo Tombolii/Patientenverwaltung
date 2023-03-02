@@ -29,40 +29,51 @@ namespace Patientenverwaltung.Gui
             if(isNavigatedFromTerminDaten())
             {
                 controller.navBerichtBearbeitenToTerminDaten();
-                MessageBox.Show("Nichts bearbeitet!");
             }
             else
             {
                 controller.navBerichtBearbeitenToBerichtOverview();
-                MessageBox.Show("Nichts bearbeitet!");
             }
         }
 
         private void btn_AenderungUebernehmen_Click(object sender, EventArgs e)
         {
+                try
+                {
+                    controller.updateBericht(getBerichtFromForm());
+                    if (isNavigatedFromTerminDaten())
+                    {
+                        controller.navBerichtBearbeitenToTerminDaten();
+                    }
+                    else
+                    {
+                        controller.navBerichtBearbeitenToBerichtOverview();
+                    }
+                    MessageBox.Show("Bericht wurde bearbeitet!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    MessageBox.Show("Bericht konnte nicht bearbeitet werden! Bitte Eingabe überprüfen.");
+                }
+        }
+
+        /// <summary>
+        /// Holt die neuen Daten des Berichts aus der Form
+        /// </summary>
+        /// <returns>aktualisierten Bericht</returns>
+        private Bericht getBerichtFromForm()
+        {
             Bericht updatedBericht = controller.getCurrentSelectedBericht();
             updatedBericht.beschwerden = txt_Beschwerden.Text;
             updatedBericht.bemerkung = txt_Bemerkungen.Text;
-            // TODO: Diagnose updaten 
-            try
+            string[] diagnoseSplits = boxDiagnose.Text.Split(':');
+            updatedBericht.diagnose = new Krankheitsbild()
             {
-                controller.updateBericht(updatedBericht);
-                if (isNavigatedFromTerminDaten())
-                {
-                    controller.navBerichtBearbeitenToTerminDaten();
-                    MessageBox.Show("Bericht wurde bearbeitet!");
-                }
-                else
-                {
-                    controller.navBerichtBearbeitenToBerichtOverview();
-                    MessageBox.Show("Bericht wurde bearbeitet!");
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("Bericht konnte nicht bearbeitet werden!");
-            }
+                idKrankheitsbild = Convert.ToInt32(diagnoseSplits[0]),
+                bezeichnung = diagnoseSplits[1].Trim()
+            };
+            return updatedBericht;
         }
 
         private void displayBerichtDaten()
@@ -72,7 +83,19 @@ namespace Patientenverwaltung.Gui
             txtDatum.Text = currentBericht.zeitpunkt.ToShortTimeString();
             txt_Bemerkungen.Text = currentBericht.bemerkung;
             txt_Beschwerden.Text = currentBericht.beschwerden;
-            txt_Diagnose.Text = currentBericht.diagnose.bezeichnung;
+            boxDiagnose.Text = currentBericht.diagnose.idKrankheitsbild + ": " + currentBericht.diagnose.bezeichnung;
+            displayDiagnoseDropdown();
+        }
+
+        /// <summary>
+        /// Füllt das DiagnoseDropdown
+        /// </summary>
+        private void displayDiagnoseDropdown()
+        {
+            foreach (var krankheitsbild in controller.getKrankheitsbilder())
+            {
+                boxDiagnose.Items.Add(krankheitsbild.idKrankheitsbild + ": " + krankheitsbild.bezeichnung);
+            }
         }
 
         /// <summary>

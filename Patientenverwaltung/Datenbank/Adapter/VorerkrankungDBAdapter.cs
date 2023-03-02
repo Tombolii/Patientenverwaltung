@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Patientenverwaltung.Datenbank.Adapter
 {
+    /// <summary>
+    /// Verwaltung von Vorerkrankungen in der Datenbank
+    /// </summary>
     public class VorerkrankungDBAdapter: BaseDBAdapter
     {
         /// <summary>
@@ -70,6 +73,17 @@ namespace Patientenverwaltung.Datenbank.Adapter
             }
             reader.Close();
             return vorerkrankungen;
+        }
+
+        /// <summary>
+        /// Löscht alle Vorerkrankungen eines Patienten
+        /// </summary>
+        /// <param name="idPatient">des Patienten</param>
+        public void deleteAllVorerkrankungenOfPatient(int idPatient)
+        {
+            string sql = "DELETE FROM vorerkrankung " +
+                         "WHERE idPatient = " + idPatient + ";";
+            connector.executeNonQuery(sql);
         }
 
         private List<Krankheitsbild> addVorerkrankungToPatient(int idPatient, List<Krankheitsbild> vorerkrankungen)
