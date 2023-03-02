@@ -37,6 +37,7 @@ namespace Patientenverwaltung
         private PatientDBAdapter patientDBAdapter;
         private KrankheitsbildDBAdapter krankheitsbildDBAdapter;
         private VersicherungDBAdapter versicherungDBAdapter;
+        private LoginDBAdapter loginDBAdapter;
 
         private Arzt loggedInArzt;
         private Patient currentSelectedPatient;
@@ -46,6 +47,7 @@ namespace Patientenverwaltung
         private List<Patient> patienten;
         private List<Krankheitsbild> krankheitsbilder;
         private List<Versicherung> versicherungen;
+        private List<PasswordInformation> pwdInformation;
 
 
         public Controller()
@@ -73,11 +75,13 @@ namespace Patientenverwaltung
             patientDBAdapter= new PatientDBAdapter();
             krankheitsbildDBAdapter = new KrankheitsbildDBAdapter();
             versicherungDBAdapter = new VersicherungDBAdapter();
+            loginDBAdapter = new LoginDBAdapter();
 
             termine = new List<Termin>();
             patienten = new List<Patient>();
             versicherungen = new List<Versicherung>();
             krankheitsbilder = new List<Krankheitsbild>();
+            pwdInformation = new List<PasswordInformation>();
 
     }
 
@@ -524,6 +528,22 @@ namespace Patientenverwaltung
         public Termin getCurrentSelectedTermin()
         {
             return currentSelectedTermin;
+        }
+
+        public bool verifyLogin(int arztID, string passwordForm)
+        {
+            PasswordInformation test = loginDBAdapter.getPassword(arztID);
+            if (test.password == passwordForm)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
         }
     }
 }
