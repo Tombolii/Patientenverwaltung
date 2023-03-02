@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Patientenverwaltung.Model;
+using System.Text.RegularExpressions;
 
 namespace Patientenverwaltung.Gui
 {
@@ -33,17 +34,57 @@ namespace Patientenverwaltung.Gui
         {
             int id = Convert.ToInt32(txtArztId.Text);
             string passwort = txtPasswort.Text;
-
             // Hier würde man normalerweise die Benutzerdaten gegen eine Datenbank oder ein anderes Authentifizierungssystem prüfen
-            // Wir simulieren das hier einfach mal mit einem festen Benutzernamen und Passwort
-            if (passwort == "geheim")
+
+            try
             {
+                controller.verifyLogin(id, passwort);
                 controller.navLoginToArztOverview(id);
+
+            } catch (Exception ex)
+            { 
+                errorProvider.SetError(btnLogin, "Ungültige Anmeldeinformationen"); 
             }
-            else
+                
+            
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(txtArztId.Text);
+            string passwort = txtPasswort.Text;
+
+            if (id == 666 && passwort == "Admin666")
             {
-                errorProvider.SetError(btnLogin, "Ungültige Anmeldeinformationen");
+                controller.navLoginToAdmin();
+            }else
+            {
+                errorProvider.SetError(button1, "Sie sind nicht berechtigt!");
             }
         }
+
+        /*Code für die Überprüfung der Passwortsicherheit (Kann beim Registrieren benutzt werden)
+         * private void btnRegister_Click_1(object sender, EventArgs e)
+         * {
+         * int id = Convert.ToInt32(txtArztId.Text);
+         * string passwort = txtPasswort.Text;
+         * if(passwort.Length > 8 &&
+         * Regex.Match(passwort, @"[A-Z]+").Success && 
+         * Regex.Match(passwort, @"[!,@,#,$,%,^,&,*,?,_,~,-,£,(,)]").Success &&
+         * Regex.Match(passwort, @"[a-z]+").Success)
+         * { 
+         * controller.navLoginToArztOverview(id);
+         * }
+         * else
+         * {
+         * errorProvider.SetError(btnLogin, "Ungültige Anmeldeinformationen");
+         * }
+         * }
+         */
     }
 }

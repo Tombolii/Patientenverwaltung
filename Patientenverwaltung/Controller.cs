@@ -26,6 +26,7 @@ namespace Patientenverwaltung
         private TerminBearbeitenForm terminBearbeitenForm;
         private TerminDatenForm terminDatenForm;
         private LoginForm loginForm;
+        private AdminForm adminForm;
         private DeletePatientConfirmationPopupForm deletePatientConfirmationPopupForm;
         private DeleteTerminConfirmationPopupForm deleteTerminConfirmationPopupForm;
 
@@ -37,6 +38,9 @@ namespace Patientenverwaltung
         private PatientDBAdapter patientDBAdapter;
         private KrankheitsbildDBAdapter krankheitsbildDBAdapter;
         private VersicherungDBAdapter versicherungDBAdapter;
+        private LoginDBAdapter loginDBAdapter;
+        private AdresseDBAdapter adresseDBAdapter;
+        private PersonendatenDBAdapter personendatenDBAdapter;
 
         private Arzt loggedInArzt;
         private Patient currentSelectedPatient;
@@ -46,6 +50,7 @@ namespace Patientenverwaltung
         private List<Patient> patienten;
         private List<Krankheitsbild> krankheitsbilder;
         private List<Versicherung> versicherungen;
+        private List<PasswordInformation> pwdInformation;
 
 
         public Controller()
@@ -63,6 +68,7 @@ namespace Patientenverwaltung
             terminBearbeitenForm = new TerminBearbeitenForm(this);
             terminDatenForm = new TerminDatenForm(this);
             loginForm = new LoginForm(this);
+            adminForm = new AdminForm(this);
             deletePatientConfirmationPopupForm = new DeletePatientConfirmationPopupForm(this);
             deleteTerminConfirmationPopupForm = new DeleteTerminConfirmationPopupForm(this);    
 
@@ -73,11 +79,15 @@ namespace Patientenverwaltung
             patientDBAdapter= new PatientDBAdapter();
             krankheitsbildDBAdapter = new KrankheitsbildDBAdapter();
             versicherungDBAdapter = new VersicherungDBAdapter();
+            loginDBAdapter = new LoginDBAdapter();
+            adresseDBAdapter = new AdresseDBAdapter();
+            personendatenDBAdapter = new PersonendatenDBAdapter();
 
-            termine = new List<Termin>();
+        termine = new List<Termin>();
             patienten = new List<Patient>();
             versicherungen = new List<Versicherung>();
             krankheitsbilder = new List<Krankheitsbild>();
+            pwdInformation = new List<PasswordInformation>();
 
     }
 
@@ -464,6 +474,16 @@ namespace Patientenverwaltung
             currentSelectedTermin = updatedTerminOfDb;
         }
 
+        public Arzt createArzt(Arzt arzt)
+        {
+            arzt.adresse = adresseDBAdapter.createNewAdresse(arzt.adresse);
+            Personendaten newPerson = personendatenDBAdapter.createNewPersonendaten(arzt, arzt.adresse.idAdresse);
+            arzt.idPersonendaten = newPerson.idPersonendaten;
+
+            arztDBAdapter.createNewArzt(arzt);
+            return arzt;
+        }
+
         private Arzt getArztById(int idArzt)
         {
             return arztDBAdapter.getArztById(idArzt);
@@ -531,6 +551,30 @@ namespace Patientenverwaltung
         public Termin getCurrentSelectedTermin()
         {
             return currentSelectedTermin;
+        }
+
+        public bool verifyLogin(int arztID, string passwordForm)
+        {
+            PasswordInformation test = loginDBAdapter.getPassword(arztID);
+            if (test.password == passwordForm)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void navLoginToAdmin()
+        {
+            loginForm.Hide();
+            adminForm.Show();
+        }
+
+        public void navAdminToLogin()
+        {
+            adminForm.Hide();
+            loginForm.Show();
         }
     }
 }
