@@ -8,7 +8,7 @@
 
         private const string DB_NAME = "patientenverwaltung";
         private const string DB_PASSWORD = "";
-        private const string DB_USER = "root";
+        private const string DB_USER = "Arzt";
         private const string DB_HOST = "localhost";
     }
 }

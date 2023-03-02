@@ -35,8 +35,8 @@ namespace Patientenverwaltung.Datenbank.Adapter
         
         public Arzt createNewArzt(Arzt arzt)
         {
-            string sql = "INSERT INTO arzt(titel, idPersonendaten, idFachgebiet, passwort) VALUES(" +
-                arzt.titel + ", " + arzt.idPersonendaten + ", " + arzt.idFachgebiet + ", " + arzt.passwort + "); \n" +
+            string sql = "INSERT INTO arzt(titel, idPersonendaten, idFachgebiet, password) VALUES('" +
+                arzt.titel + "', " + arzt.idPersonendaten + ", " + arzt.idFachgebiet + ", '" + arzt.passwort + "'); " +
                 "SELECT LAST_INSERT_ID() as 'idArzt';";
                 MySqlDataReader reader = connector.executeQuery(sql);
                 reader.Read();

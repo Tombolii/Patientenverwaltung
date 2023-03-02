@@ -562,7 +562,6 @@ namespace Patientenverwaltung
         {
             loginForm.Hide();
             adminForm.Show();
-            MessageBox.Show("Erfolgreich als Admin angemeldet, bitte beachten Sie, dass die Admin-Seite in Entwicklung ist und keine Funktionen bietet!");
         }
 
         public void navAdminToLogin()
