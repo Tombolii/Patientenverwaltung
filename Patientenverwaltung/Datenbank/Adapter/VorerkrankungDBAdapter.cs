@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Patientenverwaltung.Datenbank.Adapter
 {
+    /// <summary>
+    /// Verwaltung von Vorerkrankungen in der Datenbank
+    /// </summary>
     public class VorerkrankungDBAdapter: BaseDBAdapter
     {
         /// <summary>
@@ -17,13 +20,28 @@ namespace Patientenverwaltung.Datenbank.Adapter
         public void synchVorerkrankungenOfPatient(
             int idPatient, List<Krankheitsbild> updatedVorerkrankungen, List<Krankheitsbild> currentVorerkrankungen)
         {
-            List<Krankheitsbild> newVorerkrankungen = updatedVorerkrankungen.Except(currentVorerkrankungen).ToList();
+            List<Krankheitsbild> newVorerkrankungen = new List<Krankheitsbild>();
+            List<Krankheitsbild> deletedVorerkrankungen = new List<Krankheitsbild>();
+            foreach (Krankheitsbild krankheitsbild in updatedVorerkrankungen)
+            {
+                if (!currentVorerkrankungen.Any(v => v.idKrankheitsbild == krankheitsbild.idKrankheitsbild)){
+                    newVorerkrankungen.Add(krankheitsbild);
+                }
+            }
+            foreach (Krankheitsbild krankheitsbild in currentVorerkrankungen)
+            {
+                if (!updatedVorerkrankungen.Any(v => v.idKrankheitsbild == krankheitsbild.idKrankheitsbild))
+                {
+                    deletedVorerkrankungen.Add(krankheitsbild);
+                }
+            }
+
             if (newVorerkrankungen != null && newVorerkrankungen.Count > 0)
             {
                 // neue Vorerkrankungen in der DB aufnehmen
                 addVorerkrankungToPatient(idPatient, newVorerkrankungen);
             }
-            List<Krankheitsbild> deletedVorerkrankungen = currentVorerkrankungen.Except(updatedVorerkrankungen).ToList();
+            
             if (deletedVorerkrankungen != null && deletedVorerkrankungen.Count > 0)
             {
                 // entfernte Vorerkrankungen in der DB entfernen
@@ -55,6 +73,17 @@ namespace Patientenverwaltung.Datenbank.Adapter
             }
             reader.Close();
             return vorerkrankungen;
+        }
+
+        /// <summary>
+        /// Löscht alle Vorerkrankungen eines Patienten
+        /// </summary>
+        /// <param name="idPatient">des Patienten</param>
+        public void deleteAllVorerkrankungenOfPatient(int idPatient)
+        {
+            string sql = "DELETE FROM vorerkrankung " +
+                         "WHERE idPatient = " + idPatient + ";";
+            connector.executeNonQuery(sql);
         }
 
         private List<Krankheitsbild> addVorerkrankungToPatient(int idPatient, List<Krankheitsbild> vorerkrankungen)

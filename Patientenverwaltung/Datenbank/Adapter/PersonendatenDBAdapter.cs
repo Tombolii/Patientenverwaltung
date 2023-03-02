@@ -15,18 +15,19 @@ namespace Patientenverwaltung.Datenbank.Adapter
         /// </summary>
         /// <param name="personendaten">die angelegt werden sollen</param>
         /// <returns>die erstellten Personendaten</returns>
-        public Personendaten createNewPersonendaten(Personendaten personendaten)
+        public Personendaten createNewPersonendaten(Personendaten personendaten, int idAdresse)
         {
             string sql = "INSERT into personendaten (vorname, nachname, email, telefonnummer, geburtstag, idAdresse) " +
-            "VALUES('" + personendaten.vorname + "', ' " +
+            "VALUES('" + personendaten.vorname + "', '" +
             personendaten.nachname + "', '" +
             personendaten.email + "', '" +
             personendaten.telefonnummer + "', '" +
-            personendaten.geburtstag + "', " +
-            "LAST_INSERT_ID());";
+            personendaten.geburtstag.Date + "', " +
+            idAdresse + "); " +
+            "SELECT LAST_INSERT_ID() as 'idPersonendaten';";
             MySqlDataReader reader = connector.executeQuery(sql);
             reader.Read();
-            personendaten.idPersonendaten = reader.GetInt32(0);
+            personendaten.idPersonendaten = reader.GetInt32("idPersonendaten");
             reader.Close();
             return personendaten;
         }
@@ -47,6 +48,16 @@ namespace Patientenverwaltung.Datenbank.Adapter
             "WHERE idPersonendaten = " + personendaten.idPersonendaten + ";";
             connector.executeNonQuery(sql);
             return personendaten;
+        }
+
+        /// <summary>
+        /// Löscht einen Personendatensatz aus der Datenbank
+        /// </summary>
+        /// <param name="idPersonendaten">der Personendaten</param>
+        public void deletePersonendaten(int idPersonendaten)
+        {
+            string sql = "DELETE FROM personendaten WHERE idPersonendaten = " + idPersonendaten + ";";
+            connector.executeNonQuery(sql);
         }
     }
 }

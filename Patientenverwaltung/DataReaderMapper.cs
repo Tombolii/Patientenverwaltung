@@ -19,7 +19,7 @@ namespace Patientenverwaltung
                 Patient patient = new Patient();
                 patient.idPatient = reader.GetInt32("idPatient");
                 patient.versicherungsnummer = reader.GetInt32("versicherungsnummer");
-                Versicherung versicherung = new Versicherung()
+                patient.versicherung = new Versicherung()
                 {
                     name = reader.GetString("name"),
                     idVersicherung = reader.GetInt32("idVersicherung")
@@ -47,11 +47,12 @@ namespace Patientenverwaltung
 
         private void extractPersonendatenFromReader(MySqlDataReader reader, Personendaten person)
         {
-                person.vorname = reader.GetString("vorname");
-                person.nachname = reader.GetString("nachname");
-                person.email = reader.GetString("email");
-                person.telefonnummer = reader.GetString("telefonnummer");
-                person.geburtstag = DateTime.Parse(reader.GetString("geburtstag"));
+            person.idPersonendaten = reader.GetInt32("idPersonendaten");
+            person.vorname = reader.GetString("vorname");
+            person.nachname = reader.GetString("nachname");
+            person.email = reader.GetString("email");
+            person.telefonnummer = reader.GetString("telefonnummer");
+            person.geburtstag = DateTime.Parse(reader.GetString("geburtstag"));
             Adresse adresse = new Adresse
             {
                     idAdresse = reader.GetInt32("idAdresse"),
@@ -60,7 +61,7 @@ namespace Patientenverwaltung
                     ort = reader.GetString("ort"),
                     plz = reader.GetInt32("plz")
                 };
-                person.adresse = adresse;
+            person.adresse = adresse;
         }
     }
 }

@@ -35,3 +35,8 @@
 *.sqlite
 *.user
 /.gitignore.bak
+/Patientenverwaltung/obj/Debug/Patientenverwaltung.csproj.CoreCompileInputs.cache
+/Patientenverwaltung/obj/Debug/Patientenverwaltung.csproj.FileListAbsolute.txt
+/Patientenverwaltung/obj/Debug/Patientenverwaltung.csproj.GenerateResource.cache
+/Patientenverwaltung/obj/Debug/Patientenverwaltung.exe
+/Patientenverwaltung/obj/Debug/Patientenverwaltung.pdb

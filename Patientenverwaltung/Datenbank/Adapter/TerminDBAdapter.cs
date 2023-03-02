@@ -20,7 +20,7 @@ namespace Patientenverwaltung.Datenbank.Adapter
         {
             string sql = "INSERT INTO termin (zeitpunkt, idArzt, idPatient) " +
             "VALUES ('" + termin.zeitpunkt.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-            termin.idArzt + ", " + termin.idPatient + ");" +
+            termin.idArzt + ", " + termin.simplePatient.idPatient + "); " +
             "SELECT LAST_INSERT_ID() as 'idTermin';";
 
             MySqlDataReader reader = connector.executeQuery(sql);
@@ -28,6 +28,43 @@ namespace Patientenverwaltung.Datenbank.Adapter
             termin.idTermin = reader.GetInt32("idTermin");
             reader.Close();
             return termin;
+        }
+
+        /// <summary>
+        /// Aktualisiert einen Termin in der Datenbank
+        /// </summary>
+        /// <param name="termin">aktualisierter Termin</param>
+        /// <returns>den aktualisierten Termin</returns>
+        public Termin modifyTermin(Termin termin)
+        {
+            string sql = "UPDATE termin SET zeitpunkt = '" + termin.zeitpunkt.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                "idBericht = " + termin.idBericht + " WHERE idTermin = " + termin.idTermin + ";";
+            connector.executeNonQuery(sql);
+            return termin;
+        }
+
+        /// <summary>
+        /// Löscht einen Termin aus der Datenbank
+        /// </summary>
+        /// <param name="termin">der gelöscht werden soll</param>
+        public void deleteTermin(Termin termin)
+        {
+            {
+            string sql = "DELETE FROM termin WHERE idTermin = " + termin.idTermin + ";";
+            connector.executeQuery(sql);
+            }
+        }
+
+        /// <summary>
+        /// Löscht alle Termine eines Patienten aus der Datenbank
+        /// </summary>
+        /// <param name="idPatient">des Patienten</param>
+        public void deleteAllTermineOfPatient(int idPatient)
+        {
+            {
+            string sql = "DELETE FROM termin WHERE idPatient = " + idPatient + ";";
+            connector.executeQuery(sql);
+            }
         }
 
         /// <summary>
@@ -55,12 +92,12 @@ namespace Patientenverwaltung.Datenbank.Adapter
         private List<Termin> getTermine(string condition)
         {
             string sql = "SELECT termin.idTermin, termin.zeitpunkt, termin.idPatient, termin.idArzt, personendaten.vorname, " +
-                "personendaten.nachname, patient.idPatient " +
+                "personendaten.nachname, patient.idPatient, termin.idBericht " +
                 "FROM termin " +
                 "INNER JOIN patient ON termin.idPatient = patient.idPatient " +
                 "INNER JOIN personendaten ON patient.idPersonendaten = personendaten.idPersonendaten " +
                 condition + " order by zeitpunkt;";
-            MySqlDataReader reader = this.connector.executeQuery(sql);
+            MySqlDataReader reader = connector.executeQuery(sql);
             List<Termin> termine = new List<Termin>();
             while (reader.Read())
             {
@@ -74,6 +111,10 @@ namespace Patientenverwaltung.Datenbank.Adapter
                     nachname = reader.GetString("nachname")
                 };
                 termin.idArzt = reader.GetInt32("idArzt");
+                if (!reader.IsDBNull(reader.GetOrdinal("idBericht")))
+                {
+                   termin.idBericht = reader.GetInt32("idBericht");
+                }
                 termine.Add(termin);
             }
             reader.Close();

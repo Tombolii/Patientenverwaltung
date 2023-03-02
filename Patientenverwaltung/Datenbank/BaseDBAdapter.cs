@@ -1,6 +1,6 @@
 ﻿namespace Patientenverwaltung.Datenbank
 {
-    public class BaseDBAdapter
+    public abstract class BaseDBAdapter
     {
 
         protected DataReaderMapper mapper = new DataReaderMapper();

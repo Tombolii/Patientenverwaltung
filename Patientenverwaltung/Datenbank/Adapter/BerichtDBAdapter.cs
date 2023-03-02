@@ -2,12 +2,13 @@
 using Patientenverwaltung.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Patientenverwaltung.Datenbank.Adapter
 {
+ 
+    /// <summary>
+    /// Verwaltung von Bericht in der Datenbank
+    /// </summary>
     public class BerichtDBAdapter: BaseDBAdapter
     {
 
@@ -18,11 +19,11 @@ namespace Patientenverwaltung.Datenbank.Adapter
         /// <returns>Liste aller Berichte</returns>
         public List<Bericht> getBerichteOfPatient(int idPatient)
         {
-            string sql = "SELECT bericht.idPatient, bericht.beschwerden, bericht.bemerkung, krankheitsbild.bezeichnung, krankheitsbild.symptome, termin.zeitpunkt " +
+            string sql = "SELECT bericht.idBericht, bericht.idPatient, bericht.beschwerden, bericht.bemerkung, bericht.diagnose, krankheitsbild.bezeichnung, krankheitsbild.symptome, termin.zeitpunkt " +
                 "FROM bericht " +
                 "INNER JOIN krankheitsbild ON bericht.diagnose = krankheitsbild.idKrankheitsbild " +
                 "INNER JOIN termin ON bericht.idBericht = termin.idBericht " +
-                "WHERE idPatient = " + idPatient + ";";
+                "WHERE bericht.idPatient = " + idPatient + ";";
 
             MySqlDataReader reader = connector.executeQuery(sql);
             // TODO: Extract this to a mapper class
@@ -30,10 +31,12 @@ namespace Patientenverwaltung.Datenbank.Adapter
             while (reader.Read())
             {
                 Bericht bericht = new Bericht();
+                bericht.idBericht = reader.GetInt32("idBericht");
                 bericht.beschwerden = reader.GetString("beschwerden");
                 bericht.bemerkung = reader.GetString("bemerkung");
                 Krankheitsbild diagnose = new Krankheitsbild
                 {
+                    idKrankheitsbild = reader.GetInt32("diagnose"),
                     bezeichnung = reader.GetString("bezeichnung"),
                     symptome = reader.GetString("symptome")
                 };
@@ -46,6 +49,41 @@ namespace Patientenverwaltung.Datenbank.Adapter
         }
 
         /// <summary>
+        /// Holte einen Bericht aus der Datenbank
+        /// </summary>
+        /// <param name="idBericht">des Berichts</param>
+        /// <returns>den gesuchten Bericht</returns>
+        public Bericht getBericht(int idBericht)
+        {
+            string sql = "SELECT bericht.idBericht, bericht.idPatient, bericht.beschwerden, " +
+                "bericht.bemerkung, bericht.diagnose, krankheitsbild.bezeichnung, " +
+                "krankheitsbild.symptome, termin.zeitpunkt FROM bericht " +
+                "INNER JOIN krankheitsbild ON bericht.diagnose = krankheitsbild.idKrankheitsbild " +
+                "INNER JOIN termin ON bericht.idBericht = termin.idBericht " +
+                "WHERE bericht.idBericht = " + idBericht + ";";
+
+            MySqlDataReader reader = connector.executeQuery(sql);
+            Bericht bericht = new Bericht();
+            while (reader.Read())
+            {
+                bericht.idBericht = reader.GetInt32("idBericht");
+                bericht.beschwerden = reader.GetString("beschwerden");
+                bericht.bemerkung = reader.GetString("bemerkung");
+                Krankheitsbild diagnose = new Krankheitsbild
+                {
+                    idKrankheitsbild = reader.GetInt32("diagnose"),
+                    bezeichnung = reader.GetString("bezeichnung"),
+                    symptome = reader.GetString("symptome")
+                };
+                bericht.diagnose = diagnose;
+                bericht.zeitpunkt = DateTime.Parse(reader.GetString("zeitpunkt"));
+
+            }
+            reader.Close();
+            return bericht;
+        }
+
+        /// <summary>
         /// Aktualisiert einen Bericht in der Datenbank
         /// </summary>
         /// <param name="modifiedBericht">aktualisierter Bericht</param>
@@ -53,8 +91,8 @@ namespace Patientenverwaltung.Datenbank.Adapter
         public Bericht modifyBericht(Bericht modifiedBericht)
         {
             string sql = "UPDATE bericht " +
-                "SET beschwerden = " + modifiedBericht.beschwerden + ", " +
-                "bemerkung = " + modifiedBericht.bemerkung + ", " +
+                "SET beschwerden = '" + modifiedBericht.beschwerden + "', " +
+                "bemerkung = '" + modifiedBericht.bemerkung + "', " +
                 "diagnose = " + modifiedBericht.diagnose.idKrankheitsbild + " " +
                 "WHERE idBericht = " + modifiedBericht.idBericht + ";";
 
@@ -67,13 +105,13 @@ namespace Patientenverwaltung.Datenbank.Adapter
         /// </summary>
         /// <param name="newBericht">der neue Bericht</param>
         /// <returns>der neu erstellte Bericht</returns>
-        public Bericht addBericht(Bericht newBericht)
+        public Bericht createBericht(Bericht newBericht)
         {
             string sql = "INSERT INTO bericht (idPatient, beschwerden, bemerkung, diagnose) " +
-                "VALUES(" + newBericht.patient.idPatient + ", " +
-                newBericht.beschwerden + ", " +
-                newBericht.bemerkung + ", " +
-                newBericht.diagnose.idKrankheitsbild + ";" +
+                "VALUES(" + newBericht.idPatient + ", '" +
+                newBericht.beschwerden + "', '" +
+                newBericht.bemerkung + "', " +
+                newBericht.diagnose.idKrankheitsbild + "); " +
                 "SELECT LAST_INSERT_ID() as 'idBericht';";
 
             MySqlDataReader reader = connector.executeQuery(sql);
@@ -90,6 +128,17 @@ namespace Patientenverwaltung.Datenbank.Adapter
         public void deleteBericht(Bericht bericht)
         {
             string sql = "DELETE FROM bericht WHERE idBericht = " + bericht.idBericht + ";";
+
+            connector.executeNonQuery(sql);
+        }
+
+        /// <summary>
+        /// Löscht alle Berichte eines Patienten aus der Datenbank
+        /// </summary>
+        /// <param name="idPatient">des Patienten</param>
+        public void deleteAllBerichteOfPatient(int idPatient)
+        {
+            string sql = "DELETE FROM bericht WHERE idPatient = " + idPatient + ";";
 
             connector.executeNonQuery(sql);
         }

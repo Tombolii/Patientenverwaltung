@@ -55,70 +55,84 @@
     <Compile Include="Datenbank\Adapter\ArztDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\BerichtDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\KrankheitsbildDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\LoginDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\PatientDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\PersonendatenDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\TerminDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\VersicherungDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\VorerkrankungDBAdapter.cs" />
     <Compile Include="Datenbank\BaseDBAdapter.cs" />
     <Compile Include="Datenbank\MySQLConnector.cs" />
-    <Compile Include="Gui\BerichtForm.cs">
+    <Compile Include="Gui\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\BerichtForm.Designer.cs">
-      <DependentUpon>BerichtForm.cs</DependentUpon>
+    <Compile Include="Gui\AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\BerichtBearbeitenForm.cs">
+    <Compile Include="Gui\Bericht\BerichtOverviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\BerichtBearbeitenForm.Designer.cs">
+    <Compile Include="Gui\Bericht\BerichtOverviewForm.Designer.cs">
+      <DependentUpon>BerichtOverviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Bericht\BerichtBearbeitenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\Bericht\BerichtBearbeitenForm.Designer.cs">
       <DependentUpon>BerichtBearbeitenForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\BerichtDaten.cs">
+    <Compile Include="Gui\Patient\DeletePatientConfirmationPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\BerichtDaten.Designer.cs">
-      <DependentUpon>BerichtDaten.cs</DependentUpon>
+    <Compile Include="Gui\Patient\DeletePatientConfirmationPopupForm.Designer.cs">
+      <DependentUpon>DeletePatientConfirmationPopupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\Login.cs">
+    <Compile Include="Gui\Termin\DeleteTerminConfirmationPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="Gui\Termin\DeleteTerminConfirmationPopupForm.Designer.cs">
+      <DependentUpon>DeleteTerminConfirmationPopupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\NeuerBerichtForm.cs">
+    <Compile Include="Gui\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\NeuerBerichtForm.Designer.cs">
+    <Compile Include="Gui\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Bericht\NeuerBerichtForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\Bericht\NeuerBerichtForm.Designer.cs">
       <DependentUpon>NeuerBerichtForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\NeuerPatientForm.cs">
+    <Compile Include="Gui\Patient\NeuerPatientForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\NeuerPatientForm.Designer.cs">
+    <Compile Include="Gui\Patient\NeuerPatientForm.Designer.cs">
       <DependentUpon>NeuerPatientForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\NeuerTerminForm.cs">
+    <Compile Include="Gui\Termin\NeuerTerminForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\NeuerTerminForm.Designer.cs">
+    <Compile Include="Gui\Termin\NeuerTerminForm.Designer.cs">
       <DependentUpon>NeuerTerminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\PatientBearbeitenForm.cs">
+    <Compile Include="Gui\Patient\PatientBearbeitenForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\PatientBearbeitenForm.Designer.cs">
+    <Compile Include="Gui\Patient\PatientBearbeitenForm.Designer.cs">
       <DependentUpon>PatientBearbeitenForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\PatientSucheForm.cs">
+    <Compile Include="Gui\Patient\PatientOverviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\PatientSucheForm.Designer.cs">
-      <DependentUpon>PatientSucheForm.cs</DependentUpon>
+    <Compile Include="Gui\Patient\PatientOverviewForm.Designer.cs">
+      <DependentUpon>PatientOverviewForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\PatientenDatenForm.cs">
+    <Compile Include="Gui\Patient\PatientenDatenForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\PatientenDatenForm.Designer.cs">
+    <Compile Include="Gui\Patient\PatientenDatenForm.Designer.cs">
       <DependentUpon>PatientenDatenForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Gui\ArztOverviewForm.cs">
@@ -127,16 +141,16 @@
     <Compile Include="Gui\ArztOverviewForm.Designer.cs">
       <DependentUpon>ArztOverviewForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\TerminBearbeitenForm.cs">
+    <Compile Include="Gui\Termin\TerminBearbeitenForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\TerminBearbeitenForm.Designer.cs">
+    <Compile Include="Gui\Termin\TerminBearbeitenForm.Designer.cs">
       <DependentUpon>TerminBearbeitenForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\TerminDatenForm.cs">
+    <Compile Include="Gui\Termin\TerminDatenForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\TerminDatenForm.Designer.cs">
+    <Compile Include="Gui\Termin\TerminDatenForm.Designer.cs">
       <DependentUpon>TerminDatenForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IntegrationTest.cs">
@@ -149,6 +163,7 @@
     <Compile Include="Model\Arzt.cs" />
     <Compile Include="Model\Bericht.cs" />
     <Compile Include="Model\Krankheitsbild.cs" />
+    <Compile Include="Model\PasswordInformation.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Personendaten.cs" />
     <Compile Include="Model\SimplePatient.cs" />
@@ -156,23 +171,50 @@
     <Compile Include="Model\Versicherung.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Gui\BerichtDaten.resx">
-      <DependentUpon>BerichtDaten.cs</DependentUpon>
+    <EmbeddedResource Include="Gui\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gui\Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="Gui\Bericht\BerichtBearbeitenForm.resx">
+      <DependentUpon>BerichtBearbeitenForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gui\NeuerTerminForm.resx">
+    <EmbeddedResource Include="Gui\Bericht\BerichtOverviewForm.resx">
+      <DependentUpon>BerichtOverviewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Patient\DeletePatientConfirmationPopupForm.resx">
+      <DependentUpon>DeletePatientConfirmationPopupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Termin\DeleteTerminConfirmationPopupForm.resx">
+      <DependentUpon>DeleteTerminConfirmationPopupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Bericht\NeuerBerichtForm.resx">
+      <DependentUpon>NeuerBerichtForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Patient\NeuerPatientForm.resx">
+      <DependentUpon>NeuerPatientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Termin\NeuerTerminForm.resx">
       <DependentUpon>NeuerTerminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gui\PatientSucheForm.resx">
-      <DependentUpon>PatientSucheForm.cs</DependentUpon>
+    <EmbeddedResource Include="Gui\Patient\PatientBearbeitenForm.resx">
+      <DependentUpon>PatientBearbeitenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Patient\PatientenDatenForm.resx">
+      <DependentUpon>PatientenDatenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Patient\PatientOverviewForm.resx">
+      <DependentUpon>PatientOverviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\ArztOverviewForm.resx">
       <DependentUpon>ArztOverviewForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gui\TerminBearbeitenForm.resx">
+    <EmbeddedResource Include="Gui\Termin\TerminBearbeitenForm.resx">
       <DependentUpon>TerminBearbeitenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Termin\TerminDatenForm.resx">
+      <DependentUpon>TerminDatenForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IntegrationTest.resx">
       <DependentUpon>IntegrationTest.cs</DependentUpon>
@@ -198,9 +240,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\search_icon.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

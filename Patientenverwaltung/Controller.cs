@@ -1,304 +1,580 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Patientenverwaltung;
 using Patientenverwaltung.Model;
-using Patientenverwaltung.Datenbank;
 using Patientenverwaltung.Gui;
-using BerichtForm = Patientenverwaltung.Gui.BerichtForm;
 using Patientenverwaltung.Datenbank.Adapter;
 
 namespace Patientenverwaltung
 {
-    
     public class Controller
     {
         // GUI-Forms
-        private ArztOverviewForm programmstart = null;
-        private BerichtForm bericht = null;
-        private BerichtBearbeitenForm berichtBearbeiten = null;
-        private BerichtDaten_cs berichtDaten = null;
-        private NeuerBerichtForm neuerBericht = null;
-        private NeuerPatientForm neuerPatient = null;
-        private NeuerTerminForm neuerTermin = null;
-        private PatientBearbeitenForm patientBearbeiten = null;
-        private PatientSucheForm patient = null;
-        private PatientenDatenForm patientenDaten = null;
-        private TerminBearbeitenForm terminBearbeiten = null;
-        private TerminDatenForm terminDaten = null;
-        private Login login = null;
+        private ArztOverviewForm arztOverview;
+        private BerichtOverviewForm berichtOverviewForm;
+        private BerichtBearbeitenForm berichtBearbeitenForm;
+        private NeuerBerichtForm neuerBerichtForm;
+        private NeuerPatientForm neuerPatientForm;
+        private NeuerTerminForm neuerTerminForm;
+        private PatientBearbeitenForm patientBearbeitenForm;
+        private PatientOverviewForm patientOverviewForm;
+        private PatientenDatenForm patientenDatenForm;
+        private TerminBearbeitenForm terminBearbeitenForm;
+        private TerminDatenForm terminDatenForm;
+        private LoginForm loginForm;
+        private AdminForm adminForm;
+        private DeletePatientConfirmationPopupForm deletePatientConfirmationPopupForm;
+        private DeleteTerminConfirmationPopupForm deleteTerminConfirmationPopupForm;
+
 
         // Adapter
         private TerminDBAdapter terminDBAdapter;
         private ArztDBAdapter arztDBAdapter;
         private BerichtDBAdapter berichtDBAdapter;
         private PatientDBAdapter patientDBAdapter;
+        private KrankheitsbildDBAdapter krankheitsbildDBAdapter;
+        private VersicherungDBAdapter versicherungDBAdapter;
+        private LoginDBAdapter loginDBAdapter;
+        private AdresseDBAdapter adresseDBAdapter;
+        private PersonendatenDBAdapter personendatenDBAdapter;
 
-
+        // Informationen
+        private Arzt loggedInArzt;
+        private Patient currentSelectedPatient;
+        private Bericht currentSelectedBericht;
+        private Termin currentSelectedTermin;
         private List<Termin> termine;
-        
+        private List<Patient> patienten;
+        private List<Krankheitsbild> krankheitsbilder;
+        private List<Versicherung> versicherungen;
 
         public Controller()
         {
             // GUI-Forms
-            programmstart = new ArztOverviewForm(this);
-            bericht = new BerichtForm(this);
-            berichtBearbeiten = new BerichtBearbeitenForm(this);
-            berichtDaten = new BerichtDaten_cs(this);
-            neuerBericht = new NeuerBerichtForm(this);
-            neuerPatient = new NeuerPatientForm(this);
-            neuerTermin = new NeuerTerminForm(this);
-            patientBearbeiten = new PatientBearbeitenForm(this);
-            patient = new PatientSucheForm(this);
-            patientenDaten = new PatientenDatenForm(this);
-            terminBearbeiten = new TerminBearbeitenForm(this);
-            terminDaten = new TerminDatenForm(this);
-            login = new Login(this);
+            arztOverview = new ArztOverviewForm(this);
+            berichtOverviewForm = new BerichtOverviewForm(this);
+            berichtBearbeitenForm = new BerichtBearbeitenForm(this);
+            neuerBerichtForm = new NeuerBerichtForm(this);
+            neuerPatientForm = new NeuerPatientForm(this);
+            neuerTerminForm = new NeuerTerminForm(this);
+            patientBearbeitenForm = new PatientBearbeitenForm(this);
+            patientOverviewForm = new PatientOverviewForm(this);
+            patientenDatenForm = new PatientenDatenForm(this);
+            terminBearbeitenForm = new TerminBearbeitenForm(this);
+            terminDatenForm = new TerminDatenForm(this);
+            loginForm = new LoginForm(this);
+            adminForm = new AdminForm(this);
+            deletePatientConfirmationPopupForm = new DeletePatientConfirmationPopupForm(this);
+            deleteTerminConfirmationPopupForm = new DeleteTerminConfirmationPopupForm(this);    
 
             // Adapter
             terminDBAdapter = new TerminDBAdapter();
             arztDBAdapter = new ArztDBAdapter();
             berichtDBAdapter= new BerichtDBAdapter();
             patientDBAdapter= new PatientDBAdapter();
+            krankheitsbildDBAdapter = new KrankheitsbildDBAdapter();
+            versicherungDBAdapter = new VersicherungDBAdapter();
+            loginDBAdapter = new LoginDBAdapter();
+            adresseDBAdapter = new AdresseDBAdapter();
+            personendatenDBAdapter = new PersonendatenDBAdapter();
 
             termine = new List<Termin>();
-            
+            patienten = new List<Patient>();
+            versicherungen = new List<Versicherung>();
+            krankheitsbilder = new List<Krankheitsbild>();
     }
 
+        /// <summary>
+        /// Gibt die Form, die beim Starten des Programms gezeigt werden soll
+        /// </summary>
+        /// <returns>initiale Form</returns>
         public Form startProgram()
         {
-            return login;
+            return loginForm;
         }
 
-        public void programmStart()
+        /// <summary>
+        /// Lädt Daten und navigiert von der LoginForm zur ArztOverviewForm
+        /// </summary>
+        /// <param name="loggedInArzt">angemeldeter Arzt</param>
+        /// 
+        public void navLoginToArztOverview(int loggedInArztId)
         {
-            programmstart.displayAllTermine();
-            login.Hide();
-            programmstart.Show();
-        }
-
-        public void ärzteseiteSearchPat()
-        {
-            programmstart.Hide();
-            patient.Show();
-        }
-
-        public void ärzteseiteAddTermin()
-        {
-            programmstart.Hide();
-            neuerTermin.Show();
-        }
-
-        public void berichtBackToPat()
-        {
-            bericht.Hide();
-            patient.Show();
-        }
-
-        public void berichtSearchBericht()
-        {
-            bericht.Hide();
-            berichtDaten.Show();
+            // Laden der Datensätze aus der DB
+            loggedInArzt = getArztById(loggedInArztId);
+            patienten = patientDBAdapter.getAllPatienten();
+            termine = terminDBAdapter.getTermineOfArzt(loggedInArzt.idArzt);
+            krankheitsbilder = krankheitsbildDBAdapter.getKrankheitsbilder();
+            versicherungen = versicherungDBAdapter.getAllVersicherungen();
             
+            loginForm.Hide();
+            arztOverview.Show();
         }
 
-        public void berichtAddBericht()
+        /// <summary>
+        /// Navigation von der LoginForm zur AdminForm
+        /// </summary>
+        public void navLoginToAdmin()
         {
-            bericht.Hide();
-            neuerBericht.Show();
+            loginForm.Hide();
+            adminForm.Show();
         }
 
-        public void berichtBearbeitenSaveChange()
+        /// <summary>
+        /// Navigation von der AdminForm zur LoginForm
+        /// </summary>
+        public void navAdminToLogin()
         {
-            berichtBearbeiten.Hide();
-            bericht.Show();
+            adminForm.Hide();
+            loginForm.Show();
         }
 
-        public void berichtBearbeitenClose()
+        /// <summary>
+        /// Navigation von der ArztOverviewForm zur PatientOverviewForm
+        /// </summary>
+        public void navArztOverviewToPatientOverview()
         {
-            //Fertig - Ungestestet
-            berichtBearbeiten.Hide();
-            bericht.Show();
+            arztOverview.Hide();
+            patientOverviewForm.Show();
         }
 
-        public void berichtDatenChange()
+        /// <summary>
+        /// Navigation von der ArztOverviewForm zur TerminDatenForm
+        /// </summary>
+        public void navArztOverviewToTerminDaten()
         {
-            //Fertig - Ungestestet
-            berichtDaten.Hide();
-            berichtBearbeiten.Show();
+            arztOverview.Hide();
+            terminDatenForm.Show();
         }
 
-        public void berichtDatenBack()
+        /// <summary>
+        /// Navigation von der PatientOverviewForm zur NeuerTerminForm
+        /// </summary>
+        public void navPatientOverviewToNeuerTermin()
         {
-            //Fertig - Ungestestet
-            berichtDaten.Hide();
-            bericht.Show();
+            neuerTerminForm.Show();
         }
 
-        public void neuerBerichtAddBericht()
+        /// <summary>
+        /// Navigation von der PatientOverviewForm zur NeuerPatientForm
+        /// </summary>
+        public void navPatientOverviewToNeuerPatient()
         {
-            //Fertig - Ungestestet
-            neuerBericht.Hide();
-            bericht.Show();
+            patientOverviewForm.Hide();
+            neuerPatientForm.Show();
         }
 
-        public void neuerBerichtClose()
+        /// <summary>
+        /// Navigation von der PatientOverviewForm zur ArztOverviewForm
+        /// </summary>
+        public void navPatientOverviewToArztOverview()
         {
-            //Fertig - Ungestestet
-            neuerBericht.Hide();
-            bericht.Show();
+            patientOverviewForm.Hide();
+            arztOverview.Show();
         }
 
-        public void neuerPatientAddPat(Patient patienten)
+        /// <summary>
+        /// Navigation von der PatientOverviewForm zur PatientenDatenForm
+        /// </summary>
+        public void navPatientOverviewToPatientenDaten()
         {
-            neuerPatient.Hide();
-            patient.Show();
-            /*
-            DBAdapter dBAdapter = new DBAdapter();
-            Patient createdPatient = dBAdapter.addPatient(patienten);
-            patienten.Add(createdPatient);
-            neuerPatient.Hide();
-            patient.Show();
-
-            patient.addPatientToFrontend(createdPatient)
-            */
+            patientOverviewForm.Hide();
+            patientenDatenForm.Show();
         }
 
-        public void neuerPatientClose()
+        /// <summary>
+        /// Navigation von der BerichtOverviewForm zur PatientenDatenForm
+        /// </summary>
+        public void navBerichtOverviewToPatientenDaten()
         {
-            //Fertig - Ungestestet
-            neuerPatient.Hide();
-            patient.Show();
+            berichtOverviewForm.Hide();
+            patientenDatenForm.Show();
         }
 
-        public void neuerTerminAddTermin(Termin termin)
+        /// <summary>
+        /// Navigation von der BerichtOverviewForm zur BerichtBearbeitenForm
+        /// </summary>
+        public void navBerichtOverviewToBerichtBearbeiten()
         {
-            Termin createdTermin = terminDBAdapter.addTermin(termin);
-            termine.Add(createdTermin);
-            neuerTermin.Hide();
-            programmstart.Show();
-
-            programmstart.addTerminToFrontend(createdTermin);
+            berichtOverviewForm.Hide();
+            berichtBearbeitenForm.Show();
         }
 
-        public void neuerTerminClose()
+        /// <summary>
+        /// Navigation von der BerichtBearbeitenForm zur BerichtOverviewForm
+        /// </summary>
+        public void navBerichtBearbeitenToBerichtOverview()
         {
-            //Fertig - Ungestestet
-            neuerTermin.Hide();
-            programmstart.Show();
+            berichtBearbeitenForm.Hide();
+            berichtOverviewForm.Show();
         }
 
-        public void patientBearbeitenSaveChange()
+        /// <summary>
+        /// Navigation von der BerichtBearbeitenForm zur TerminDatenForm
+        /// </summary>
+        public void navBerichtBearbeitenToTerminDaten()
         {
-            //Fertig - Ungestestet
-            patientBearbeiten.Hide();
-            patient.Show();
+            berichtBearbeitenForm.Hide();
+            terminDatenForm.Show();
         }
 
-        public void patientBearbeitenClose()
+        /// <summary>
+        /// Navigation von der NeuerBerichtForm zur TerminDatenForm
+        /// </summary>
+        public void navNeuerBerichtToTerminDaten()
         {
-            //Fertig - Ungestestet
-            patientBearbeiten.Hide();
-            patient.Show();
+            neuerBerichtForm.Hide();
+            terminDatenForm.Show();
         }
 
-        public void patientenBackToStart()
+        /// <summary>
+        /// Navigation von der NeuerPatientForm zur PatientOverviewForm
+        /// </summary>
+        public void navNeuerPatientToPatientOverview()
         {
-            //Fertig - Ungestestet
-            patient.Hide();
-            programmstart.Show();
+            neuerPatientForm.Close();
+            patientOverviewForm.Show();
         }
 
-        public void patientSearchPat()
+        /// <summary>
+        /// Navigation von der PatientBearbeitenForm zur PatientenDatenForm
+        /// </summary>
+        public void navPatientBearbeitenToPatientenDaten()
         {
-            //Fertig - Ungestestet
-            patient.Hide();
-            patientenDaten.Show();
+            patientBearbeitenForm.Hide();
+            patientenDatenForm.Show();
         }
 
-        public void patientAddPat()
+        /// <summary>
+        /// Navigation von der PatientenDatenForm zur PatientBearbeitenForm
+        /// </summary>
+        public void navPatientenDatenToPatientBearbeiten()
         {
-            //Fertig - Ungestestet
-            patient.Hide();
-            neuerPatient.Show();
+            patientenDatenForm.Hide();
+            patientBearbeitenForm.Show();
         }
 
-        public void patientDatenChangePat()
+        /// <summary>
+        /// Navigation von der PatientenDatenForm zur BerichtOverviewForm
+        /// </summary>
+        public void navPatientenDatenToBerichtOverview()
         {
-            //Fertig - Ungestestet
-            patientenDaten.Hide();
-            patientBearbeiten.Show();
+            patientenDatenForm.Hide();
+            berichtOverviewForm.Show();
         }
 
-        public void patientDatenOpenBerichte()
+        /// <summary>
+        /// Navigation von der PatientenDatenForm zur DeleteConfirmationPopupForm
+        /// </summary>
+        public void navPatientenDatenToDeleteConfirmationPopup()
         {
-            //Fertig - Ungestestet
-            patientenDaten.Hide();
-            berichtDaten.Show();
+            deletePatientConfirmationPopupForm.Show();
         }
 
-        public void patientDatenBack()
+        /// <summary>
+        /// Navigation von der DeletePatientConfirmationPopupForm zur PatientOverviewForm
+        /// </summary>
+        public void navDeletePatientConfirmationPopupToPatientOverview()
         {
-            //Fertig - Ungestestet
-            patientenDaten.Hide();
-            patient.Show();
+            patientenDatenForm.Hide();
+            deletePatientConfirmationPopupForm.Hide();
+            patientOverviewForm.Show();
         }
 
-        public void terminBearbeitenSaveChange()
+        /// <summary>
+        /// Navigation von der DeletePatientConfirmationPopupForm zur PatientenDatenForm
+        /// </summary>
+        public void navDeletePatientConfirmationPopupToPatientenDaten()
         {
-            //Fertig - Ungestestet
-            terminBearbeiten.Hide();
-            programmstart.Show();
+            deletePatientConfirmationPopupForm.Hide();
+            patientenDatenForm.Show();
         }
 
-        public void terminBearbeitenClose()
+        /// <summary>
+        /// Navigation von der PatientenDatenForm zur PatientenOverviewForm
+        /// </summary>
+        public void navPatientenDatenToPatientOverview()
         {
-            //Fertig - Ungestestet
-            terminBearbeiten.Hide();
-            programmstart.Show();
+            patientenDatenForm.Hide();
+            patientOverviewForm.Show();
         }
 
-        public void terminDatenChangeTermin()
+        /// <summary>
+        /// Navigation von der TerminBearbeitenForm zur TerminDatenForm, wenn Termin aktualisiert wurde
+        /// </summary>
+        public void navTerminBearbeitenToTerminDaten()
         {
-            //Fertig - Ungestestet
-            terminDaten.Hide();
-            terminBearbeiten.Show();
+            terminBearbeitenForm.Hide();
+            terminDatenForm.Show();
         }
 
-        public void terminDatenDeleteTermin()
+        /// <summary>
+        /// Navigation von der TerminDatenForm zur TerminBearbeitenForm
+        /// </summary>
+        public void navTerminDatenToTerminBearbeiten()
         {
-            //Fertig - Ungestestet
-            terminDaten.Hide();
-            programmstart.Show();
+            terminDatenForm.Hide();
+            terminBearbeitenForm.Show();
         }
 
-        public void terminDatenClose()
+        /// <summary>
+        /// Navigation von der TerminDatenForm zur ArztOverviewForm
+        /// </summary>
+        public void navTerminDatenToArztOverview()
         {
-            //Fertig - Ungestestet
-            terminDaten.Hide();
-            programmstart.Show();
+            terminDatenForm.Hide();
+            arztOverview.Show();
         }
 
-        public List<Termin> GetTermineOfArzt(int idArzt)
+        /// <summary>
+        /// Navigation von der TerminDatenForm zur DeleteTerminConfirmationForm
+        /// </summary>
+        public void navTerminDatenToDeleteTerminConfirmationPopup()
         {
-            return terminDBAdapter.getTermineOfArzt(idArzt);               
-        }
-        public List<Termin> getTermineOfPatient(int idPatient)
-        {
-            return terminDBAdapter.getTermineOfPatient(idPatient);
-        }
-        public List<BerichtForm> getBericht(int idPatient)
-        {
-            return null;
+            deleteTerminConfirmationPopupForm.Show();
         }
 
-        public List<Krankheitsbild> getKrankheiten(int idPatient)
+        /// <summary>
+        /// Navigation von der TerminDatenForm zur NeuerBerichtForm
+        /// </summary>
+        public void navTerminDatenToNeuerBericht()
         {
-            return null;
+            terminDatenForm.Hide();
+            neuerBerichtForm.Show();
         }
 
+        /// <summary>
+        /// Navigation von der NeuerTerminForm zur PatientenDatenForm
+        /// </summary>
+        public void navNeuerTerminToPatientenDaten()
+        {
+            neuerTerminForm.Hide();
+        }
+
+        /// <summary>
+        /// Navigation von der TerminDatenForm zur BerichtDatenForm
+        /// </summary>
+        public void navTerminDatenToBerichtDaten()
+        {
+            
+            berichtBearbeitenForm.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der DeleteTerminConfirmationPopupForm zur ArztOverviewForm
+        /// </summary>
+        public void navDeleteTerminConfirmationPopupToArztOverview()
+        {
+            terminDatenForm.Hide();
+            deleteTerminConfirmationPopupForm.Hide();
+            arztOverview.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der DeleteTerminConfirmationPopupForm zur TerminDatenForm
+        /// </summary>
+        public void navDeleteTerminConfirmationPopupToTerminDaten()
+        {
+            deleteTerminConfirmationPopupForm.Hide();
+            terminDatenForm.Show();
+        }
+
+        /// <summary>
+        /// Gibt alle Berichte des aktuell ausgewählten Patienten zurück
+        /// </summary>
+        /// <returns>List der Berichte</returns>
+        public List<Bericht> getBerichteOfPatient()
+        {
+            return berichtDBAdapter.getBerichteOfPatient(currentSelectedPatient.idPatient);
+        }
+
+        /// <summary>
+        /// Gibt einen bestimmten Bericht zurück
+        /// </summary>
+        /// <param name="idBericht">des gesuchten Berichts</param>
+        /// <returns>den gesuchten Bericht</returns>
+        public Bericht getBerichtById(int idBericht)
+        {
+            return berichtDBAdapter.getBericht(idBericht);
+        }
+
+        /// <summary>
+        /// Löscht den aktuell ausgewählten Patient
+        /// </summary>
+        public void deletePatient()
+        {
+            patientDBAdapter.deletePatient(currentSelectedPatient);
+            for (int i = 0; i < termine.Count; i++)
+            {
+                if (termine[i].simplePatient.idPatient == currentSelectedPatient.idPatient)
+                {
+                    termine.RemoveAt(i);
+                }
+            }
+            patienten.Remove(currentSelectedPatient);
+            currentSelectedPatient = null;
+        }
+
+        /// <summary>
+        /// Löscht den aktuell ausgewählten Termin
+        /// </summary>
+        public void deleteCurrentTermin()
+        {
+            terminDBAdapter.deleteTermin(currentSelectedTermin);
+            termine.Remove(currentSelectedTermin);
+            currentSelectedTermin = null;
+        }
+
+        /// <summary>
+        /// Erstellt einen neuen Bericht
+        /// </summary>
+        /// <param name="neuerBericht">der neue Bericht</param>
+        public void createBericht(Bericht neuerBericht)
+        {
+            Bericht bericht = berichtDBAdapter.createBericht(neuerBericht);
+            currentSelectedBericht = bericht;
+            currentSelectedTermin.idBericht = bericht.idBericht;
+            updateTermin(currentSelectedTermin);
+        }
+
+        /// <summary>
+        /// Aktualisiert einen Bericht
+        /// </summary>
+        /// <param name="updatedBericht">aktualisierter Bericht</param>
+        public void updateBericht(Bericht updatedBericht)
+        {
+            currentSelectedBericht = berichtDBAdapter.modifyBericht(updatedBericht);
+        }
+
+        /// <summary>
+        /// Erstellt einen neuen Patient
+        /// </summary>
+        /// <param name="patient">der neue Patient</param>
+        public void createPatient(Patient patient)
+        {
+            patienten.Add(patientDBAdapter.createPatient(patient));
+        }
+
+        /// <summary>
+        /// Aktualisiert einen Patienten
+        /// </summary>
+        /// <param name="updatedPatient">aktualisierter Patient</param>
+        public void updatePatient(Patient updatedPatient)
+        {
+            patienten.Remove(currentSelectedPatient);
+            currentSelectedPatient = patientDBAdapter.modifyPatient(updatedPatient);
+            patienten.Add(currentSelectedPatient);
+        }
+
+        /// <summary>
+        /// Erstellt einen neuen Termin
+        /// </summary>
+        /// <param name="termin">der neue Termin</param>
+        public void createTermin(Termin termin)
+        {
+            termine.Add(terminDBAdapter.addTermin(termin));
+        }
+
+        /// <summary>
+        /// Aktualisiert einen Termin
+        /// </summary>
+        /// <param name="updatedTermin">aktualisierter Termin</param>
+        public void updateTermin(Termin updatedTermin)
+        {
+            Termin updatedTerminOfDb = terminDBAdapter.modifyTermin(updatedTermin);
+            currentSelectedTermin = updatedTerminOfDb;
+        }
+
+        public void createArzt(Arzt arzt)
+        {
+            arztDBAdapter.createArzt(arzt);
+        }
+
+        private Arzt getArztById(int idArzt)
+        {
+            return arztDBAdapter.getArztById(idArzt);
+        }
+
+        public Arzt getLoggedInArzt()
+        {
+            return loggedInArzt;
+        }
+
+        public List<Krankheitsbild> getKrankheitsbilder()
+        {
+            return krankheitsbilder;
+        }
+
+        public List<Versicherung> getVersicherungen()
+        {
+
+            return versicherungen;
+        }
+
+        public List<Termin> getTermine()
+        {
+            return termine;
+        }
+
+        public List<Patient> getPatienten()
+        {
+            return patienten;
+        }
+
+        public Patient getCurrentSelectedPatient()
+        {
+            return currentSelectedPatient;
+        }
+
+        public void setCurrentSelectedPatient(Patient currentSelectedPatient)
+        {
+            this.currentSelectedPatient = currentSelectedPatient;
+        }
+
+        public void setCurrentSelectedBericht(Bericht currentSelectedBericht)
+        {
+            this.currentSelectedBericht = currentSelectedBericht;
+        }
+
+        public Bericht getCurrentSelectedBericht()
+        {
+            return currentSelectedBericht;
+        }
+
+        /// <summary>
+        /// Setzt den aktuell ausgewählten Bericht und falls für diesen bereits ein Bericht existiert, wird dieser ebenfalls als markiert gesetzt
+        /// </summary>
+        /// <param name="currentSelectedTermin">ausgewählter Termin</param>
+        public void setCurrentSelectedTermin(Termin currentSelectedTermin)
+        {
+            this.currentSelectedTermin = currentSelectedTermin;
+            if(currentSelectedTermin.idBericht != 0)
+            {
+                currentSelectedBericht = getBerichtById(currentSelectedTermin.idBericht);
+            }
+        }
+
+        public Termin getCurrentSelectedTermin()
+        {
+            return currentSelectedTermin;
+        }
+
+        /// <summary>
+        /// Holt das gesetze Passwort und überprüft dieses mit dem eingegebenen
+        /// </summary>
+        /// <param name="arztID">des Arztes</param>
+        /// <param name="passwortInput">eingegebenes Password</param>
+        /// <returns>true bei Übereinstimmung</returns>
+        public bool verifyLogin(int arztID, string passwortInput)
+        {
+            if (arztID != 0 && passwortInput != "")
+            {
+                PasswordInformation passwordInformation = loginDBAdapter.getPassword(arztID);
+                return passwordInformation.validatePassword(passwortInput);
+            } else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -1,14 +1,7 @@
 ﻿using Patientenverwaltung.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Controller = Patientenverwaltung.Controller;
 
 
 namespace Patientenverwaltung.Gui
@@ -18,43 +11,158 @@ namespace Patientenverwaltung.Gui
     {
         private Controller controller;
         private static int rowCount = 0;
+        private int pageIndex = 0;
+        private const int ROW_AMOUNT = 10;
+
         public ArztOverviewForm(Controller controller)
         {
             InitializeComponent();
             this.controller = controller;
-
         }
-        public void displayAllTermine()
+
+        protected override void OnVisibleChanged(EventArgs e)
         {
-            List<Termin> termine = controller.GetTermineOfArzt(1);
-            for (int i = 0; i < termine.Count; i++)
+            base.OnVisibleChanged(e);
+            if (Visible)
             {
-                addTerminToFrontend(termine[i]);
+                Arzt loggedInArzt = controller.getLoggedInArzt();
+                lbl_Name.Text = "Hallo " + loggedInArzt.vorname + " " + loggedInArzt.nachname;
+                refreshTerminTable();
             }
         }
-        public void addTerminToFrontend(Termin termin)
+
+        public void displayTermineOfList(List<Termin> termineToShow)
         {
-            tblTermine.Controls.Add(new Label() { Text = termin.simplePatient.nachname }, 2, rowCount);
-            tblTermine.Controls.Add(new Label() { Text = termin.simplePatient.vorname }, 3, rowCount);
-            tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("dd,MM,yyyy") }, 0, rowCount);
-            tblTermine.Controls.Add(new Label() { Text = termin.zeitpunkt.ToString("H:mm") + " Uhr" }, 1, rowCount);
-            rowCount++;
+            tblTermine.Visible = false;
+            clearTermineOverview();
+            rowCount = 0;               
+            for (int i = 0; i < termineToShow.Count; i++)
+            {
+                addTerminToFrontend(termineToShow[i]);
+            }
+            tblTermine.Visible = true;
         }
 
-        private void btn_TerminHinzufuegen_Click(object sender, EventArgs e)
+        public void addTerminToFrontend(Termin termin)
         {
-            controller.ärzteseiteAddTermin();
+            Label datumLabel = new Label();
+            datumLabel.DoubleClick += onTerminDoubleClick;
+            datumLabel.Text = termin.zeitpunkt.ToShortDateString();
+
+            Label uhrzeitLabel = new Label();
+            uhrzeitLabel.DoubleClick += onTerminDoubleClick;
+            uhrzeitLabel.Text = termin.zeitpunkt.ToShortTimeString() + " Uhr";
+
+            Label nachnameLabel = new Label();
+            nachnameLabel.DoubleClick += onTerminDoubleClick;
+            nachnameLabel.Text = termin.simplePatient.nachname;
+
+            Label vornameLabel = new Label();
+            vornameLabel.DoubleClick += onTerminDoubleClick;
+            vornameLabel.Text = termin.simplePatient.vorname;
+
+            tblTermine.Controls.Add(nachnameLabel, 2, rowCount);
+            tblTermine.Controls.Add(vornameLabel, 3, rowCount);
+            tblTermine.Controls.Add(datumLabel, 0, rowCount);
+            tblTermine.Controls.Add(uhrzeitLabel, 1, rowCount);
+            rowCount++;
         }
 
         private void btn_PatientenAnsehen_Click(object sender, EventArgs e)
         {
-            controller.ärzteseiteSearchPat();
+            controller.navArztOverviewToPatientOverview();
         }
 
-        private void Programmstart_Load(object sender, EventArgs e)
+        private void clearTermineOverview()
         {
-            
+            tblTermine.Controls.Clear();
         }
 
+        private void refreshTerminTable()
+        {
+            int firstTerminIndexOfPage = pageIndex * ROW_AMOUNT;
+            int lastTerminIndexOfPage = ROW_AMOUNT;
+            if (firstTerminIndexOfPage + ROW_AMOUNT >= controller.getTermine().Count)
+            {
+                lastTerminIndexOfPage = controller.getTermine().Count - firstTerminIndexOfPage;
+            }
+            List<Termin> termineToShow = controller.getTermine().GetRange(firstTerminIndexOfPage, lastTerminIndexOfPage);
+            if (!checkAlleTermine.Checked)
+            {
+                // Termine des aktuellen Tages anzeigen
+                DateTime currentDate = DateTime.Now;
+                termineToShow = termineToShow.FindAll(termin =>
+                    termin.zeitpunkt.Date.Equals(currentDate.Date)
+                );
+            }
+            displayTermineOfList(termineToShow);
+            
+            setVisibilityOfPageButtons();
+        }
+
+        private void btn_Weiter_Click(object sender, EventArgs e)
+        {
+            if (validateNextPage())
+            {
+                pageIndex++;
+                lblPage.Text = (pageIndex + 1).ToString();
+                setVisibilityOfPageButtons();
+                refreshTerminTable();
+            }
+        }
+
+        private void btn_Zurueck_Click(object sender, EventArgs e)
+        {
+            if (pageIndex != 0)
+            {
+                pageIndex--;
+                lblPage.Text = (pageIndex + 1).ToString();
+                setVisibilityOfPageButtons();
+                refreshTerminTable();
+            }
+        }
+
+        /// <summary>
+        /// Setzt die Sichtbarkeit der Buttons für die Seiten
+        /// </summary>
+        private void setVisibilityOfPageButtons()
+        {
+            if (pageIndex == 0)
+            {
+                btn_Zurueck.Enabled = false;
+            }
+            else
+            {
+                btn_Zurueck.Enabled = true;
+            }
+            if (!validateNextPage())
+            {
+                btn_Weiter.Enabled = false;
+            }
+            else
+            {
+                btn_Weiter.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Überprüft ob es noch eine weitere Seite gibt
+        /// </summary>
+        /// <returns></returns>
+        private bool validateNextPage()
+        {
+            return (pageIndex + 1) * ROW_AMOUNT < controller.getPatienten().Count;
+        }
+
+        private void checkAlleTermine_CheckedChanged(object sender, EventArgs e)
+        {
+           refreshTerminTable();
+        }
+
+        public void onTerminDoubleClick(object sender, EventArgs e)
+        {
+            controller.setCurrentSelectedTermin(controller.getTermine()[tblTermine.GetRow((Control)sender)]);
+            controller.navArztOverviewToTerminDaten();
+        }
     }
 }

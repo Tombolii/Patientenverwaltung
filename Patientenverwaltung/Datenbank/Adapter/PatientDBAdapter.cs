@@ -5,12 +5,17 @@ using System.Collections.Generic;
 
 namespace Patientenverwaltung.Datenbank.Adapter
 {
+    /// <summary>
+    /// Verwaltung von Patienten in der Datenbank
+    /// </summary>
     public class PatientDBAdapter : BaseDBAdapter
     {
 
         private AdresseDBAdapter adresseDBAdapter = new AdresseDBAdapter();
         private PersonendatenDBAdapter personendatenDBAdapter= new PersonendatenDBAdapter();
         private VorerkrankungDBAdapter vorerkrankungDBAdapter = new VorerkrankungDBAdapter();
+        private BerichtDBAdapter berichtDBAdapter = new BerichtDBAdapter();
+        private TerminDBAdapter terminDBAdapter = new TerminDBAdapter();
 
         /// <summary>
         /// Liest einen Patient mit Hilfe der idPatient aus
@@ -43,13 +48,29 @@ namespace Patientenverwaltung.Datenbank.Adapter
         }
 
         /// <summary>
-        /// Löscht einen bestimmten Patienten aus der Datenbank
+        /// Gibt alle Patienten aus der Datenbank zurück
+        /// </summary>
+        /// <returns>Liste aller Patienten</returns>
+        public List<Patient> getAllPatienten()
+        {
+            return getPatientByCondition("");
+        }
+
+        /// <summary>
+        /// Löscht einen bestimmten Patienten aus der Datenbank und alle dazugehörigen Informationen
         /// </summary>
         /// <param name="idPatient">des zu löschenden Patienten</param>
-        public void deletePatient(int idPatient)
+        public void deletePatient(Patient patient)
         {
-            string sql = "DELETE FROM patient WHERE idPatient = " + idPatient + ";";
+            vorerkrankungDBAdapter.deleteAllVorerkrankungenOfPatient(patient.idPatient);
+            terminDBAdapter.deleteAllTermineOfPatient(patient.idPatient);
+            berichtDBAdapter.deleteAllBerichteOfPatient(patient.idPatient);
+
+            string sql = "DELETE FROM patient WHERE idPatient = " + patient.idPatient + ";";
             connector.executeNonQuery(sql);
+
+            personendatenDBAdapter.deletePersonendaten(patient.idPersonendaten);
+            adresseDBAdapter.deleteAdresse(patient.adresse.idAdresse);
         }
 
         /// <summary>
@@ -85,13 +106,13 @@ namespace Patientenverwaltung.Datenbank.Adapter
         public Patient createPatient(Patient newPatient)
         {
             // Anlegen der Adresse
-            adresseDBAdapter.createNewAdresse(newPatient.adresse);
+            Adresse adresse = adresseDBAdapter.createNewAdresse(newPatient.adresse);
 
             // Anlegen der Personendaten
-            personendatenDBAdapter.createNewPersonendaten(newPatient);
+            Personendaten personendaten = personendatenDBAdapter.createNewPersonendaten(newPatient, adresse.idAdresse);
 
             // Anlegen des Patienten und Auslesen der Id des neuen Patienten
-            addPatient(newPatient);
+            addPatient(newPatient, personendaten.idPersonendaten);
 
             // Vorerkrankungen synchronisieren
             vorerkrankungDBAdapter.synchVorerkrankungenOfPatient(
@@ -99,13 +120,13 @@ namespace Patientenverwaltung.Datenbank.Adapter
             return newPatient;
         }
 
-        private void addPatient(Patient patient)
+        private void addPatient(Patient patient, int idPersonendaten)
         {
             string sql = "INSERT INTO patient (idVersicherung, idPersonendaten, versicherungsnummer) " +
             "VALUES(" + patient.versicherung.idVersicherung + ", " +
-            "LAST_INSERT_ID(), " +
+            idPersonendaten + ", " +
             patient.versicherungsnummer + "); " +
-            "SELECT LAST_INSERT_ID() as 'idPatient'";
+            "SELECT LAST_INSERT_ID() as 'idPatient';";
             MySqlDataReader reader = connector.executeQuery(sql);
             reader.Read();
             patient.idPatient = reader.GetInt32("idPatient");
@@ -124,7 +145,7 @@ namespace Patientenverwaltung.Datenbank.Adapter
 
         private List<Patient> getPatientByCondition(string condition)
         {
-            string sql = "SELECT patient.idPatient, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.telefonnummer, " +
+            string sql = "SELECT patient.idPatient, personendaten.idPersonendaten, personendaten.vorname, personendaten.nachname, personendaten.email, personendaten.telefonnummer, " +
                 "personendaten.geburtstag, adresse.idAdresse, adresse.straße, adresse.hausnummer, adresse.ort, adresse.plz, versicherung.name, versicherung.idVersicherung, patient.versicherungsnummer " +
                 "FROM patient " +
                 "INNER JOIN personendaten ON personendaten.idPersonendaten = patient.idPersonendaten " +
@@ -133,7 +154,9 @@ namespace Patientenverwaltung.Datenbank.Adapter
                 condition + ";";
 
             MySqlDataReader reader = connector.executeQuery(sql);
-            return mapper.extractPatientenFromReader(reader);
+            List<Patient> patienten = mapper.extractPatientenFromReader(reader);
+            patienten.ForEach(patient => patient.vorerkrankungen = vorerkrankungDBAdapter.getVorerkrankungenOfPatient(patient.idPatient));
+            return patienten;
         }
     }
 }
