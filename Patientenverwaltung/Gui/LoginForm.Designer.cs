@@ -35,7 +35,7 @@
             this.txtPasswort = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAdmin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             this.lblArztId.AutoSize = true;
             this.lblArztId.Location = new System.Drawing.Point(30, 30);
             this.lblArztId.Name = "lblArztId";
-            this.lblArztId.Size = new System.Drawing.Size(37, 13);
+            this.lblArztId.Size = new System.Drawing.Size(43, 16);
             this.lblArztId.TabIndex = 0;
             this.lblArztId.Text = "ArztId:";
             // 
@@ -53,7 +53,7 @@
             this.lblPasswort.AutoSize = true;
             this.lblPasswort.Location = new System.Drawing.Point(30, 60);
             this.lblPasswort.Name = "lblPasswort";
-            this.lblPasswort.Size = new System.Drawing.Size(53, 13);
+            this.lblPasswort.Size = new System.Drawing.Size(65, 16);
             this.lblPasswort.TabIndex = 1;
             this.lblPasswort.Text = "Passwort:";
             // 
@@ -61,7 +61,7 @@
             // 
             this.txtArztId.Location = new System.Drawing.Point(120, 30);
             this.txtArztId.Name = "txtArztId";
-            this.txtArztId.Size = new System.Drawing.Size(150, 20);
+            this.txtArztId.Size = new System.Drawing.Size(150, 22);
             this.txtArztId.TabIndex = 2;
             // 
             // txtPasswort
@@ -69,14 +69,14 @@
             this.txtPasswort.Location = new System.Drawing.Point(120, 60);
             this.txtPasswort.Name = "txtPasswort";
             this.txtPasswort.PasswordChar = '*';
-            this.txtPasswort.Size = new System.Drawing.Size(150, 20);
+            this.txtPasswort.Size = new System.Drawing.Size(150, 22);
             this.txtPasswort.TabIndex = 3;
             // 
             // btnLogin
             // 
             this.btnLogin.Location = new System.Drawing.Point(120, 90);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.Size = new System.Drawing.Size(98, 23);
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Anmelden";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -86,28 +86,27 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // button1
+            // btnAdmin
             // 
-            this.button1.Location = new System.Drawing.Point(120, 119);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Admin";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnAdmin.Location = new System.Drawing.Point(120, 119);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(98, 26);
+            this.btnAdmin.TabIndex = 5;
+            this.btnAdmin.Text = "Admin-Login";
+            this.btnAdmin.UseVisualStyleBackColor = true;
+            this.btnAdmin.Click += new System.EventHandler(this.button1_Click);
             // 
             // LoginForm
             // 
-            this.ClientSize = new System.Drawing.Size(276, 150);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(276, 157);
+            this.Controls.Add(this.btnAdmin);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPasswort);
             this.Controls.Add(this.txtArztId);
             this.Controls.Add(this.lblPasswort);
             this.Controls.Add(this.lblArztId);
-            this.Name = "LoginForm";
+            this.Name = "Login";
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -116,6 +115,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAdmin;
     }
 }

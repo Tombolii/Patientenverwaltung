@@ -55,6 +55,7 @@
     <Compile Include="Datenbank\Adapter\ArztDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\BerichtDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\KrankheitsbildDBAdapter.cs" />
+    <Compile Include="Datenbank\Adapter\LoginDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\PatientDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\PersonendatenDBAdapter.cs" />
     <Compile Include="Datenbank\Adapter\TerminDBAdapter.cs" />
@@ -62,6 +63,12 @@
     <Compile Include="Datenbank\Adapter\VorerkrankungDBAdapter.cs" />
     <Compile Include="Datenbank\BaseDBAdapter.cs" />
     <Compile Include="Datenbank\MySQLConnector.cs" />
+    <Compile Include="Gui\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\AdminForm.Designer.cs">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gui\Bericht\BerichtOverviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +163,7 @@
     <Compile Include="Model\Arzt.cs" />
     <Compile Include="Model\Bericht.cs" />
     <Compile Include="Model\Krankheitsbild.cs" />
+    <Compile Include="Model\PasswordInformation.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Personendaten.cs" />
     <Compile Include="Model\SimplePatient.cs" />
@@ -163,6 +171,9 @@
     <Compile Include="Model\Versicherung.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Gui\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gui\Bericht\BerichtBearbeitenForm.resx">
       <DependentUpon>BerichtBearbeitenForm.cs</DependentUpon>
     </EmbeddedResource>

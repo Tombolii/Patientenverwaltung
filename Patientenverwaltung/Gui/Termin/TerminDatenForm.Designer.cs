@@ -168,7 +168,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_Nachname);
             this.Name = "TerminDatenForm";
-            this.Text = "TerminDaten";
+            this.Text = "Termindaten";
             this.ResumeLayout(false);
             this.PerformLayout();
 

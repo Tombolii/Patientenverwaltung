@@ -84,7 +84,7 @@
             this.Controls.Add(this.lblPatientName);
             this.Controls.Add(this.label1);
             this.Name = "DeleteTerminConfirmationPopupForm";
-            this.Text = "DeleteTerminConfirmationPopupForm";
+            this.Text = "Löschen bestätigen";
             this.ResumeLayout(false);
             this.PerformLayout();
 

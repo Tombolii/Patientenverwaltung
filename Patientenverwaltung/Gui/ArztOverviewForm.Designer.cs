@@ -238,7 +238,7 @@
             this.Controls.Add(this.lbl_Name);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ArztOverviewForm";
-            this.Text = "Ärzteseite";
+            this.Text = "Startseite";
             this.ResumeLayout(false);
             this.PerformLayout();
 

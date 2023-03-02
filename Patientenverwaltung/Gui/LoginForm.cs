@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Patientenverwaltung.Model;
-using System.Text.RegularExpressions;
 
 namespace Patientenverwaltung.Gui
 {
@@ -32,39 +23,45 @@ namespace Patientenverwaltung.Gui
 
         private void btnLogin_Click_1(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(txtArztId.Text);
-            string passwort = txtPasswort.Text;
-            // Hier würde man normalerweise die Benutzerdaten gegen eine Datenbank oder ein anderes Authentifizierungssystem prüfen
-
             try
             {
-                controller.verifyLogin(id, passwort);
-                controller.navLoginToArztOverview(id);
+                int id = Convert.ToInt32(txtArztId.Text);
+                string passwort = txtPasswort.Text;
+                if(controller.verifyLogin(id, passwort))
+                {
+                    controller.navLoginToArztOverview(id);
+                }
+                else
+                {
+                    errorProvider.SetError(btnLogin, "Ungültige Anmeldeinformationen");
+                }
+                
 
             } catch (Exception ex)
-            { 
-                errorProvider.SetError(btnLogin, "Ungültige Anmeldeinformationen"); 
+            {
+                errorProvider.SetError(btnLogin, "Ungültige Anmeldeinformationen");
             }
-                
-            
-        }
-
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(txtArztId.Text);
-            string passwort = txtPasswort.Text;
+            if (txtArztId.Text != "" && txtPasswort.Text != "")
+            {
+                int id = Convert.ToInt32(txtArztId.Text);
+                string passwort = txtPasswort.Text;
 
-            if (id == 666 && passwort == "Admin666")
+                if (id == 666 && passwort == "Admin666")
+                {
+                    controller.navLoginToAdmin();
+                }
+                else
+                {
+                    errorProvider.SetError(btnAdmin, "Sie sind nicht berechtigt!");
+                }
+            }
+            else
             {
-                controller.navLoginToAdmin();
-            }else
-            {
-                errorProvider.SetError(button1, "Sie sind nicht berechtigt!");
+                errorProvider.SetError(btnAdmin, "Bitte Admin-Daten eingeben");
             }
         }
 

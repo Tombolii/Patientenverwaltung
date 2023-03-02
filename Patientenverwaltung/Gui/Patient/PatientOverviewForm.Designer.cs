@@ -285,7 +285,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "PatientOverviewForm";
-            this.Text = "Patienten";
+            this.Text = "Patienten Übersicht";
             this.ResumeLayout(false);
             this.PerformLayout();
 

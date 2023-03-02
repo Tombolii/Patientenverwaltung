@@ -345,7 +345,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_Nachname);
             this.Name = "PatientBearbeitenForm";
-            this.Text = "PatientBearbeiten";
+            this.Text = "Patient bearbeiten";
             this.ResumeLayout(false);
             this.PerformLayout();
 

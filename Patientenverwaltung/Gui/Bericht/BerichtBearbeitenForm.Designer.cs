@@ -189,7 +189,7 @@
             this.Controls.Add(this.btn_AenderungUebernehmen);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "BerichtBearbeitenForm";
-            this.Text = "BerichtBearbeiten";
+            this.Text = "Bericht bearbeiten";
             this.ResumeLayout(false);
             this.PerformLayout();
 

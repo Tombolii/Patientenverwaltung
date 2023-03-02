@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Patientenverwaltung.Model;
 using Patientenverwaltung.Gui;
@@ -10,7 +7,6 @@ using Patientenverwaltung.Datenbank.Adapter;
 
 namespace Patientenverwaltung
 {
-    
     public class Controller
     {
         // GUI-Forms
@@ -42,6 +38,7 @@ namespace Patientenverwaltung
         private AdresseDBAdapter adresseDBAdapter;
         private PersonendatenDBAdapter personendatenDBAdapter;
 
+        // Informationen
         private Arzt loggedInArzt;
         private Patient currentSelectedPatient;
         private Bericht currentSelectedBericht;
@@ -50,8 +47,6 @@ namespace Patientenverwaltung
         private List<Patient> patienten;
         private List<Krankheitsbild> krankheitsbilder;
         private List<Versicherung> versicherungen;
-        private List<PasswordInformation> pwdInformation;
-
 
         public Controller()
         {
@@ -83,12 +78,10 @@ namespace Patientenverwaltung
             adresseDBAdapter = new AdresseDBAdapter();
             personendatenDBAdapter = new PersonendatenDBAdapter();
 
-        termine = new List<Termin>();
+            termine = new List<Termin>();
             patienten = new List<Patient>();
             versicherungen = new List<Versicherung>();
             krankheitsbilder = new List<Krankheitsbild>();
-            pwdInformation = new List<PasswordInformation>();
-
     }
 
         /// <summary>
@@ -116,6 +109,24 @@ namespace Patientenverwaltung
             
             loginForm.Hide();
             arztOverview.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der LoginForm zur AdminForm
+        /// </summary>
+        public void navLoginToAdmin()
+        {
+            loginForm.Hide();
+            adminForm.Show();
+        }
+
+        /// <summary>
+        /// Navigation von der AdminForm zur LoginForm
+        /// </summary>
+        public void navAdminToLogin()
+        {
+            adminForm.Hide();
+            loginForm.Show();
         }
 
         /// <summary>
@@ -474,14 +485,9 @@ namespace Patientenverwaltung
             currentSelectedTermin = updatedTerminOfDb;
         }
 
-        public Arzt createArzt(Arzt arzt)
+        public void createArzt(Arzt arzt)
         {
-            arzt.adresse = adresseDBAdapter.createNewAdresse(arzt.adresse);
-            Personendaten newPerson = personendatenDBAdapter.createNewPersonendaten(arzt, arzt.adresse.idAdresse);
-            arzt.idPersonendaten = newPerson.idPersonendaten;
-
-            arztDBAdapter.createNewArzt(arzt);
-            return arzt;
+            arztDBAdapter.createArzt(arzt);
         }
 
         private Arzt getArztById(int idArzt)
@@ -553,28 +559,22 @@ namespace Patientenverwaltung
             return currentSelectedTermin;
         }
 
-        public bool verifyLogin(int arztID, string passwordForm)
+        /// <summary>
+        /// Holt das gesetze Passwort und überprüft dieses mit dem eingegebenen
+        /// </summary>
+        /// <param name="arztID">des Arztes</param>
+        /// <param name="passwortInput">eingegebenes Password</param>
+        /// <returns>true bei Übereinstimmung</returns>
+        public bool verifyLogin(int arztID, string passwortInput)
         {
-            PasswordInformation test = loginDBAdapter.getPassword(arztID);
-            if (test.password == passwordForm)
+            if (arztID != 0 && passwortInput != "")
             {
-                return true;
-            }
-            else
+                PasswordInformation passwordInformation = loginDBAdapter.getPassword(arztID);
+                return passwordInformation.validatePassword(passwortInput);
+            } else
             {
                 return false;
             }
-        }
-        public void navLoginToAdmin()
-        {
-            loginForm.Hide();
-            adminForm.Show();
-        }
-
-        public void navAdminToLogin()
-        {
-            adminForm.Hide();
-            loginForm.Show();
         }
     }
 }

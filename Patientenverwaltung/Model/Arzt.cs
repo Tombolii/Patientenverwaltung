@@ -34,12 +34,12 @@ namespace Patientenverwaltung.Model
             set { _titel = value; }
         }
 
-        private string _passwort;
+        private PasswordInformation _passwortInformation;
 
-        public string passwort
+        public PasswordInformation passwortInformation
         {
-            get { return _passwort; }
-            set { _passwort = value; }
+            get { return _passwortInformation; }
+            set { _passwortInformation = value; }
         }
 
     }

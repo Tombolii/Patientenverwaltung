@@ -196,7 +196,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "BerichtOverviewForm";
-            this.Text = "Berichte";
+            this.Text = "Bericht Übersicht";
             this.ResumeLayout(false);
             this.PerformLayout();
 

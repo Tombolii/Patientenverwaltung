@@ -143,7 +143,7 @@
             this.Controls.Add(this.btn_BerhichtHinzufuegen);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "NeuerBerichtForm";
-            this.Text = "NeuerBericht";
+            this.Text = "Neuen Bericht anlegen";
             this.ResumeLayout(false);
             this.PerformLayout();
 

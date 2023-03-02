@@ -1,13 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
 using Patientenverwaltung.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Patientenverwaltung.Datenbank.Adapter
 {
+    /// <summary>
+    /// Verwalten der Ärzte in der Datenbank 
+    /// </summary>
     public class ArztDBAdapter: BaseDBAdapter
     {
 
@@ -33,18 +31,26 @@ namespace Patientenverwaltung.Datenbank.Adapter
             return mapper.extractArztFromReader(reader);
         }
         
-        public Arzt createNewArzt(Arzt arzt)
+        /// <summary>
+        /// Erstellt einen neuen Arzt in der Datenbank
+        /// </summary>
+        /// <param name="arzt">der neue Arzt</param>
+        /// <returns>neu erstellten Arzt</returns>
+        public Arzt createArzt(Arzt arzt)
         {
-            string sql = "INSERT INTO arzt(titel, idPersonendaten, idFachgebiet, password) VALUES('" +
-                arzt.titel + "', " + arzt.idPersonendaten + ", " + arzt.idFachgebiet + ", '" + arzt.passwort + "'); " +
+            arzt.adresse = adresseDBAdapter.createNewAdresse(arzt.adresse);
+            Personendaten personendaten = personendatenDBAdapter.createNewPersonendaten(arzt, arzt.adresse.idAdresse);
+            arzt.idPersonendaten = personendaten.idPersonendaten;
+
+            string sql = "INSERT INTO arzt(titel, idPersonendaten, idFachgebiet, password, password_salt) VALUES('" +
+                arzt.titel + "', " + arzt.idPersonendaten + ", " + arzt.idFachgebiet + ", '" + arzt.passwortInformation.password + "', '" +
+                arzt.passwortInformation.passwordSalt + "'); " +
                 "SELECT LAST_INSERT_ID() as 'idArzt';";
                 MySqlDataReader reader = connector.executeQuery(sql);
                 reader.Read();
-                arzt.idArzt= reader.GetInt32("idArzt");
+                arzt.idArzt = reader.GetInt32("idArzt");
                 reader.Close(); ;
-
             return arzt;
         }
-
     }
 }

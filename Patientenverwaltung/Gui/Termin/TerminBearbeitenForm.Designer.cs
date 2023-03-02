@@ -107,7 +107,7 @@
             this.Controls.Add(this.txt_Datum);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "TerminBearbeitenForm";
-            this.Text = "TerminBearbeiten";
+            this.Text = "Termin bearbeiten";
             this.ResumeLayout(false);
             this.PerformLayout();
 

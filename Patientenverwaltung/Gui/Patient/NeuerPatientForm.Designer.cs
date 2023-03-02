@@ -361,7 +361,7 @@
             this.Controls.Add(this.txt_Nachname);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "NeuerPatientForm";
-            this.Text = "NeuerPatient";
+            this.Text = "Neuen Patienten anlegen";
             this.ResumeLayout(false);
             this.PerformLayout();
 

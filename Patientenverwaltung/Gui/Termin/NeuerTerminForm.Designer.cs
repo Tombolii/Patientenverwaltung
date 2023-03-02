@@ -102,7 +102,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txt_Datum);
             this.Name = "NeuerTerminForm";
-            this.Text = "NeuerTermin";
+            this.Text = "Termin erstellen";
             this.ResumeLayout(false);
             this.PerformLayout();
 

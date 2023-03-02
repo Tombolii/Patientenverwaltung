@@ -1,12 +1,5 @@
 ﻿using Patientenverwaltung.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Patientenverwaltung.Gui
@@ -24,37 +17,44 @@ namespace Patientenverwaltung.Gui
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            Adresse newAdresse = new Adresse();
-            newAdresse.ort = txt_Ort.Text;
-            newAdresse.hausnummer = txt_HausNr.Text;
-            newAdresse.plz = Convert.ToInt32(txt_PLZ.Text);
-            newAdresse.straße = txt_Straße.Text;
-
-            Arzt newArzt = new Arzt();
-            newArzt.adresse = newAdresse;
-            newArzt.vorname = txt_Vorname.Text;
-            newArzt.nachname = txt_Nachname.Text;
-            newArzt.email = txt_Mail.Text;
-            newArzt.telefonnummer = txt_TelNr.Text;
-            newArzt.geburtstag = Convert.ToDateTime(txt_Geburtstag.Text);
-            newArzt.titel = txt_Titel.Text;
-            newArzt.passwort = txt_Passwort.Text;
-            newArzt.idFachgebiet = Convert.ToInt32(txt_Fachgebiet.Text);
-
-
-
-            if (txt_Vorname.Text == " " || txt_Nachname.Text == " " || txt_Mail.Text == " " || txt_TelNr.Text == " " || txt_Geburtstag.Text == " " ||
-                txt_Straße.Text == " " || txt_HausNr.Text == " " || txt_Ort.Text == " " || txt_PLZ.Text == " " ||
-                txt_Titel.Text == " " || txt_Passwort.Text == " " || txt_Fachgebiet.Text == " ")
+            if (validateInput())
             {
-                MessageBox.Show("Fehlerhafte Eingabe");
-            }
-            else
+                try
+                {
+                    controller.createArzt(getArztFromForm());
+                    MessageBox.Show("Arzt hinzugefügt!");
+                    controller.navAdminToLogin();
+                }catch(Exception ex)
+                {
+                    MessageBox.Show("Arzt konnte nicht erstellt werden! Bitte Eingabe überprüfen.");
+                    Console.WriteLine(ex.Message);
+                }
+            } else
             {
-                controller.createArzt(newArzt);
-                MessageBox.Show("Arzt hinzugefügt!");
+                MessageBox.Show("Bitte alle Felder füllen!");
             }
+        }
 
+        private Arzt getArztFromForm()
+        {
+            return new Arzt
+            {
+                adresse = new Adresse()
+                {
+                    ort = txt_Ort.Text,
+                    hausnummer = txt_HausNr.Text,
+                    plz = Convert.ToInt32(txt_PLZ.Text),
+                    straße = txt_Straße.Text
+                },
+                vorname = txt_Vorname.Text,
+                nachname = txt_Nachname.Text,
+                email = txt_Mail.Text,
+                telefonnummer = txt_TelNr.Text,
+                geburtstag = Convert.ToDateTime(txt_Geburtstag.Text),
+                titel = txt_Titel.Text,
+                passwortInformation = new PasswordInformation(txt_Passwort.Text),
+                idFachgebiet = Convert.ToInt32(txt_Fachgebiet.Text)
+            };
         }
 
         private void btn_exit_Click(object sender, EventArgs e)
@@ -62,14 +62,11 @@ namespace Patientenverwaltung.Gui
             controller.navAdminToLogin();
         }
 
-        private void txt_Fachgebiet_TextChanged(object sender, EventArgs e)
+        private bool validateInput()
         {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
+            return !(txt_Vorname.Text == "" || txt_Nachname.Text == "" || txt_Mail.Text == "" || txt_TelNr.Text == "" || txt_Geburtstag.Text == "" ||
+                txt_Straße.Text == "" || txt_HausNr.Text == "" || txt_Ort.Text == "" || txt_PLZ.Text == "" ||
+                txt_Titel.Text == "" || txt_Passwort.Text == "" || txt_Fachgebiet.Text == "");
         }
     }
 }
