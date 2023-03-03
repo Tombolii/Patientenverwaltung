@@ -169,6 +169,7 @@ namespace Patientenverwaltung.Gui
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = false;
+                Application.Exit();
             }
         }
     }

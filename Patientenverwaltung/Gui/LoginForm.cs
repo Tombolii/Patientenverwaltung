@@ -70,6 +70,7 @@ namespace Patientenverwaltung.Gui
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = false;
+                Application.Exit();
             }
         }
         /*Code für die Überprüfung der Passwortsicherheit (Kann beim Registrieren benutzt werden)
