@@ -77,5 +77,12 @@ namespace Patientenverwaltung.Gui
                 controller.navTerminDatenToBerichtDaten();
             }
         }
+        public void TerminDatenForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

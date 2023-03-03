@@ -286,6 +286,7 @@
             this.Controls.Add(this.label1);
             this.Name = "PatientOverviewForm";
             this.Text = "Patienten Übersicht";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PatientOverviewForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

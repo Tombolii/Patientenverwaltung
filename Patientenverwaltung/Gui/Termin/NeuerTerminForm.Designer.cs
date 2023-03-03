@@ -103,6 +103,7 @@
             this.Controls.Add(this.txt_Datum);
             this.Name = "NeuerTerminForm";
             this.Text = "Termin erstellen";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NeuerTerminForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

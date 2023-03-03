@@ -197,6 +197,7 @@
             this.Controls.Add(this.label1);
             this.Name = "BerichtOverviewForm";
             this.Text = "Bericht Übersicht";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BerichtOverviewForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -210,5 +210,13 @@ namespace Patientenverwaltung.Gui
                 txt_HausNr.Text != "" ||
                 txt_Telefonnummer.Text != "";
         }
+
+        public void PatientBearbeitenForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

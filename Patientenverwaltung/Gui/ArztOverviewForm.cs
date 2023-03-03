@@ -164,5 +164,12 @@ namespace Patientenverwaltung.Gui
             controller.setCurrentSelectedTermin(controller.getTermine()[tblTermine.GetRow((Control)sender)]);
             controller.navArztOverviewToTerminDaten();
         }
+        public void ArztOverviewForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = false;
+            }
+        }
     }
 }

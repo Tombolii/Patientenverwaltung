@@ -60,5 +60,13 @@ namespace Patientenverwaltung.Gui
             txt_Datum.Text = termin.zeitpunkt.ToShortDateString();
             txt_Uhrzeit.Text = termin.zeitpunkt.ToShortTimeString();
         }
+
+        public void TerminBearbeitenForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

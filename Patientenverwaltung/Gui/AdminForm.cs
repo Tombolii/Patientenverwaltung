@@ -68,5 +68,12 @@ namespace Patientenverwaltung.Gui
                 txt_Straße.Text == "" || txt_HausNr.Text == "" || txt_Ort.Text == "" || txt_PLZ.Text == "" ||
                 txt_Titel.Text == "" || txt_Passwort.Text == "" || txt_Fachgebiet.Text == "");
         }
+        public void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

@@ -113,5 +113,13 @@ namespace Patientenverwaltung.Gui
             }
             return false;
         }
+
+        public void BerichtBearbeitenForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

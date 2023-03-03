@@ -287,6 +287,7 @@
             this.Controls.Add(this.boxVorerkrankungen);
             this.Name = "PatientenDatenForm";
             this.Text = "Patientendaten";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PatientDatenForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
