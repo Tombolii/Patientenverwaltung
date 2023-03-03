@@ -69,8 +69,8 @@ namespace Patientenverwaltung.Gui
             txt_HausNr.Text = currentPatient.adresse.hausnummer;
             txt_Ort.Text = currentPatient.adresse.ort;
             txt_Plz.Text = currentPatient.adresse.plz.ToString();
-            box_Krankenkasse.Text = currentPatient.versicherung.idVersicherung + ": " + currentPatient.versicherung.name;
             displayVersicherungDropdown();
+            box_Krankenkasse.Text = currentPatient.versicherung.idVersicherung + ": " + currentPatient.versicherung.name;
             displayVorerkrankungen(currentPatient);
         }
 
