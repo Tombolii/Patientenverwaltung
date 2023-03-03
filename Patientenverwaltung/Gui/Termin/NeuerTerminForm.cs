@@ -54,5 +54,13 @@ namespace Patientenverwaltung.Gui
         {
             controller.navNeuerTerminToPatientenDaten();
         }
+
+        private void NeuerTerminForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

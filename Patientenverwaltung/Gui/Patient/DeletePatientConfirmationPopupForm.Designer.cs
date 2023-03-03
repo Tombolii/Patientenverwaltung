@@ -87,6 +87,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DeletePatientConfirmationPopupForm";
             this.Text = "Löschen bestätigen";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DeletePatient_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

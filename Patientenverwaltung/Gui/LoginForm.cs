@@ -65,6 +65,13 @@ namespace Patientenverwaltung.Gui
             }
         }
 
+        public void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = false;
+            }
+        }
         /*Code für die Überprüfung der Passwortsicherheit (Kann beim Registrieren benutzt werden)
          * private void btnRegister_Click_1(object sender, EventArgs e)
          * {

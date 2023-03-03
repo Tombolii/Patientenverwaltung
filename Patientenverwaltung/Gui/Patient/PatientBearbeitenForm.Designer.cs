@@ -346,6 +346,7 @@
             this.Controls.Add(this.txt_Nachname);
             this.Name = "PatientBearbeitenForm";
             this.Text = "Patient bearbeiten";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PatientBearbeitenForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

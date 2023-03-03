@@ -222,5 +222,13 @@ namespace Patientenverwaltung.Gui
         {
             return (pageIndex + 1) * ROW_AMOUNT < controller.getPatienten().Count;
         }
+
+        public void PatientOverviewForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

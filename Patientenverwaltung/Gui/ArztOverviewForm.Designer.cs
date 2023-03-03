@@ -239,6 +239,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ArztOverviewForm";
             this.Text = "Startseite";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ArztOverviewForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -106,6 +106,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txt_Datum);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TerminBearbeitenForm_FormClosing);
             this.Name = "TerminBearbeitenForm";
             this.Text = "Termin bearbeiten";
             this.ResumeLayout(false);

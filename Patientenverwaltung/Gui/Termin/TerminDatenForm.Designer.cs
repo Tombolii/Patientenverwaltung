@@ -169,6 +169,7 @@
             this.Controls.Add(this.txt_Nachname);
             this.Name = "TerminDatenForm";
             this.Text = "Termindaten";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TerminDatenForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -75,5 +75,12 @@ namespace Patientenverwaltung.Gui
                 boxDiagnose.Items.Add(krankheitsbild.idKrankheitsbild + ": " + krankheitsbild.bezeichnung);
             }
         }
+        public void NeuerBerichtForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

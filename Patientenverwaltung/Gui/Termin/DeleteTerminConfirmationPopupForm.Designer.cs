@@ -83,6 +83,7 @@
             this.Controls.Add(this.btn_Confirm);
             this.Controls.Add(this.lblPatientName);
             this.Controls.Add(this.label1);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DeleteTerminConformationPpupForm_FormClosing);
             this.Name = "DeleteTerminConfirmationPopupForm";
             this.Text = "Löschen bestätigen";
             this.ResumeLayout(false);

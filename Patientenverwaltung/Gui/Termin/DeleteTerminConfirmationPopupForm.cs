@@ -31,5 +31,13 @@ namespace Patientenverwaltung.Gui
         {
             controller.navDeleteTerminConfirmationPopupToTerminDaten();
         }
+
+        public void DeleteTerminConformationPpupForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

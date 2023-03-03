@@ -44,7 +44,7 @@
             this.lblArztId.AutoSize = true;
             this.lblArztId.Location = new System.Drawing.Point(30, 30);
             this.lblArztId.Name = "lblArztId";
-            this.lblArztId.Size = new System.Drawing.Size(43, 16);
+            this.lblArztId.Size = new System.Drawing.Size(37, 13);
             this.lblArztId.TabIndex = 0;
             this.lblArztId.Text = "ArztId:";
             // 
@@ -53,7 +53,7 @@
             this.lblPasswort.AutoSize = true;
             this.lblPasswort.Location = new System.Drawing.Point(30, 60);
             this.lblPasswort.Name = "lblPasswort";
-            this.lblPasswort.Size = new System.Drawing.Size(65, 16);
+            this.lblPasswort.Size = new System.Drawing.Size(53, 13);
             this.lblPasswort.TabIndex = 1;
             this.lblPasswort.Text = "Passwort:";
             // 
@@ -61,7 +61,7 @@
             // 
             this.txtArztId.Location = new System.Drawing.Point(120, 30);
             this.txtArztId.Name = "txtArztId";
-            this.txtArztId.Size = new System.Drawing.Size(150, 22);
+            this.txtArztId.Size = new System.Drawing.Size(150, 20);
             this.txtArztId.TabIndex = 2;
             // 
             // txtPasswort
@@ -69,7 +69,7 @@
             this.txtPasswort.Location = new System.Drawing.Point(120, 60);
             this.txtPasswort.Name = "txtPasswort";
             this.txtPasswort.PasswordChar = '*';
-            this.txtPasswort.Size = new System.Drawing.Size(150, 22);
+            this.txtPasswort.Size = new System.Drawing.Size(150, 20);
             this.txtPasswort.TabIndex = 3;
             // 
             // btnLogin
@@ -105,8 +105,9 @@
             this.Controls.Add(this.txtArztId);
             this.Controls.Add(this.lblPasswort);
             this.Controls.Add(this.lblArztId);
-            this.Name = "Login";
+            this.Name = "LoginForm";
             this.Text = "Login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

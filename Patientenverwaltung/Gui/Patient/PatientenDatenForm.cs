@@ -75,5 +75,13 @@ namespace Patientenverwaltung.Gui
             patient.vorerkrankungen.ForEach(k =>
                 boxVorerkrankungen.Items.Add(k.idKrankheitsbild + ": " + k.bezeichnung));
         }
+
+        public void PatientDatenForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

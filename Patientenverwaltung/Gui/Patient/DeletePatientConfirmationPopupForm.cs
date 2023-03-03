@@ -48,5 +48,14 @@ namespace Patientenverwaltung.Gui
         {
             controller.navDeletePatientConfirmationPopupToPatientenDaten();
         }
+
+        public void DeletePatient_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
+        }
+
     }
 }
