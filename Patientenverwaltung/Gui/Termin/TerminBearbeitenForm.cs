@@ -45,7 +45,7 @@ namespace Patientenverwaltung.Gui
         private Termin getTerminFromForm()
         {
             Termin updatedTermin = controller.getCurrentSelectedTermin();
-            updatedTermin.zeitpunkt = Convert.ToDateTime(txt_Datum.Text + txt_Uhrzeit.Text);
+            updatedTermin.zeitpunkt = Convert.ToDateTime(txt_Datum.Text + " " + txt_Uhrzeit.Text);
             return updatedTermin;
         }
 

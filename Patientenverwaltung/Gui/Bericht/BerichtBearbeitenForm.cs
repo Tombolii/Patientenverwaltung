@@ -83,8 +83,8 @@ namespace Patientenverwaltung.Gui
             txtDatum.Text = currentBericht.zeitpunkt.ToShortTimeString();
             txt_Bemerkungen.Text = currentBericht.bemerkung;
             txt_Beschwerden.Text = currentBericht.beschwerden;
-            boxDiagnose.Text = currentBericht.diagnose.idKrankheitsbild + ": " + currentBericht.diagnose.bezeichnung;
             displayDiagnoseDropdown();
+            boxDiagnose.Text = currentBericht.diagnose.idKrankheitsbild + ": " + currentBericht.diagnose.bezeichnung;
         }
 
         /// <summary>

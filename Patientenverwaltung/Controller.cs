@@ -232,7 +232,7 @@ namespace Patientenverwaltung
         /// </summary>
         public void navNeuerPatientToPatientOverview()
         {
-            neuerPatientForm.Close();
+            neuerPatientForm.Hide();
             patientOverviewForm.Show();
         }
 
